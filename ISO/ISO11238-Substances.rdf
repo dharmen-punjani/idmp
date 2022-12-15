@@ -1394,7 +1394,7 @@
 		<cmns-av:explanatoryNote>Note that while the IDMP standards require a substance name for all substances, the ontology deviates from this by making the name optional in the restriction on substance. This is to enable mapping to various source repositories for substance information that do not necessarily provide names but that define a substance based on its molecular structure, which is far more accurate.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;SubstanceClassificationSchemeScheme">
+	<owl:Class rdf:about="&idmp-sub;SubstanceClassificationScheme">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
