@@ -1398,12 +1398,30 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;defines"/>
-				<owl:someValuesFrom rdf:resource="&cmns-cls;Classifier"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceClassifier"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>substance classification scheme</rdfs:label>
 		<skos:definition>classification scheme that categorizes substances by some criteria</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SubstanceClassifier">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceClassificationScheme"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>substance classifier</rdfs:label>
+		<skos:definition>classifier that specifies differentiating criteria along a particular dimension or viewpoint with respect to a substance</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceCode">
