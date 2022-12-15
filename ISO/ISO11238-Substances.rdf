@@ -112,9 +112,9 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 	
 	<owl:Class rdf:about="&idmp-sub;AcidMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntity"/>
+		<rdfs:label>acid molecule</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_37527"/>
-		<skos:definition>a molecular entity capable of donating a hydron (Bronsted acid) or capable of forming a covalent bond with an electron pair (Lewis acid)</skos:definition>
-		<skos:prefLabel>acid molecule</skos:prefLabel>
+		<skos:definition>molecular entity capable of donating a hydron (Bronsted acid) or capable of forming a covalent bond with an electron pair (Lewis acid)</skos:definition>
 		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -160,18 +160,18 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 	
 	<owl:Class rdf:about="&idmp-sub;AlphaAminoAcidMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
-		<skos:prefLabel>alpha-amino acid molecule</skos:prefLabel>
+		<rdfs:label>alpha-amino acid molecule</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;AminoAcidResidue">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonomerResidue"/>
-		<skos:prefLabel>amino acid residue</skos:prefLabel>
+		<rdfs:label>amino acid residue</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Atom">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntity"/>
-		<skos:definition>smallest particle still characterizing a chemical element</skos:definition>
-		<skos:prefLabel>atom</skos:prefLabel>
+		<rdfs:label>atom</rdfs:label>
+		<skos:definition>smallest particle characterizing a chemical element</skos:definition>
 		<cmns-av:directSource>Nomenclature of Inorganic Chemistry – IUPAC Recommendations 2005, N. G. Connelly, T. Damhus, R. M. Hartshorn, A. T. Hutton (Eds.), Royal Society of Chemistry, Cambridge, U.K., ISBN 0-85404-438-8. 3rd ed., p. 35</cmns-av:directSource>
 		<cmns-av:explanatoryNote>It consists of a nucleus of a positive charge carrying almost all its mass (more than 99.9%) and Z electrons determining its size.</cmns-av:explanatoryNote>
 	</owl:Class>
@@ -281,81 +281,81 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentArrangement">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassification"/>
+		<rdfs:label>constituent arrangement</rdfs:label>
 		<skos:example>a classification of substances by the arrangement of constituent parts</skos:example>
-		<skos:prefLabel>constituent arrangement</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentChemicalFunction">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentFunction"/>
+		<rdfs:label>constituent chemical function</rdfs:label>
 		<skos:definition>criteria that is based on the role or function in a chemical reaction</skos:definition>
 		<skos:note>can be expressed at macroscopic level or by proxy of constituent molecular entities at the molecular level</skos:note>
-		<skos:prefLabel>constituent chemical function</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentConstituency">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassification"/>
+		<rdfs:label>constituent constituency</rdfs:label>
 		<skos:altLabel>constituent composition</skos:altLabel>
 		<skos:definition>a criteria that defines by a definite constituency or composition</skos:definition>
-		<skos:prefLabel>constituent constituency</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentCriteria">
+		<rdfs:label>constituent criteria</rdfs:label>
 		<dct:description>criteria that are defining and essential for some classification</dct:description>
-		<skos:prefLabel>constituent criteria</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentFunction">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassification"/>
+		<rdfs:label>constituent function</rdfs:label>
 		<skos:definition>a criteria for classifying substances based on intended function, use or purpose</skos:definition>
-		<skos:prefLabel>constituent function</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentHistory">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassification"/>
+		<rdfs:label>constituent history</rdfs:label>
 		<skos:definition>a criteria for classifcation that defines by the past history of the entities referring to a significant instant such as creation, assembly or modification</skos:definition>
-		<skos:prefLabel>constituent history</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentMolecularSequences">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentArrangement"/>
+		<rdfs:label>constituent molecular sequences</rdfs:label>
 		<skos:definition>a critieria for substance classfication based on the sequence of molecular groups in constituent molecules</skos:definition>
 		<skos:example>sequence of amino acid residues defining a protein</skos:example>
 		<skos:example>sequence of nucleotides defining a nucleic acid substance</skos:example>
-		<skos:prefLabel>constituent molecular sequences</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentMolecularStructures">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentArrangement"/>
+		<rdfs:label>constituent molecular structures</rdfs:label>
 		<skos:definition>a chemical defined by at the molecular level by molecules with a specific molecular structure</skos:definition>
 		<skos:example>a criteria for substances based on specific molecular structures of the molecules</skos:example>
-		<skos:prefLabel>constituent molecular structures</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentOrigins">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentHistory"/>
+		<rdfs:label>constituent origins</rdfs:label>
 		<dct:description>a criteria that defines entities by the entities they are created from</dct:description>
 		<skos:example>a herbal extract is defined by the herb extracted from</skos:example>
-		<skos:prefLabel>constituent origins</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentPharmaceuticalFunction">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentFunction"/>
+		<rdfs:label>constituent pharmaceutical function</rdfs:label>
 		<dct:description>criteria for substance classification based on the pharmaceutical function or role in a treatment</dct:description>
-		<skos:prefLabel>constituent pharmaceutical function</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentSubstances">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentConstituency"/>
+		<rdfs:label>constituent substances</rdfs:label>
 		<skos:definition>a criteria that defines from the substances some things is composed of</skos:definition>
 		<skos:example>a mixture in IDMP is defined by the single substances it is composed of</skos:example>
-		<skos:prefLabel>constituent substances</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstitutionalUnit">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularGroup"/>
+		<rdfs:label>molecular constitutional unit</rdfs:label>
 		<skos:altLabel>constitutional unit</skos:altLabel>
 		<skos:definition>an atom or group of atoms (with pendant atoms or groups, if any) comprising a part of the essential structure of a macromolecule, an oligomer molecule, a block or a chain</skos:definition>
-		<skos:prefLabel>molecular constitutional unit</skos:prefLabel>
 		<cmns-av:adaptedFrom>PAC, 1996, 68, 2287. (Glossary of basic terms in polymer science (IUPAC Recommendations 1996)) on page 2291</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -455,9 +455,9 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 	
 	<owl:Class rdf:about="&idmp-sub;Macromolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
+		<rdfs:label>macromolecule</rdfs:label>
 		<skos:altLabel>polymer molecule</skos:altLabel>
 		<skos:definition>a molecule of high relative molecular mass, the structure of which essentially comprises the multiple repetition of units derived, actually or conceptually, from molecules of low relative molecular mass</skos:definition>
-		<skos:prefLabel>macromolecule</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
@@ -637,9 +637,9 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Structure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:label>molecular entity</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;Substance"/>
-		<skos:definition>Any constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity.</skos:definition>
-		<skos:prefLabel>molecular entity</skos:prefLabel>
+		<skos:definition>constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity</skos:definition>
 		<cmns-av:directSource>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1142</cmns-av:directSource>
 	</owl:Class>
 	
@@ -670,17 +670,17 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularGroup">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntity"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
-				<owl:onClass rdf:resource="&idmp-sub;Atom"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Atom"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:label>molecular group</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24433"/>
 		<skos:altLabel>group</skos:altLabel>
-		<skos:definition>a defined linked collection of atoms or a single atom within a molecular entity</skos:definition>
-		<skos:prefLabel>molecular group</skos:prefLabel>
+		<skos:definition>defined linked collection of atoms or a single atom within a molecular entity</skos:definition>
 		<cmns-av:adaptedFrom>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1118</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>This use of the term in physical organic and general chemistry is less restrictive than the definition adopted for the purpose of nomenclature of organic compounds.</cmns-av:explanatoryNote>
 	</owl:Class>
@@ -773,39 +773,37 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntity"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
-				<owl:onClass rdf:resource="&idmp-sub;Atom"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularStructure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
-				<owl:onClass rdf:resource="&idmp-sub;MolecularStructure"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Atom"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<skos:definition>an electrically neutral entity consisting of more than one atom (n&gt;1).</skos:definition>
-		<skos:prefLabel>molecule</skos:prefLabel>
+		<rdfs:label>molecule</rdfs:label>
+		<skos:definition>electrically neutral entity consisting of more than one atom (n&gt;1)</skos:definition>
 		<cmns-av:directSource>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1143</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MonomerMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
-		<skos:definition>a molecule which can undergo polymerization thereby contributing constitutional units to the essential structure of a macromolecule</skos:definition>
-		<skos:prefLabel>monomer molecule</skos:prefLabel>
+		<rdfs:label>monomer molecule</rdfs:label>
+		<skos:definition>molecule which can undergo polymerization thereby contributing constitutional units to the essential structure of a macromolecule</skos:definition>
 		<cmns-av:directSource>PAC, 1996, 68, 2287. (Glossary of basic terms in polymer science (IUPAC Recommendations 1996)) on page 2289</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MonomerResidue">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularGroup"/>
-		<skos:prefLabel>monomer residue</skos:prefLabel>
-		<skos:prefLabel>the residue derived from a monomer molecule that is a constituent of a macromolecule</skos:prefLabel>
+		<rdfs:label>monomer residue</rdfs:label>
+		<rdfs:label>residue derived from a monomer molecule that is a constituent of a macromolecule</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;NucleicAcidMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Macromolecule"/>
-		<skos:prefLabel>nucleic acid molecule</skos:prefLabel>
+		<rdfs:label>nucleic acid molecule</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;NucleicAcidSubstance">
@@ -813,8 +811,7 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;isComposedOfAtMolecularLevel"/>
-				<owl:onClass rdf:resource="&idmp-sub;NucleicAcidMolecule"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;NucleicAcidMolecule"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>nucleic acid substance</rdfs:label>
@@ -828,9 +825,9 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 	
 	<owl:Class rdf:about="&idmp-sub;Nucleotide">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonomerResidue"/>
+		<rdfs:label>nucleotide</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36976"/>
 		<skos:definition>a nucleoside phosphate resulting from the condensation of the 3 or 5 hydroxy group of a nucleoside with phosphoric acid</skos:definition>
-		<skos:prefLabel>nucleotide</skos:prefLabel>
 		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -1037,7 +1034,7 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Macromolecule"/>
-		<skos:prefLabel>protein molecule</skos:prefLabel>
+		<rdfs:label>protein molecule</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinSubstance">
@@ -1411,8 +1408,8 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:label>substance classification</rdfs:label>
 		<skos:definition>a classification of substances by some criteria</skos:definition>
-		<skos:prefLabel>substance classification</skos:prefLabel>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceCode">
@@ -1899,14 +1896,14 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMonomer">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
-		<skos:prefLabel>has monomer</skos:prefLabel>
+		<rdfs:label>has monomer</rdfs:label>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMonomerMolecule">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
+		<rdfs:label>has monomer molecule</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-sub;Macromolecule"/>
 		<rdfs:range rdf:resource="&idmp-sub;MonomerMolecule"/>
-		<skos:prefLabel>has monomer molecule</skos:prefLabel>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNumberOfMoieties">
@@ -2038,10 +2035,10 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isComposedOfAtMolecularLevel">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
+		<rdfs:label>is composed of at molecular level</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:range rdf:resource="&idmp-sub;MolecularEntity"/>
 		<skos:definition>relates a substances to its main defining molecular entities</skos:definition>
-		<skos:prefLabel>is composed of at molecular level</skos:prefLabel>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isMoietyOf">
