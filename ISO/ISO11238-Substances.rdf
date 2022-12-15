@@ -106,8 +106,7 @@
 		<skos:definition>substance that yields hydrogen ions or protons in aqueous solutions; a substance capable of accepting a pair of electrons for the formation of a coordinate covalent bond; a substance whose hydrogen can be replaced by metals or basic radicals, or which react with bases to form salts and water.</skos:definition>
 		<skos:example>An example of an acid is hydrochloric acid.</skos:example>
 		<skos:note>An acid is also defined as a chemical that gives off hydrogen ions in water and forms salts by combining with certain metals. Acids have a sour taste and turn certain dyes red. Some acids made by the body, such as gastric acid, can help the body work the way it should.</skos:note>
-		<skos:note>An acid is also defined in CHEBI as a molecular entity capable of donating a hydron (Bronsted acid) or capable of forming a covalent bond with an electron pair (Lewis acid).
-This is referenced as an acid molecule in IDMP substance.</skos:note>
+		<skos:note>An acid is also defined in CHEBI as a molecular entity capable of donating a hydron (Bronsted acid) or capable of forming a covalent bond with an electron pair (Lewis acid). This is referenced as an acid molecule in IDMP substance.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;AcidMolecule">
@@ -280,9 +279,9 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentArrangement">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassification"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassificationScheme"/>
 		<rdfs:label>constituent arrangement</rdfs:label>
-		<skos:example>a classification of substances by the arrangement of constituent parts</skos:example>
+		<skos:example>classification of substances by the arrangement of constituent parts</skos:example>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentChemicalFunction">
@@ -293,33 +292,28 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentConstituency">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassification"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassificationScheme"/>
 		<rdfs:label>constituent constituency</rdfs:label>
 		<skos:altLabel>constituent composition</skos:altLabel>
-		<skos:definition>a criteria that defines by a definite constituency or composition</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;ConstituentCriteria">
-		<rdfs:label>constituent criteria</rdfs:label>
-		<dct:description>criteria that are defining and essential for some classification</dct:description>
+		<skos:definition>criteria that defines by a definite constituency or composition</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentFunction">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassification"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassificationScheme"/>
 		<rdfs:label>constituent function</rdfs:label>
-		<skos:definition>a criteria for classifying substances based on intended function, use or purpose</skos:definition>
+		<skos:definition>criteria for classifying substances based on intended function, use or purpose</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentHistory">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassification"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassificationScheme"/>
 		<rdfs:label>constituent history</rdfs:label>
-		<skos:definition>a criteria for classifcation that defines by the past history of the entities referring to a significant instant such as creation, assembly or modification</skos:definition>
+		<skos:definition>criteria for classifcation that defines by the past history of the entities referring to a significant instant such as creation, assembly or modification</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentMolecularSequences">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentArrangement"/>
 		<rdfs:label>constituent molecular sequences</rdfs:label>
-		<skos:definition>a critieria for substance classfication based on the sequence of molecular groups in constituent molecules</skos:definition>
+		<skos:definition>critieria for substance classfication based on the sequence of molecular groups in constituent molecules</skos:definition>
 		<skos:example>sequence of amino acid residues defining a protein</skos:example>
 		<skos:example>sequence of nucleotides defining a nucleic acid substance</skos:example>
 	</owl:Class>
@@ -1400,16 +1394,16 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 		<cmns-av:explanatoryNote>Note that while the IDMP standards require a substance name for all substances, the ontology deviates from this by making the name optional in the restriction on substance. This is to enable mapping to various source repositories for substance information that do not necessarily provide names but that define a substance based on its molecular structure, which is far more accurate.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;SubstanceClassification">
+	<owl:Class rdf:about="&idmp-sub;SubstanceClassificationSchemeScheme">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
-				<owl:onClass rdf:resource="&idmp-sub;ConstituentCriteria"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+				<owl:someValuesFrom rdf:resource="&cmns-cls;Classifier"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>substance classification</rdfs:label>
-		<skos:definition>a classification of substances by some criteria</skos:definition>
+		<rdfs:label>substance classification scheme</rdfs:label>
+		<skos:definition>classification scheme that categorizes substances by some criteria</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceCode">
