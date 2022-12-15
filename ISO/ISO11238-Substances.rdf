@@ -1398,7 +1398,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:onProperty rdf:resource="&cmns-col;defines"/>
 				<owl:someValuesFrom rdf:resource="&cmns-cls;Classifier"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
