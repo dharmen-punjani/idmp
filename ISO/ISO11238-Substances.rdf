@@ -161,6 +161,18 @@
 	
 	<owl:Class rdf:about="&idmp-sub;AminoAcidResidue">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonomerResidue"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ProteinMolecule"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ConstitutionalUnit"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>amino acid residue</rdfs:label>
 	</owl:Class>
 	
@@ -181,9 +193,11 @@
 		<skos:note>A base is a molecular entity dissolved in a solvent that is capable of accepting a proton (Bronsted base) or forming a covalent bond with a hydron (Lewis base) (SIO).</skos:note>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;BiologicalSourceMaterial">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SourceMaterial"/>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
+	<owl:Class rdf:about="&idmp-sub;BiologicalSourceMaterialRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SourceMaterialRole"/>
+		<rdfs:label>biological source material role</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.76, 7.2.5</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>Source material in IDMP is used to define structurally diverse, chemical, mixture, polymer and protein substances from biological matrices.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ChemicalSubstance">
@@ -294,6 +308,12 @@
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentArrangement">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:someValuesFrom rdf:resource="&cmns-col;Arrangement"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>constituent arrangement</rdfs:label>
 		<skos:example>classification criterion by the arrangement of constituent parts</skos:example>
 	</owl:Class>
@@ -315,6 +335,12 @@
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentFunction">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:someValuesFrom rdf:resource="&cmns-pts;Role"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>constituent function</rdfs:label>
 		<skos:definition>criterion for classfication based on intended function, use or purpose</skos:definition>
 	</owl:Class>
@@ -325,8 +351,33 @@
 		<skos:definition>criterion for classification that defines by the past history of the entities referring to a significant instant such as creation, assembly, isolation or modification</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;ConstituentMolecularEntity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentConstituency"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularEntity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>contituent molecular entity</rdfs:label>
+		<skos:definition>classification by a molecular entity that something is essentially composed of at the molecular level</skos:definition>
+		<skos:example>Water as substance is classified by the water as constituent molecule although it will contain many other molecules, depending on purity or grade.</skos:example>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;ConstituentMolecularSequences">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentArrangement"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularSubstanceClassifier"/>
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;ConstituentArrangement">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+						<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularScope"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
 		<rdfs:label>constituent molecular sequences</rdfs:label>
 		<skos:definition>critieria for substance classfication based on the sequence of molecular groups in constituent molecules</skos:definition>
 		<skos:example>sequence of amino acid residues defining a protein</skos:example>
@@ -334,7 +385,25 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentMolecularStructures">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentArrangement"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularSubstanceClassifier"/>
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;ConstituentArrangement">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+						<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularScope"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularStructure"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>constituent molecular structures</rdfs:label>
 		<skos:definition>a chemical defined by at the molecular level by molecules with a specific molecular structure</skos:definition>
 		<skos:example>a criteria for substances based on specific molecular structures of the molecules</skos:example>
@@ -356,13 +425,34 @@
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentSubstances">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentConstituency"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>constituent substances</rdfs:label>
 		<skos:definition>classification by the substance, the substance is composed of</skos:definition>
 		<skos:example>a mixture in IDMP is defined by the single substances it is composed of</skos:example>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstitutionalUnit">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Atom">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;MolecularGroup">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>molecular constitutional unit</rdfs:label>
 		<skos:altLabel>constitutional unit</skos:altLabel>
 		<skos:definition>an atom or group of atoms (with pendant atoms or groups, if any) comprising a part of the essential structure of a macromolecule, an oligomer molecule, a block or a chain</skos:definition>
@@ -478,6 +568,13 @@
 	
 	<owl:Class rdf:about="&idmp-sub;Macromolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:onClass rdf:resource="&idmp-sub;MonomerResidue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>macromolecule</rdfs:label>
 		<skos:altLabel>polymer molecule</skos:altLabel>
 		<skos:definition>a molecule of high relative molecular mass, the structure of which essentially comprises the multiple repetition of units derived, actually or conceptually, from molecules of low relative molecular mass</skos:definition>
@@ -548,6 +645,12 @@
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.41</dct:source>
 		<owl:disjointWith rdf:resource="&idmp-sub;MolecularEntity"/>
 		<skos:definition>entity that has mass, occupies space and consists of one or more substances</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MaterialRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:label>material role</rdfs:label>
+		<skos:definition>functional role played by a material that is part of or used in the preparation of some manufactured item, or pharmaceutical product, medication, or drug</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Matter">
@@ -720,6 +823,26 @@
 		<cmns-av:explanatoryNote>This use of the term in physical organic and general chemistry is less restrictive than the definition adopted for the purpose of nomenclature of organic compounds.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MolecularRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularEntity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>molecular role</rdfs:label>
+		<skos:definition>functional role played by a molecular entity that is part of some other molecular entity or participates in a specific chemical reaction with other molecular entities</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MolecularScope">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;Context"/>
+		<skos:definition>frame of reference of entities the size of atoms and molecules</skos:definition>
+		<skos:prefLabel>molecular scope</skos:prefLabel>
+		<cmns-av:explanatoryNote>entities of size around 0.1 nm - ?? nm</cmns-av:explanatoryNote>
+		<cmns-av:synonym>molecular level</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MolecularStructure">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Structure"/>
 		<rdfs:subClassOf>
@@ -792,6 +915,14 @@
 		<skos:definition>unique identifier for the unambiguous representation of the arrangement of atoms for a given substance</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MolecularSubstanceClassifier">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<dct:description>a substance classifier that is based on some constituent molecular entity or an aspect of it</dct:description>
+		<skos:prefLabel>molecular substance classifier</skos:prefLabel>
+		<cmns-av:explanatoryNote>The constituent molecular entity is essential for classifying the substance.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>The water molecule is an constituent molecular entity for water as substance. Water will contain other molecules in different quantities.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MolecularWeight">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
 		<rdfs:label>molecular weight</rdfs:label>
@@ -832,12 +963,31 @@
 	
 	<owl:Class rdf:about="&idmp-sub;MonomerResidue">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Macromolecule"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ConstitutionalUnit"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>monomer residue</rdfs:label>
-		<rdfs:label>residue derived from a monomer molecule that is a constituent of a macromolecule</rdfs:label>
+		<skos:definition>residue derived from a monomer molecule that is a constituent of a macromolecule</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;NucleicAcidMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Macromolecule"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:onClass rdf:resource="&idmp-sub;AminoAcidResidue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>nucleic acid molecule</rdfs:label>
 	</owl:Class>
 	
@@ -872,6 +1022,18 @@
 	
 	<owl:Class rdf:about="&idmp-sub;Nucleotide">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonomerResidue"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;NucleicAcidMolecule"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ConstitutionalUnit"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>nucleotide</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36976"/>
 		<skos:definition>a nucleoside phosphate resulting from the condensation of the 3 or 5 hydroxy group of a nucleoside with phosphoric acid</skos:definition>
@@ -1049,7 +1211,7 @@
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;Organism">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
 		<rdfs:label>organism</rdfs:label>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6</cmns-av:adaptedFrom>
 	</owl:Class>
@@ -1099,6 +1261,13 @@
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Macromolecule"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:onClass rdf:resource="&idmp-sub;Nucleotide"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>protein molecule</rdfs:label>
 	</owl:Class>
 	
@@ -1195,8 +1364,8 @@
 		<cmns-av:synonym>single molecular entity</cmns-av:synonym>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;SourceMaterial">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+	<owl:Class rdf:about="&idmp-sub;SourceMaterialRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
@@ -1204,8 +1373,8 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<skos:definition>role played by material, where it or parts of it are modified or isolated to produce a substance</skos:definition>
-		<skos:note>Usage in IDMP is for biological material, which should be described by its biological taxonomy or anatomy.</skos:note>
-		<skos:prefLabel>source material</skos:prefLabel>
+		<skos:prefLabel>source material role</skos:prefLabel>
+		<cmns-av:explanatoryNote>Generalized from IDMP definition of source material</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstance">
@@ -1215,6 +1384,30 @@
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:hasValue rdf:resource="&idmp-sub;SpecifiedSubstanceType"/>
+			</owl:Restriction>
+		</owl:equivalentClass>
+		<owl:equivalentClass>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;SpecifiedSubstanceGroup4"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</owl:equivalentClass>
+		<owl:equivalentClass>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;SpecifiedSubstanceGroup1">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SpecifiedSubstanceGroup2">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SpecifiedSubstanceGroup3">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</owl:equivalentClass>
 		<skos:definition>substance defined by groups of elements that describe multi-substance materials or specify further information on substances relevant to the description of medicinal products</skos:definition>
@@ -1253,6 +1446,19 @@
 		<rdf:type rdf:resource="&idmp-sub;ISO11238SubstanceType"/>
 		<rdfs:label>specified substance type</rdfs:label>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;StartingMaterialRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>starting material role</rdfs:label>
+		<skos:definition>role played by the material in a manufactoring process from which the manufactoring process starts</skos:definition>
+		<cmns-av:explanatoryNote>This material is a building block which will be (partially) incorporated in the structure of the resultant product.</cmns-av:explanatoryNote>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Stereochemistry">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentMolecularStructures"/>
