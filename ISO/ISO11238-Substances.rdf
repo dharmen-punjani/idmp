@@ -87,7 +87,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
-		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&idmp-sub;Acid">
@@ -180,14 +179,6 @@
 		<rdfs:seeAlso rdf:resource="http://semanticscience.org/resource/SIO_010454"/>
 		<skos:definition>substance having an available pair of electrons capable of forming a covalent bond with a hydron or with the vacant orbital of some other molecular entity</skos:definition>
 		<skos:note>A base is a molecular entity dissolved in a solvent that is capable of accepting a proton (Bronsted base) or forming a covalent bond with a hydron (Lewis base) (SIO).</skos:note>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;BiologicalClassificationScheme">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
-		<rdfs:label>biological classification scheme</rdfs:label>
-		<skos:definition>a classification scheme for organisms</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6</cmns-av:adaptedFrom>
-		<cmns-av:synonym>taxonomy</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;BiologicalSourceMaterial">
@@ -1232,6 +1223,32 @@
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.78, 6.2</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:label>specified substance group 1</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.2</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:label>specified substance group 2</rdfs:label>
+		<skos:definition>classifies substances by the manufactoring process</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.3</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup3">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:label>specified substance group 3</rdfs:label>
+		<skos:definition>classifies substances base on the pharmacopoeial and technical grades</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.4</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup4">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassifier"/>
+		<rdfs:label>specified substance group 4</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.5</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:NamedIndividual rdf:about="&idmp-sub;SpecifiedSubstanceType">
 		<rdf:type rdf:resource="&idmp-sub;ISO11238SubstanceType"/>
 		<rdfs:label>specified substance type</rdfs:label>
@@ -1952,6 +1969,15 @@ The more specific substance types defined in the ISO 11238 standard are not univ
 		<rdfs:label>substance role</rdfs:label>
 		<skos:definition>functional role played by a substance in another substance or that is part of or used in the preparation of some manufactured item, or pharmaceutical product, medication, or drug</skos:definition>
 		<skos:note>A pharmacological role is related to the composition, properties, or action of a substance or ingredient in another substance or pharmaceutical product. It covers adjuvant and expedient, which are roles played by the substance components in a pharmaceutical product, but it can also be used for treated disease, patient, packaging and routes of administrations, all of which are roles that are studied in the science of pharmacology and have an impact on the drug&apos;s effects.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Taxonomy">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdfs:label>taxonomy</rdfs:label>
+		<skos:definition>scientific organism classification system</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.88</cmns-av:directSource>
+		<cmns-av:explanatoryNote>need to describe the origin of source material in substances isolated from biological matrices</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasActiveMoiety">

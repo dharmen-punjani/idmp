@@ -15,6 +15,7 @@
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
+	xmlns="https://www.omg.org/spec/Commons/QuantitiesAndUnits/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
@@ -42,7 +43,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Documents/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20220901/QuantitiesAndUnits/"/>
-		<cmns-av:copyright>Copyright (c) 2011-2022 Thematix Partners LLC</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2015-2022 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
@@ -90,6 +90,7 @@
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.2</dct:source>
 		<dct:source>ISO 80000-1:2009 Quantities and units - Part 1: General, clause 3.4</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
+		<owl:disjointWith rdf:resource="&cmns-qtu;DerivedQuantityKind"/>
 		<skos:definition>quantity in a conventionally chosen subset of a given system of quantities, where no quantity in the subset can be expressed in terms of the other quantities within that subset</skos:definition>
 		<skos:example>The International System of Quantities (ISQ) comprises these base quantities (with their SI base measurement units): length (meter), mass (kilogram), duration (second), electric current (ampere), thermodynamic temperature (kelvin), amount of substance (mole), and luminous intensity (candela). These base quantities are not mutually comparable. All quantities of any one of these kinds are, however, mutually comparable.</skos:example>
 		<skos:note>The subset mentioned in the definition is termed the &apos;set of base quantities&apos;. Base quantities are referred to as being mutually independent since a base quantity cannot be expressed as a product of powers of the other base quantities.</skos:note>
@@ -174,7 +175,6 @@
 		<dct:source>ISO 11240 Health informatics - Identification of medicinal products - Data elements and structures for the unique identification and exchange of units of measurement, clause 3.1.7</dct:source>
 		<dct:source>ISO 80000-1:2009 Quantities and units - Part 1: General, clause 3.5</dct:source>
 		<dct:source rdf:datatype="&xsd;anyURI">https://www.omg.org/spec/SysML/</dct:source>
-		<owl:disjointWith rdf:resource="&cmns-qtu;BaseQuantityKind"/>
 		<skos:definition>quantity, in a system of quantities, defined in terms of the base quantities of that system</skos:definition>
 		<skos:example>In a system of quantities having the base quantities length and mass, mass density is a derived quantity defined as the quotient of mass and volume (length to the power three).</skos:example>
 	</owl:Class>
@@ -852,6 +852,7 @@
 		<rdfs:label>has dimension</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-qtu;QuantityKind"/>
 		<rdfs:range rdf:resource="&cmns-qtu;QuantityDimension"/>
+		<owl:inverseOf rdf:resource="&cmns-qtu;isDimensionOf"/>
 		<skos:definition>indicates a measurable extent associated with a given quantity kind in some system of quantities, which may be derived, depending on the choice of base quantity</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -973,7 +974,6 @@
 		<rdfs:label>is dimension of</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-qtu;QuantityDimension"/>
 		<rdfs:range rdf:resource="&cmns-qtu;QuantityKind"/>
-		<owl:inverseOf rdf:resource="&cmns-qtu;hasDimension"/>
 		<skos:definition>indicates a measurable extent associated with a given quantity kind in some system of quantities, which may be derived, depending on the choice of base quantity</skos:definition>
 	</owl:ObjectProperty>
 	

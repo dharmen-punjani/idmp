@@ -12,6 +12,7 @@
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://www.omg.org/spec/Commons/Classifiers/"
+	xmlns="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
@@ -31,7 +32,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Collections/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/Designators/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20221101/Classifiers/"/>
-		<skos:changeNote>https://www.omg.org/spec/Commons/20220501/Classifiers.rdf version of this ontology was modified to eliminate a double space in a note on ClassificationScheme (COMMONS-6), loosen the constraints on the restriction on Classifier for property classifies (COMMONS-9), and add a boolean property allowing users to state that only one classifier from a particular scheme can be used to classify something (i.e., the classifiers in the scheme are mutually exclusive and only one can apply to the thing being classified).</skos:changeNote>
 		<skos:note>The classifiers ontology conforms with the OWL 2 DL semantics, and is outside of OWL 2 RL due to the inclusion of local some values and minimum cardinality constraints. These constraints could be removed as needed to support OWL RL rule-based applications that cannot be extended to support them.</skos:note>
 		<skos:note>This ontology was originally designed for use in the OMG Languages, Countries and Codes (LCC) specification as part of the broader CountryRepresentation ontology. The concepts have also been used in the Financial Industry Business Ontology (FIBO) for representing industry sectors, financial instrument classifiers (e.g., asset classes), lifecycle states, and so forth.</skos:note>
 		<cmns-av:copyright>Copyright (c) 2014-2022 EDM Council, Inc.</cmns-av:copyright>
@@ -83,26 +83,26 @@
 	<owl:ObjectProperty rdf:about="&cmns-cls;characterizes">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;describes"/>
 		<rdfs:label>characterizes</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-cls;isCharacterizedBy"/>
 		<skos:definition>provides a discriminating feature or quality of</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-cls;classifies">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;characterizes"/>
 		<rdfs:label>classifies</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-cls;isClassifiedBy"/>
 		<skos:definition>arranges in categories according to one or more shared characteristics</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-cls;isCharacterizedBy">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isDescribedBy"/>
 		<rdfs:label>is characterized by</rdfs:label>
-		<owl:inverseOf rdf:resource="&cmns-cls;characterizes"/>
 		<skos:definition>indicates a quality or feature of something, distinguishing it from something else</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-cls;isClassifiedBy">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isCharacterizedBy"/>
 		<rdfs:label>is classified by</rdfs:label>
-		<owl:inverseOf rdf:resource="&cmns-cls;classifies"/>
 		<skos:definition>is systematically grouped based on characteristics by</skos:definition>
 	</owl:ObjectProperty>
 	

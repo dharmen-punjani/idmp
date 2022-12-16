@@ -21,6 +21,7 @@
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://www.omg.org/spec/Commons/ProductsAndServices/"
+	xmlns="https://www.omg.org/spec/Commons/ProductsAndServices/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
@@ -58,7 +59,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/Commons/PartiesAndSituations/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://www.omg.org/spec/Commons/20221101/ProductsAndServices/"/>
-		<skos:note>This ontology was originally designed for and has been adapted from the Financial Industry Business Ontology (FIBO) Products and Services Ontology.</skos:note>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
@@ -163,12 +163,12 @@
 		<rdfs:subClassOf>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-prd;GS1Member">
+					</rdf:Description>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
 						<owl:hasValue rdf:resource="&cmns-prd;GS1GlobalOffice"/>
 					</owl:Restriction>
-					<rdf:Description rdf:about="&cmns-prd;GS1Member">
-					</rdf:Description>
 				</owl:unionOf>
 			</owl:Class>
 		</rdfs:subClassOf>
@@ -432,15 +432,16 @@
 		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 1.4.4; available at https://www.gs1.org/docs/barcodes/GS1_General_Specifications.pdf</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&cmns-prd;TradeItem">
+	<owl:NamedIndividual rdf:about="&cmns-prd;TradeItem">
+		<rdf:type rdf:resource="&owl;Class"/>
 		<rdfs:subClassOf>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
 					<rdf:Description rdf:about="&cmns-prd;Good">
 					</rdf:Description>
-					<rdf:Description rdf:about="&cmns-prd;Right">
-					</rdf:Description>
 					<rdf:Description rdf:about="&cmns-prd;Product">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-prd;Right">
 					</rdf:Description>
 					<rdf:Description rdf:about="&cmns-prd;Service">
 					</rdf:Description>
@@ -452,7 +453,7 @@
 		<skos:scopeNote>This definition covers services and products, from raw materials through to end user products, all of which may have predefined characteristics.</skos:scopeNote>
 		<cmns-av:adaptedFrom>GS1 General Specifications, Release 22.0, Jan 22, clause 2.1</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Each trade item that is different from another in design and/or content is allocated a unique identification number, which remains the same as long as it is traded. The same identification number is given to all trade items sharing key characteristics. Such numbers must be treated in their entirety throughout the supply chain.</cmns-av:explanatoryNote>
-	</owl:Class>
+	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&cmns-prd;UPCCompanyPrefix">
 		<rdfs:subClassOf rdf:resource="&cmns-prd;GS1CompanyPrefix"/>
@@ -503,6 +504,7 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-prd;isProvidedBy"/>
 		<rdfs:label>is issued by</rdfs:label>
 		<rdfs:range rdf:resource="&cmns-pts;AgentRole"/>
+		<owl:inverseOf rdf:resource="&cmns-prd;issues"/>
 		<skos:definition>indicates a role played by a functional entity or party responsible for circulating, distributing, or publishing something</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -521,6 +523,7 @@
 	
 	<owl:ObjectProperty rdf:about="&cmns-prd;isSituatedAt">
 		<rdfs:label>is situated at</rdfs:label>
+		<owl:inverseOf rdf:resource="&cmns-prd;situates"/>
 		<skos:definition>is placed at</skos:definition>
 		<cmns-av:explanatoryNote>Something may be situated at some site, or in some setting, situation, or context.</cmns-av:explanatoryNote>
 	</owl:ObjectProperty>
@@ -529,7 +532,6 @@
 		<rdfs:subPropertyOf rdf:resource="&cmns-prd;provides"/>
 		<rdfs:label>issues</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-pts;AgentRole"/>
-		<owl:inverseOf rdf:resource="&cmns-prd;isIssuedBy"/>
 		<skos:definition>officially makes something available</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -546,7 +548,6 @@
 	
 	<owl:ObjectProperty rdf:about="&cmns-prd;situates">
 		<rdfs:label>situates</rdfs:label>
-		<owl:inverseOf rdf:resource="&cmns-prd;isSituatedAt"/>
 		<skos:definition>indicates the place, setting, or context in which something is placed</skos:definition>
 	</owl:ObjectProperty>
 
