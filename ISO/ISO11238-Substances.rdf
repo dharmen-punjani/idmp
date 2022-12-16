@@ -1394,21 +1394,14 @@
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
-		<rdfs:label>specified substance</rdfs:label>
-		<owl:equivalentClass>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:hasValue rdf:resource="&idmp-sub;SpecifiedSubstanceType"/>
-			</owl:Restriction>
-		</owl:equivalentClass>
-		<owl:equivalentClass>
+		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;SpecifiedSubstanceGroup4"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
-		</owl:equivalentClass>
-		<owl:equivalentClass>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
 				<owl:someValuesFrom>
@@ -1423,6 +1416,13 @@
 						</owl:unionOf>
 					</owl:Class>
 				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified substance</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;SpecifiedSubstanceType"/>
 			</owl:Restriction>
 		</owl:equivalentClass>
 		<skos:definition>substance defined by groups of elements that describe multi-substance materials or specify further information on substances relevant to the description of medicinal products</skos:definition>
