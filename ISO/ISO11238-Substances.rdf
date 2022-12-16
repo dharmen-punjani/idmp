@@ -86,7 +86,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances/"/>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221101/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property isStoichiometric with respect to chemical substances to optional from required (IDMP-380), and then reversed per the SME team and to conform with the IDMP standard.</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
 		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -182,6 +181,19 @@
 		<rdfs:seeAlso rdf:resource="http://semanticscience.org/resource/SIO_010454"/>
 		<skos:definition>substance having an available pair of electrons capable of forming a covalent bond with a hydron or with the vacant orbital of some other molecular entity</skos:definition>
 		<skos:note>A base is a molecular entity dissolved in a solvent that is capable of accepting a proton (Bronsted base) or forming a covalent bond with a hydron (Lewis base) (SIO).</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;BiologicalClassificationScheme">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
+		<rdfs:label>biological classification scheme</rdfs:label>
+		<skos:definition>a classification scheme for organisms</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6</cmns-av:adaptedFrom>
+		<cmns-av:synonym>taxonomy</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;BiologicalSourceMaterial">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SourceMaterial"/>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.5, Figure 17</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ChemicalSubstance">
@@ -291,35 +303,36 @@
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentArrangement">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassificationScheme"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>constituent arrangement</rdfs:label>
-		<skos:example>classification of substances by the arrangement of constituent parts</skos:example>
+		<skos:example>classification criterion by the arrangement of constituent parts</skos:example>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentChemicalFunction">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentFunction"/>
 		<rdfs:label>constituent chemical function</rdfs:label>
 		<skos:definition>criteria that is based on the role or function in a chemical reaction</skos:definition>
+		<skos:example>chemical properties or mechansim of action. see ISO 11238:20218 7.2.4.2</skos:example>
 		<skos:note>can be expressed at macroscopic level or by proxy of constituent molecular entities at the molecular level</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentConstituency">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassificationScheme"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>constituent constituency</rdfs:label>
 		<skos:altLabel>constituent composition</skos:altLabel>
-		<skos:definition>criteria that defines by a definite constituency or composition</skos:definition>
+		<skos:definition>classification criterion by a definite constituency or composition</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentFunction">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassificationScheme"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>constituent function</rdfs:label>
-		<skos:definition>criteria for classifying substances based on intended function, use or purpose</skos:definition>
+		<skos:definition>criterion for classfication based on intended function, use or purpose</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentHistory">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceClassificationScheme"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>constituent history</rdfs:label>
-		<skos:definition>criteria for classifcation that defines by the past history of the entities referring to a significant instant such as creation, assembly or modification</skos:definition>
+		<skos:definition>criterion for classification that defines by the past history of the entities referring to a significant instant such as creation, assembly, isolation or modification</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentMolecularSequences">
@@ -348,12 +361,13 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentFunction"/>
 		<rdfs:label>constituent pharmaceutical function</rdfs:label>
 		<dct:description>criteria for substance classification based on the pharmaceutical function or role in a treatment</dct:description>
+		<skos:example>includes  pharmacological effects, therapeutic targets, indications or mechansim of action. see ISO 11238:20218 7.2.4.2</skos:example>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentSubstances">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentConstituency"/>
 		<rdfs:label>constituent substances</rdfs:label>
-		<skos:definition>a criteria that defines from the substances some things is composed of</skos:definition>
+		<skos:definition>classification by the substance, the substance is composed of</skos:definition>
 		<skos:example>a mixture in IDMP is defined by the single substances it is composed of</skos:example>
 	</owl:Class>
 	
@@ -1044,6 +1058,12 @@
 		<cmns-txt:hasTextValue>(+)</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;Organism">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Material"/>
+		<rdfs:label>organism</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerClassifier">
 		<rdf:type rdf:resource="&idmp-sub;ISO11238SubstanceType"/>
 		<rdfs:label>polymer type</rdfs:label>
@@ -1185,9 +1205,28 @@
 		<cmns-av:synonym>single molecular entity</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SourceMaterial">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<skos:definition>role played by material, where it or parts of it are modified or isolated to produce a substance</skos:definition>
+		<skos:note>Usage in IDMP is for biological material, which should be described by its biological taxonomy or anatomy.</skos:note>
+		<skos:prefLabel>source material</skos:prefLabel>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:label>specified substance</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;SpecifiedSubstanceType"/>
+			</owl:Restriction>
+		</owl:equivalentClass>
 		<skos:definition>substance defined by groups of elements that describe multi-substance materials or specify further information on substances relevant to the description of medicinal products</skos:definition>
 		<skos:note>A specified substance is generally a further specification of a substance that captures information on manufacture, specifications, physical form or multi-substance materials that are components of a medicinal product formulation.</skos:note>
 		<skos:note>This could include grade, units of measure, physical form, constituents, manufacturer, critical manufacturing processes (e.g. extraction, synthetic or recombinant processes), specification and the analytical methods used to determine whether a substance is in compliance with a specification. There are four different groups of elements that can be used to define a given specified substance and specific relationships between each group of elements.</skos:note>
@@ -1200,8 +1239,8 @@
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;Stereochemistry">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentMolecularStructures"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Structure"/>
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>stereochemistry</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause B.6.5.1</dct:source>
 		<skos:definition>relative spatial arrangement of atoms in 3-dimensional space within molecules</skos:definition>
