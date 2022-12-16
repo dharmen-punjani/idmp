@@ -163,14 +163,19 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonomerResidue"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;ProteinMolecule"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;ConstitutionalUnit"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ConstitutionalUnit">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;ProteinMolecule"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>amino acid residue</rdfs:label>
@@ -965,14 +970,19 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Macromolecule"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;ConstitutionalUnit"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ConstitutionalUnit">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;Macromolecule"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>monomer residue</rdfs:label>
@@ -1024,14 +1034,19 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonomerResidue"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;NucleicAcidMolecule"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;ConstitutionalUnit"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ConstitutionalUnit">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;NucleicAcidMolecule"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>nucleotide</rdfs:label>
