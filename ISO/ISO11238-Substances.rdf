@@ -723,6 +723,15 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
     
 
 
+    <!-- https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/Classification -->
+
+    <owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/Classification">
+        <skos:definition>a classification is an arrangement of a collective of things by features shared among the things in the collective</skos:definition>
+        <skos:prefLabel>classification</skos:prefLabel>
+    </owl:Class>
+    
+
+
     <!-- https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConformanceLevel -->
 
     <owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConformanceLevel">
@@ -748,8 +757,8 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
     <!-- https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentArrangement -->
 
     <owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentArrangement">
-        <rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/SubstanceClassification"/>
-        <skos:example>a classification of substances by the arrangement of constituent parts</skos:example>
+        <rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentCriteria"/>
+        <skos:example>a classification by the arrangement of constituent parts</skos:example>
         <skos:prefLabel>constituent arrangement</skos:prefLabel>
     </owl:Class>
     
@@ -759,6 +768,12 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 
     <owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentChemicalFunction">
         <rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.omg.org/spec/Commons/Designators/defines"/>
+                <owl:someValuesFrom rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/SubstanceClassification"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <skos:definition>criteria that is based on the role or function in a chemical reaction</skos:definition>
         <skos:note>can be expressed at macroscopic level or by proxy of constituent molecular entities at the molecular level</skos:note>
         <skos:prefLabel>constituent chemical function</skos:prefLabel>
@@ -769,7 +784,7 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
     <!-- https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentConstituency -->
 
     <owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentConstituency">
-        <rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/SubstanceClassification"/>
+        <rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentCriteria"/>
         <skos:altLabel>constituent composition</skos:altLabel>
         <skos:definition>a criteria that defines by a definite constituency or composition</skos:definition>
         <skos:prefLabel>constituent constituency</skos:prefLabel>
@@ -780,6 +795,12 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
     <!-- https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentCriteria -->
 
     <owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentCriteria">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.omg.org/spec/Commons/Designators/defines"/>
+                <owl:someValuesFrom rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/Classification"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <dct:description>criteria that are defining and essential for some classification</dct:description>
         <skos:prefLabel>constituent criteria</skos:prefLabel>
     </owl:Class>
@@ -789,7 +810,7 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
     <!-- https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentFunction -->
 
     <owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentFunction">
-        <rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/SubstanceClassification"/>
+        <rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentCriteria"/>
         <skos:definition>a criteria for classifying substances based on intended function, use or purpose</skos:definition>
         <skos:prefLabel>constituent function</skos:prefLabel>
     </owl:Class>
@@ -799,7 +820,7 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
     <!-- https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentHistory -->
 
     <owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentHistory">
-        <rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/SubstanceClassification"/>
+        <rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentCriteria"/>
         <skos:definition>a criteria for classifcation that defines by the past history of the entities referring to a significant instant such as creation, assembly or modification</skos:definition>
         <skos:prefLabel>constituent history</skos:prefLabel>
     </owl:Class>
@@ -844,6 +865,12 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
 
     <owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentPharmaceuticalFunction">
         <rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/ConstituentFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://www.omg.org/spec/Commons/Designators/defines"/>
+                <owl:someValuesFrom rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/SubstanceClassification"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <dct:description>criteria for substance classification based on the pharmaceutical function or role in a treatment</dct:description>
         <skos:prefLabel>constituent pharmaceutical function</skos:prefLabel>
     </owl:Class>
@@ -1780,6 +1807,7 @@ This is referenced as an acid molecule in IDMP substance.</skos:note>
     <!-- https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/SubstanceClassification -->
 
     <owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/SubstanceClassification">
+        <rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/Classification"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://www.omg.org/spec/Commons/Collections/hasConstituent"/>
