@@ -87,7 +87,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Release"/>
-		<cmns-av:copyright>Copyright (c) 2022 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2022 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
@@ -698,7 +697,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>molecular graph</rdfs:label>
-		<skos:definition>single chemical structure that is an unambiguous representation of the arrangement of atoms, normalized to conform with the International Union of Pure and Applied Chemistry (IUPAC) specification for drawing chemical structures to the degree possible</skos:definition>
+		<skos:definition>single chemical structure representation that is an unambiguous representation of the arrangement of atoms, normalized to conform with the International Union of Pure and Applied Chemistry (IUPAC) specification for drawing chemical structures to the degree possible</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularGraphIdentifier">
