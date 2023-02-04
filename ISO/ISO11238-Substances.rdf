@@ -86,7 +86,6 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"/>
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230203/ISO11238-Substances/"/>
-		<skos:changeNote>The https://spec.pistoiaalliance.org/idmp/ontology/ISO/20221201/ISO11238-Substances.rdf version of this ontology was modified to relax the restriction on the property hasStructure with respect to substances, single substances, and moieties to optional from at most one value, to allow for cases where there may be multiples, especially if mapping content from multiple repositories (IDMP-GitHub-244) and to add definitions for certain stereochemistry nominals where they were missing (IDMP-GitHub-243).</skos:changeNote>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Preliminary"/>
 		<cmns-av:copyright>Copyright (c) 2023 EDM Council, Inc.</cmns-av:copyright>
 		<cmns-av:copyright>Copyright (c) 2023 Pistoia Alliance, Inc.</cmns-av:copyright>
@@ -286,17 +285,29 @@
 				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ConstituentMolecularEntity">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
+								<owl:onClass rdf:resource="&idmp-sub;SpecifiedMolecularStructure"/>
+								<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>chemical substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;NucleicAcidSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;PolymerSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;ProteinSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
-		<owl:equivalentClass>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:hasValue rdf:resource="&idmp-sub;ChemicalSubstanceType"/>
-			</owl:Restriction>
-		</owl:equivalentClass>
 		<skos:definition>single substance that can be described as a stoichiometric or non-stoichiometric single molecular entity and is not a protein, nucleic acid or polymer substance</skos:definition>
 		<skos:note>Chemical substances are generally considered &apos;small&apos; molecules which have associated salts, solvates or ions and may be described using a single definitive or representative structure.</skos:note>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NameAndAnnotationConformant"/>
@@ -366,6 +377,28 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>constituency classifier</rdfs:label>
 		<skos:definition>classification criterion by a definite constituency or composition</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ConstituentAminoAcid">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentMolecularFragment"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Molecule">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFragment"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;AminoAcidResidue"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>constituent amino acid</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentMolecularEntity">
@@ -438,6 +471,53 @@
 		<skos:definition>classification of matter by a molecular entity that the matter is essentially composed of at the molecular scope</skos:definition>
 		<skos:example>Water as substance is classified by the water molecule as constituent molecule although it will contain many other molecules, depending on purity or grade.</skos:example>
 		<cmns-av:explanatoryNote>Matter that is classified by the same constituent molecular entity are usually called chemical substances (compounds or elements), but this is a different chemical substance concept than the one defined in the IDMP-O ontology.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ConstituentMolecularFragment">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituencyClassifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntityClassifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Molecule">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFragment"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularGroup"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>constituent molecular group</rdfs:label>
+		<skos:definition>classifier for molecular entities that consist of certain types of molecular groups</skos:definition>
+		<skos:example>classification based on functional groups such as the ester group</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ConstituentNucleotide">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentMolecularFragment"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Molecule">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFragment"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;Nucleotide"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>constituent nucleotide</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentSubstance">
@@ -708,7 +788,16 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
-				<owl:onClass rdf:resource="&idmp-sub;SingleSubstance"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ConstituentSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;SingleSubstance">
+							</rdf:Description>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:onClass>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -1053,16 +1142,28 @@
 	
 	<owl:Class rdf:about="&idmp-sub;NucleicAcidSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ConstituentMolecularEntity">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
+								<owl:onClass rdf:resource="&idmp-sub;SpecifiedMolecularSequence"/>
+								<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>nucleic acid substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;PolymerSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;ProteinSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
-		<owl:equivalentClass>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:hasValue rdf:resource="&idmp-sub;NucleicAcidType"/>
-			</owl:Restriction>
-		</owl:equivalentClass>
 		<skos:definition>single substance that can be defined by a linear sequence of nucleosides typically linked through phosphate or phosphate-like diester bonds</skos:definition>
 		<skos:note>The type of nucleic acid substance, e.g. ribonucleic acid (RNA) and deoxyribonucleic acid (DNA), is also identified. Oligonucleotides and gene elements, e.g. promoters, enhancers, coding sequences and silencers, are defined as nucleic acid substances.</skos:note>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.54</cmns-av:directSource>
@@ -1309,15 +1410,27 @@
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ConstituentMolecularEntity">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
+								<owl:onClass rdf:resource="&idmp-sub;SpecifiedMolecularSequence"/>
+								<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>polymer substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;ProteinSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
-		<owl:equivalentClass>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:hasValue rdf:resource="&idmp-sub;PolymerClassifier"/>
-			</owl:Restriction>
-		</owl:equivalentClass>
 		<skos:definition>single polydisperse substance that contains structural repeat units linked by covalent bonds</skos:definition>
 		<skos:note>Monodisperse proteins and nucleic acids with defined sequences shall not be defined using the polymer substance elements.</skos:note>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.63</cmns-av:directSource>
@@ -1374,14 +1487,26 @@
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ConstituentMolecularEntity">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
+								<owl:onClass rdf:resource="&idmp-sub;SpecifiedMolecularSequence"/>
+								<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>protein substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
-		<owl:equivalentClass>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:hasValue rdf:resource="&idmp-sub;ProteinType"/>
-			</owl:Restriction>
-		</owl:equivalentClass>
 		<skos:definition>single substance with a defined sequence of alpha-amino acids connected through peptide bonds</skos:definition>
 		<skos:note>A protein consists of one or more chains with a length of more than 40 amino acids. A peptide is defined as a linear sequence consisting of 2 to 40 amino acid residues.</skos:note>
 		<skos:note>Synthetic peptides and proteins with defined sequences, recombinant proteins and highly purified proteins extracted from biological matrices are described as protein substances. Sites of glycosylation, disulphide linkages and glycosylation type (e.g. fungal, plant, anthropoid, avian mammalian, human) are defining elements of protein substances, when known. A graphical molecular structure is also included in the definition of all peptides of 40 amino acid residues or less.</skos:note>
@@ -1422,15 +1547,26 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
-				<owl:onClass rdf:resource="&idmp-sub;MolecularStructure"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onProperty rdf:resource="&idmp-sub;optionallyIncludes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedMolecularWeight"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;optionallyIncludes"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedMolecularWeight"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;ConstituentMolecularEntity">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
+								<owl:onClass rdf:resource="&idmp-sub;SpecifiedMolecularStructure"/>
+								<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>single substance</rdfs:label>
@@ -1469,6 +1605,11 @@
 		<skos:definition>role played by material, where it or parts of it are modified or isolated to produce a substance</skos:definition>
 		<skos:prefLabel>source material role</skos:prefLabel>
 		<cmns-av:explanatoryNote>Generalized from IDMP definition of source material</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedAminoAcidSequence">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularSequence"/>
+		<rdfs:label>specified amino acid sequence</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedMolecularSequence">
@@ -1543,6 +1684,16 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>specified molecular weight</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedMonomerSequence">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularSequence"/>
+		<rdfs:label>specified monomer sequence</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedNucleotideSequence">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularSequence"/>
+		<rdfs:label>specified nucleotide sequence</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedStereochemistry">
@@ -1900,12 +2051,6 @@
 	<owl:Class rdf:about="&idmp-sub;StructurallyDiverseSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:label>structurally diverse substance</rdfs:label>
-		<owl:equivalentClass>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
-				<owl:hasValue rdf:resource="&idmp-sub;StructurallyDiverseSubstanceType"/>
-			</owl:Restriction>
-		</owl:equivalentClass>
 		<skos:definition>single polydisperse substance isolated from a single source that is a complex combination which cannot be described as a mixture of a limited number of single substances</skos:definition>
 		<skos:note>Structurally diverse substances are defined based on immutable properties of a given material. Modifications that irreversibly alter the structure of the material, distinctive physical properties or components subsumed into the material, e.g. a gene in gene therapy substances, are defining elements for structurally diverse substances. Fractions derived from source material (oils/juices and extracts) are also captured in the definition. Protein mixtures containing a large number of diverse sequences such as polyclonal immunoglobulins are defined as structurally diverse substances.</skos:note>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.63</cmns-av:directSource>
@@ -2468,6 +2613,13 @@
 		<idmp-dtp:isEncodedAs rdf:resource="&idmp-dtp;DatatypeCode-ST"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.2</cmns-av:adaptedFrom>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularFragment">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
+		<rdfs:label>has molecular group</rdfs:label>
+		<rdfs:domain rdf:resource="&idmp-sub;MolecularEntity"/>
+		<rdfs:range rdf:resource="&idmp-sub;MolecularGroup"/>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularWeight">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
