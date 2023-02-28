@@ -87,11 +87,10 @@
 		<owl:imports rdf:resource="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"/>
 		<owl:versionIRI rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/20230203/ISO11238-Substances/"/>
 		<idmp-chg:hasMaturityLevel rdf:resource="&idmp-chg;Preliminary"/>
-		<cmns-av:copyright>Copyright (c) 2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&idmp-sub;Acid">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PortionOfMaterial"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalSubstance"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularEntity"/>
@@ -158,6 +157,9 @@
 	<owl:Class rdf:about="&idmp-sub;AlphaAminoAcidMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
 		<rdfs:label>alpha-amino acid molecule</rdfs:label>
+		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33704"/>
+		<skos:definition>An amino acid molecule in which the amino group is located on the carbon atom at the position α to the carboxy group.</skos:definition>
+		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;AminoAcidResidue">
@@ -180,30 +182,91 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>amino acid residue</rdfs:label>
+		<rdfs:seeAlso>When two or more amino acids molecules combine to form a peptide molecule, the elements of water are removed, and what remains of each amino acid molecule is called an amino-acid residue.</rdfs:seeAlso>
+		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33708"/>
+		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;ArrangementClassifier">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+	<owl:Class rdf:about="&idmp-sub;ArrangementAspect">
+		<rdfs:label>arrangement aspect</rdfs:label>
+		<owl:disjointWith rdf:resource="&idmp-sub;MatterAspect"/>
+		<owl:disjointWith rdf:resource="&idmp-sub;ParticipantClassifier"/>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-cls;Aspect">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+						<owl:someValuesFrom rdf:resource="&cmns-col;Arrangement"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</owl:equivalentClass>
+		<skos:definition>classification of a thing by the arrangement of essential parts or the arrangement of the thing in its environment</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;AspectConstituency">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&cmns-col;Arrangement"/>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:allValuesFrom rdf:resource="&cmns-cls;Aspect"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>arrangement classifier</rdfs:label>
-		<skos:definition>classification of a thing by the arrangement of essential parts or the arrangement of the thing in its environment</skos:definition>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:allValuesFrom rdf:resource="&cmns-cls;Aspect"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&cmns-cls;Aspect"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>aspect constituency</rdfs:label>
+		<dct:description>a relation between aspects that defines one aspect by some other aspect</dct:description>
+		<cmns-av:synonym>aspect relationship</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;AspectConstituencyRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;AspectRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isRoleIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;AspectConstituency"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>aspect constituency role</rdfs:label>
+		<rdfs:label>role of an aspect in an aspect constituency</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;AspectRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Role"/>
+		<rdfs:label>aspect role</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&cmns-cls;Aspect"/>
+			</owl:Restriction>
+		</owl:equivalentClass>
+		<skos:definition>role played by an aspect for some purpose</skos:definition>
+		<skos:example>The mass aspect, a physical property aspect of an object, can play the role of a description in the case of the result of a measurement, a prescription (a mass limit) applied to a container, or a specification of the mass to be used when applying a recipe.</skos:example>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Atom">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntity"/>
 		<rdfs:label>atom</rdfs:label>
+		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
 		<skos:definition>smallest particle characterizing a chemical element</skos:definition>
 		<cmns-av:directSource>Nomenclature of Inorganic Chemistry – IUPAC Recommendations 2005, N. G. Connelly, T. Damhus, R. M. Hartshorn, A. T. Hutton (Eds.), Royal Society of Chemistry, Cambridge, U.K., ISBN 0-85404-438-8. 3rd ed., p. 35</cmns-av:directSource>
 		<cmns-av:explanatoryNote>It consists of a nucleus of a positive charge carrying almost all its mass (more than 99.9%) and Z electrons determining its size.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Base">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PortionOfMaterial"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalSubstance"/>
 		<rdfs:label>base</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22695"/>
 		<rdfs:seeAlso rdf:resource="http://semanticscience.org/resource/SIO_010454"/>
@@ -219,7 +282,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ChemicalFunctionClassifier">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;RoleClassifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;RoleBearerClassifier"/>
 		<rdfs:label>chemical function classifier</rdfs:label>
 		<skos:definition>criteria that is based on the role or function in a chemical reaction</skos:definition>
 		<skos:example>chemical properties or mechansim of action. see ISO 11238:20218 7.2.4.2</skos:example>
@@ -365,36 +428,26 @@
 		<cmns-txt:hasTextValue>OPTIONAL</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-sub;ConstituencyClassifier">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
-		<rdfs:label>constituency classifier</rdfs:label>
-		<skos:definition>classification criterion by a definite constituency or composition</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;ConstituentAminoAcid">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentMolecularFragment"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;Molecule">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFragment"/>
-								<owl:someValuesFrom rdf:resource="&idmp-sub;AminoAcidResidue"/>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>constituent amino acid</rdfs:label>
+	<owl:Class rdf:about="&idmp-sub;ConstituencyAspect">
+		<rdfs:label>constituency aspect</rdfs:label>
+		<owl:disjointWith rdf:resource="&idmp-sub;MatterAspect"/>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-cls;Aspect">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+						<owl:someValuesFrom rdf:resource="&cmns-pts;Constituency"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</owl:equivalentClass>
+		<skos:definition>aspect that characterizes a definite constituency or composition</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentMolecularEntity">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituencyClassifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituencyAspect"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;isCharacteristicOf"/>
@@ -466,7 +519,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ConstituentMolecularFragment">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituencyClassifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituencyAspect"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntityClassifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -490,30 +543,8 @@
 		<skos:example>classification based on functional groups such as the ester group</skos:example>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;ConstituentNucleotide">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentMolecularFragment"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;Molecule">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFragment"/>
-								<owl:someValuesFrom rdf:resource="&idmp-sub;Nucleotide"/>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>constituent nucleotide</rdfs:label>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;ConstituentSubstance">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituencyClassifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituencyAspect"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;isCharacteristicOf"/>
@@ -532,8 +563,52 @@
 		<cmns-av:explanatoryNote>A constituent substance classifies material that is essentially composed of material, that is classfied by the substance.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;ConstitutionalAminoAcid">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstitutionalUnit"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Molecule">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFragment"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;AminoAcidResidue"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>constitutional amino acid</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ConstitutionalNucleotide">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstitutionalUnit"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Molecule">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;hasMolecularFragment"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;Nucleotide"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>constitutional nucleotide</rdfs:label>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;ConstitutionalUnit">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstituentMolecularFragment"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
@@ -555,28 +630,60 @@
 		<cmns-av:adaptedFrom>PAC, 1996, 68, 2287. (Glossary of basic terms in polymer science (IUPAC Recommendations 1996)) on page 2291</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;DefiningCharacteristic">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;isNecessaryCharacteristicFor"/>
-				<owl:someValuesFrom rdf:resource="&cmns-cls;Classifier"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
+	<owl:Class rdf:about="&idmp-sub;DefinedAspect">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;AspectConstituencyRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;DefinitionRole"/>
+		<rdfs:label>defined aspect</rdfs:label>
+		<skos:definition>aspect that is being defined in the aspect constituency</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;DefiningAspect">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;AspectConstituencyRole"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;DefinitionRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
 				<owl:someValuesFrom rdf:resource="&cmns-cxtdsg;Context"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>defining characteristic</rdfs:label>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-cls;Aspect">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;isCharacteristicOf"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;AspectConstituency"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>defining aspect</rdfs:label>
 		<skos:definition>A defining characteristic is a part of a classifier that defines rules that are necessarily fulfilled by things in order for the thing to be classified by the classifier.</skos:definition>
-		<cmns-av:explanatoryNote>Defining characteristics can be restricted to some context that provides a specific perspective on the things or domain. If this is the case, then relations between classifiers also apply only within a shared context.</cmns-av:explanatoryNote>
-		<cmns-av:explanatoryNote>The set of things classified by the defining characteristic is a super set of the set of things that are classified by the classifier the defining characteristic is included in.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>Defining apects can be restricted to some context that provides a specific perspective on the things or domain. If this is the case, then relations between aspects also apply only within a shared context.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>The set of things characterized by the defining aspect is a super set of the set of things that are characterized by the aspect the defining aspect is included in.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>defining characteristic</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;DefinitionRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;AspectRole"/>
+		<rdfs:label>definition role</rdfs:label>
+		<skos:definition>role played by an aspect when that aspect is used to define something</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;DescriptionRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;AspectRole"/>
+		<rdfs:label>description role</rdfs:label>
+		<skos:definition>role played by an aspect when that aspect is used to describe something</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Ester">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PortionOfMaterial"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalSubstance"/>
 		<rdfs:label>ester</rdfs:label>
 		<dct:source>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_35701</dct:source>
 		<dct:source>Medical Subject Headings, see http://purl.bioontology.org/ontology/MESH/D004952</dct:source>
@@ -601,7 +708,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Hydrate">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PortionOfMaterial"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalSubstance"/>
 		<rdfs:label>hydrate</rdfs:label>
 		<dct:source>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_35505</dct:source>
 		<skos:definition>addition compound that contains water in weak chemical combination with another compound</skos:definition>
@@ -667,11 +774,11 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;IngredientClassifier">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;RoleClassifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;RoleBearerClassifier"/>
 		<rdfs:subClassOf>
 			<owl:Class>
 				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-sub;ConstituencyClassifier">
+					<rdf:Description rdf:about="&idmp-sub;ConstituencyAspect">
 					</rdf:Description>
 					<rdf:Description rdf:about="&idmp-sub;ParticipantClassifier">
 					</rdf:Description>
@@ -715,8 +822,12 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>macromolecule</rdfs:label>
+		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33839"/>
 		<skos:altLabel>polymer molecule</skos:altLabel>
 		<skos:definition>a molecule of high relative molecular mass, the structure of which essentially comprises the multiple repetition of units derived, actually or conceptually, from molecules of low relative molecular mass</skos:definition>
+		<cmns-av:directSource>PAC, 1996, 68, 2287. (Glossary of basic terms in polymer science (IUPAC Recommendations 1996)) on page 2289</cmns-av:directSource>
+		<cmns-av:explanatoryNote>In many cases, especially for synthetic polymers, a molecule can be regarded as having a high relative molecular mass if the addition or removal of one or a few of the units has a negligible effect on the molecular properties. This statement fails in the case of certain macromolecules for which the properties may be critically dependent on fine details of the molecular structure.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>If a part or the whole of the molecule has a high relative molecular mass and essentially comprises the multiple repetition of units derived, actually or conceptually, from molecules of low relative molecular mass, it may be described as either macromolecular or polymeric, or by polymer used adjectivally.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
@@ -784,6 +895,18 @@
 		<cmns-av:explanatoryNote>Market context is applicable with respect to patent exclusivity, for example.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MaterialClassifier">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MatterAspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PortionOfMaterial"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>material classifier</rdfs:label>
+		<skos:definition>classifier for material</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MaterialRole">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
 		<rdfs:label>material role</rdfs:label>
@@ -797,6 +920,25 @@
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.41</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Note that the concept of &apos;matter&apos; is used in the definition of substance but not explicitly defined in the IDMP standards. The definition of &apos;material&apos; is close, but adds the notion of consisting of one or more substances, thus this term generalizes both material and substance.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>physical object</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MatterAspect">
+		<rdfs:label>matter aspect</rdfs:label>
+		<owl:disjointWith rdf:resource="&idmp-sub;PhysicalPropertyAspect"/>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-cls;Aspect">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+						<owl:someValuesFrom rdf:resource="&idmp-sub;Matter"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</owl:equivalentClass>
+		<skos:definition>an aspect that characterizes matter</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Mixture">
@@ -973,7 +1115,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Structure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularStructure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>molecular entity</rdfs:label>
@@ -984,7 +1126,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularEntityClassifier">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MatterAspect"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
@@ -1030,15 +1172,16 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Atom"/>
+				<owl:onClass rdf:resource="&idmp-sub;Atom"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>molecular group</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24433"/>
-		<skos:altLabel>group</skos:altLabel>
 		<skos:definition>defined linked collection of atoms or a single atom within a molecular entity</skos:definition>
 		<cmns-av:adaptedFrom>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1118</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>This use of the term in physical organic and general chemistry is less restrictive than the definition adopted for the purpose of nomenclature of organic compounds.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>chemical group</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularRole">
@@ -1129,6 +1272,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>molecule</rdfs:label>
+		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
 		<skos:definition>electrically neutral entity consisting of more than one atom (n&gt;1)</skos:definition>
 		<cmns-av:directSource>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1143</cmns-av:directSource>
 	</owl:Class>
@@ -1137,7 +1281,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
 		<rdfs:label>monomer molecule</rdfs:label>
 		<skos:definition>molecule which can undergo polymerization thereby contributing constitutional units to the essential structure of a macromolecule</skos:definition>
-		<cmns-av:directSource>PAC, 1996, 68, 2287. (Glossary of basic terms in polymer science (IUPAC Recommendations 1996)) on page 2289</cmns-av:directSource>
+		<cmns-av:directSource>IUPAC. Compendium of Chemical Terminology, 2nd ed. (the &quot;Gold Book&quot;). Compiled by A. D. McNaught and A. Wilkinson. Blackwell Scientific Publications, Oxford (1997).</cmns-av:directSource>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MonomerResidue">
@@ -1161,6 +1305,29 @@
 		</rdfs:subClassOf>
 		<rdfs:label>monomer residue</rdfs:label>
 		<skos:definition>residue derived from a monomer molecule that is a constituent of a macromolecule</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;NecessaryAspect">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;DefiningAspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-cls;Aspect">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;isNecessaryCharacteristicFor"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;AspectConstituency"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>necessary aspect</rdfs:label>
+		<skos:definition>an aspect plays the role of a necessary part in the definition of another aspect in an aspect constituency</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;NucleicAcidMolecule">
@@ -1232,6 +1399,10 @@
 		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36976"/>
 		<skos:definition>a nucleoside phosphate resulting from the condensation of the 3 or 5 hydroxy group of a nucleoside with phosphoric acid</skos:definition>
 		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Objective">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;OfficialName">
@@ -1350,7 +1521,7 @@
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;OpticalActivity">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PropertyClassifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalPropertyAspect"/>
 		<rdfs:label>specified optical activity</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3, Figure 14</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.2</dct:source>
@@ -1404,6 +1575,29 @@
 		<cmns-txt:hasTextValue>(+)</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;OptionalAspect">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;DefiningAspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-cls;Aspect">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&idmp-sub;isOptionalAspectOf"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;AspectConstituency"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>optional aspect</rdfs:label>
+		<skos:definition>an aspect plays the role of an optional part in the definition of another aspect in an aspect constituency</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Organism">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
 		<rdfs:label>organism</rdfs:label>
@@ -1425,10 +1619,61 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PharmaceuticalFunctionClassifier">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;RoleClassifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;RoleBearerClassifier"/>
 		<rdfs:label>pharmaceutical function</rdfs:label>
 		<dct:description>classifier of material based on the pharmaceutical function or role in a treatment</dct:description>
 		<skos:example>includes  pharmacological effects, therapeutic targets, indications or mechansim of action. see ISO 11238:20218 7.2.4.2</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalPropertyAspect">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Matter"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical property aspect</rdfs:label>
+		<skos:definition>an aspect of matter based on physically observable properties of the matter</skos:definition>
+		<skos:example>a distribution of molecular weight</skos:example>
+		<skos:example>a matching mass spectrum</skos:example>
+		<skos:example>a specified mass range</skos:example>
+		<skos:example>a specified optical activity</skos:example>
+		<cmns-av:explanatoryNote>The properties are specified by specific or ranges of quantity values, but can be also more complex properties such as statistical distributions or a match with some sample spectrum.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalSubstance">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularEntity"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularEntity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical substance</rdfs:label>
+		<rdfs:seeAlso>Keet, C.M. A core ontology of macroscopic stuff. 19th International Conference on Knowledge Engineering and Knowledge Management (EKAW&apos;14). K. Janowicz et al. (Eds.). 24-28 Nov, 2014, Linkoping, Sweden. Springer LNAI vol. 8876, 209-224.</rdfs:seeAlso>
+		<rdfs:seeAlso>Keet, C.M. Relating some stuff to other stuff. 20th International Conference on Knowledge Engineering and Knowledge Management (EKAW&apos;16). Springer LNAI, 19-23 November 2016, Bologna, Italy. (in print)</rdfs:seeAlso>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;Matter">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+						<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</owl:equivalentClass>
+		<skos:altLabel>stuff</skos:altLabel>
+		<skos:definition>matter of microscopic to macroscopic scale of  defined constituency or origin</skos:definition>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerClassifier">
@@ -1469,13 +1714,36 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Matter">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:onClass>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Structure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>material</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.41</dct:source>
 		<skos:definition>matter that is not of molecular or astrononomical scope and can be described by Newtonian physics</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PrescriptionRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;AspectRole"/>
+		<rdfs:label>prescription role</rdfs:label>
+		<skos:definition>role played by an aspect as part of some prescription</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ProductClassifier">
@@ -1488,23 +1756,6 @@
 		</rdfs:subClassOf>
 		<rdfs:label>product classifier</rdfs:label>
 		<skos:definition>classifies things that are being produced</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;PropertyClassifier">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Matter"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>property classifier</rdfs:label>
-		<skos:definition>a classifier of matter based on physically observable properties of the matter</skos:definition>
-		<skos:example>a distribution of molecular weight</skos:example>
-		<skos:example>a matching mass spectrum</skos:example>
-		<skos:example>a specified mass range</skos:example>
-		<skos:example>a specified optical activity</skos:example>
-		<cmns-av:explanatoryNote>The properties are specified by specific or ranges of quantity values, but can be also more complex properties such as statistical distributions or a match with some sample spectrum.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinMolecule">
@@ -1560,7 +1811,49 @@
 		<cmns-av:explanatoryNote>Certain definitions used in the IDMP standards appear to be specific to regulatory reporting, which differ with the perspective of a chemist (scientist) performing analysis. In such cases in this ontology we will attempt to capture both perspectives and identify distinctions to limit ambiguity.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;RoleClassifier">
+	<owl:Class rdf:about="&idmp-sub;Requirement">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Requirements"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;RequirementRole"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<skos:definition>characterizes something by the condition the objective of the specification, that the requirement is part of, is met</skos:definition>
+		<skos:prefLabel>requirement</skos:prefLabel>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;RequirementRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecificationRole"/>
+		<rdfs:label>requirement role</rdfs:label>
+		<skos:definition>role of an aspect in a specification that characterizes what is needed or must apply for the specification to be fulfilled</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Requirements">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:label>requirements</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:intersectionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-col;Collection">
+					</rdf:Description>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+						<owl:allValuesFrom rdf:resource="&idmp-sub;Requirement"/>
+					</owl:Restriction>
+				</owl:intersectionOf>
+			</owl:Class>
+		</owl:equivalentClass>
+		<skos:definition>collection of requirements</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;RoleBearerClassifier">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -1573,7 +1866,7 @@
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>role classifier</rdfs:label>
+		<rdfs:label>role bearer classifier</rdfs:label>
 		<skos:definition>criterion for classfication based on intended function, use or purpose</skos:definition>
 		<skos:example>Amlodipine is specified to be the active ingredient in some pharamceutical product.</skos:example>
 		<cmns-av:usageNote>The role classifier includes the description of the context, when the role is realized.</cmns-av:usageNote>
@@ -1586,10 +1879,10 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Salt">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PortionOfMaterial"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalSubstance"/>
 		<rdfs:label>salt</rdfs:label>
-		<dct:source>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_24866</dct:source>
-		<dct:source>National Cancer Institute Thesaurus, see http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C822</dct:source>
+		<rdfs:seeAlso>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_24866</rdfs:seeAlso>
+		<rdfs:seeAlso>National Cancer Institute Thesaurus, see http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C822</rdfs:seeAlso>
 		<skos:definition>ionic substance formed from the neutralization reaction of an acid and a base</skos:definition>
 		<skos:note>Salts are ionic compounds composed of cations (positive ions) and anions (negative ions).</skos:note>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.71</cmns-av:directSource>
@@ -1666,18 +1959,31 @@
 		<cmns-av:explanatoryNote>Generalized from IDMP definition of source material</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Specification">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
+		<rdfs:label>specification</rdfs:label>
+		<skos:definition>arrangement of aspects that characterize aspects of things that are the targets (subject) of the specification in a context and must meet a collection of requirements.  The requirements define aspects, in a way that if things in the context are characterized by the requirement aspects, then requirements are met.</skos:definition>
+		<cmns-av:explanatoryNote>The target(s) of a specification may or may not manifest themselfes.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecificationRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;AspectRole"/>
+		<rdfs:label>specification role</rdfs:label>
+		<skos:definition>role played by an aspect as part of a specification</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedAminoAcidSequence">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularSequence"/>
 		<rdfs:label>specified amino acid sequence</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedMolecularSequence">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;DefiningCharacteristic"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;DefiningAspect"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntityClassifier"/>
 		<rdfs:subClassOf>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-sub;ArrangementClassifier">
+					<rdf:Description rdf:about="&idmp-sub;ArrangementAspect">
 					</rdf:Description>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
@@ -1699,12 +2005,12 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedMolecularStructure">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;DefiningCharacteristic"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;DefiningAspect"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntityClassifier"/>
 		<rdfs:subClassOf>
 			<owl:Class>
 				<owl:intersectionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-sub;ArrangementClassifier">
+					<rdf:Description rdf:about="&idmp-sub;ArrangementAspect">
 					</rdf:Description>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
@@ -1730,7 +2036,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedMolecularWeight">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PropertyClassifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalPropertyAspect"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
@@ -1756,7 +2062,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedPharmaceuticalProductIngredient">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;DefiningCharacteristic"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;DefiningAspect"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;IngredientClassifier"/>
 		<rdfs:label>specified pharmaceutical product ingredient</rdfs:label>
 		<skos:definition>specification of an ingredient that is ingredient in some pharmaceutical product</skos:definition>
@@ -1764,7 +2070,6 @@
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedStereochemistry">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularStructure"/>
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Structure"/>
 		<rdfs:label>specified stereochemistry</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause B.6.5.1</dct:source>
 		<skos:definition>relative spatial arrangement of atoms in 3-dimensional space within molecules</skos:definition>
@@ -1814,22 +2119,9 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
-		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Matter"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceClassificationScheme"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Specification"/>
 		<rdfs:label>specified substance group</rdfs:label>
-		<skos:definition>classifier that groups differentiating criteria along a particular dimension or viewpoint included in a substance following the IDMP standard</skos:definition>
+		<skos:definition>specification about physical substances that groups differentiating criteria along a particular dimension or viewpoint included in a substance following the IDMP standard</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1">
@@ -1892,6 +2184,7 @@
 		<rdf:type rdf:resource="&idmp-sub;SpecifiedStereochemistry"/>
 		<rdfs:label>stereochemistry - achiral</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
+		<owl:differentFrom rdf:resource="&idmp-sub;Stereochemistry-Chiral"/>
 		<skos:definition>stereochemistry classifier indicating that the molecule is not chiral</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>ACHIRAL</cmns-txt:hasTextValue>
@@ -1943,6 +2236,7 @@
 		<rdf:type rdf:resource="&idmp-sub;SpecifiedStereochemistry"/>
 		<rdfs:label>stereochemistry - cis</rdfs:label>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.1, Table 53, clause B.6.5.1</dct:source>
+		<owl:differentFrom rdf:resource="&idmp-sub;Stereochemistry-Trans"/>
 		<skos:definition>stereochemistry classifier indicating that the functional groups (substituents) are on the same side of some plane</skos:definition>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
 		<cmns-txt:hasTextValue>CIS</cmns-txt:hasTextValue>
@@ -2133,7 +2427,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Substance">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MatterAspect"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
@@ -2163,7 +2457,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>substance</rdfs:label>
 		<skos:altLabel>substance classifier</skos:altLabel>
-		<skos:definition>classifier of matter of defined composition that has discrete existence, whose origin may be biological, mineral or chemical</skos:definition>
+		<skos:definition>aspect that characterizes matter of defined composition that has discrete existence, whose origin may be biological, mineral or chemical</skos:definition>
 		<skos:note>A substance can be a moiety. A moiety is an entity within a substance that has a complete and continuous molecular structure. The strength of a pharmaceutical product is often based on what is referred to as the active moiety of the molecule, responsible for the physiological or pharmacological action of the drug substance. Chemically, the active moiety of a stoichiometric or non-stoichoimetrical substance molecule is considered that part of the molecule that is the base, free acid or ion molecular part of a salt, solvate, chelate, clathrate, molecular complex or ester.</skos:note>
 		<skos:note>Discrete existence refers to the ability of a substance to exist independently of any other substance. Substances can either be well-defined entities containing definite chemical structures, synthetic (e.g. isomeric mixtures) or naturally-occurring (e.g. conjugated oestrogens) mixtures of chemicals containing definite molecular structures, or materials derived from plants, animals, microorganisms or inorganic matrices for which the chemical structure may be unknown or difficult to define.</skos:note>
 		<skos:note>Substances are further described as single substances, mixture substances or one of a group of specified substances. Single substances are defined using a minimally sufficient set of data elements divided into five types: chemical, protein, nucleic acid, polymer and structurally diverse. Substances may be salts, solvates, free acids, free bases or mixtures of related compounds that are either isolated or synthesized together. Pharmacopoeial terminology and defining characteristics will be used when available and appropriate. Defining elements are dependent on the type of substance.</skos:note>
@@ -2222,13 +2516,13 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:allValuesFrom rdf:resource="&idmp-sub;Substance"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;PhysicalSubstance"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalSubstance"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -2246,7 +2540,7 @@
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>substance constituency</rdfs:label>
+		<rdfs:label>physical substance constituency</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.17</dct:source>
 		<skos:definition>constituency that defines some substance based on its relationship(s) to some other substance (ingredient) or moiety, potentially in some amount, in some context</skos:definition>
 		<skos:example>The substance, triamcinolone acetonide is the parent (constituent) substance of the specified substance Group 1 substance, triamcinolone acetonide, micronized. In this example, the subject role is played by &apos;triamcinolone acetonide, micronized&apos; and object role by &apos;triamcinolone acetonide&apos;.</skos:example>
@@ -2566,6 +2860,12 @@
 		<skos:note>A pharmacological role is related to the composition, properties, or action of a substance or ingredient in another substance or pharmaceutical product. It covers adjuvant and expedient, which are roles played by the substance components in a pharmaceutical product, but it can also be used for treated disease, patient, packaging and routes of administrations, all of which are roles that are studied in the science of pharmacology and have an impact on the drug&apos;s effects.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;TargetRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecificationRole"/>
+		<rdfs:label>target role</rdfs:label>
+		<skos:definition>role played by an aspect in a specification that characterizes the things that are target of the specification and must meet the requirements of the specification</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Taxonomy">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;ClassificationScheme"/>
 		<rdfs:label>taxonomy</rdfs:label>
@@ -2614,6 +2914,14 @@
 		<skos:definition>indicates whether a given class or element is mandatory, conditional, or optional with respect to a given substance type or specified substance group for reporting information per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasGranularPart">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
+		<rdfs:label>has granular part</rdfs:label>
+		<skos:definition>relation between a collective of granular things to its granular parts</skos:definition>
+		<skos:example>A portion of water has granular part a water molecule.</skos:example>
+		<skos:example>A sack of rice has granular part a rice grain.</skos:example>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMoiety">
 		<rdfs:label>has moiety</rdfs:label>
 		<owl:propertyChainAxiom rdf:parseType="Collection">
@@ -2638,7 +2946,7 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularEntity">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasGranularPart"/>
 		<rdfs:label>has molecular entity</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-sub;Matter"/>
 		<rdfs:range rdf:resource="&idmp-sub;MolecularEntity"/>
@@ -2751,6 +3059,24 @@
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause A.2.3</cmns-av:adaptedFrom>
 	</owl:DatatypeProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasSpecifiedIngredient">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;includesCharacteristic"/>
+		<rdfs:label>has specified ingredient</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;IngredientClassifier"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasSpecifiedMolecularStructure">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;includesCharacteristic"/>
+		<rdfs:label>has specified molecular structure</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;SpecifiedMolecularStructure"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasSpecifiedSubstance">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;includesCharacteristic"/>
+		<rdfs:label>has specified substance</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasStereochemistry">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasStructure"/>
 		<rdfs:label>has stereochemistry</rdfs:label>
@@ -2825,10 +3151,11 @@
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;includesCharacteristic">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
-		<rdfs:label>includes characteristic</rdfs:label>
+		<rdfs:label>includes aspect</rdfs:label>
 		<rdfs:domain rdf:resource="&cmns-cls;Classifier"/>
 		<owl:inverseOf rdf:resource="&idmp-sub;isCharacteristicOf"/>
 		<skos:definition>relation between two classifiers A and B where B is classifying an aspect of things classified by A</skos:definition>
+		<cmns-av:synonym>includes characteristic</cmns-av:synonym>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isActiveMoietyOf">
@@ -2841,8 +3168,9 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isCharacteristicOf">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;isIncludedIn"/>
-		<rdfs:label>is characteristic of</rdfs:label>
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;isConstituentOf"/>
+		<rdfs:label>is aspect of</rdfs:label>
+		<cmns-av:synonym>is characteristic of</cmns-av:synonym>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isEquivalentTo">
@@ -2881,8 +3209,16 @@
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isNecessaryCharacteristicFor">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isCharacteristicOf"/>
-		<rdfs:label>is necessary characteristic for</rdfs:label>
 		<owl:inverseOf rdf:resource="&idmp-sub;necessarilyIncludes"/>
+		<skos:prefLabel>is necessary aspect of</skos:prefLabel>
+		<cmns-av:synonym>is necessary characteristic for</cmns-av:synonym>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;isOptionalAspectOf">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isCharacteristicOf"/>
+		<owl:inverseOf rdf:resource="&idmp-sub;optionallyIncludes"/>
+		<skos:prefLabel>is optional aspect of</skos:prefLabel>
+		<cmns-av:synonym>is optional characteristic of</cmns-av:synonym>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isParentSubstanceOf">
@@ -2940,8 +3276,8 @@
 	<owl:ObjectProperty rdf:about="&idmp-sub;necessarilyIncludes">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;includesCharacteristic"/>
 		<rdfs:label>necessarily includes</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-cls;Classifier"/>
-		<rdfs:range rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:domain rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:range rdf:resource="&cmns-cls;Aspect"/>
 		<skos:definition>a classifier A necessarily includes a classifier B if things classified by A are also classified by B</skos:definition>
 		<cmns-av:explanatoryNote>If A necessarily includes B then A is a specialization of B. This is similar to the rdfs:subClassOf relation between OWL classes.</cmns-av:explanatoryNote>
 	</owl:ObjectProperty>
@@ -2949,8 +3285,8 @@
 	<owl:ObjectProperty rdf:about="&idmp-sub;optionallyIncludes">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;includesCharacteristic"/>
 		<rdfs:label>optionally includes</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-cls;Classifier"/>
-		<rdfs:range rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:domain rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:range rdf:resource="&cmns-cls;Aspect"/>
 		<skos:definition>a classifier A optionally includes a classifier B if there is presumable a thing that is classified by A and classified by B</skos:definition>
 		<cmns-av:explanatoryNote>This relation is informational only in most cases, but excludes cases where the optional classifier classifies things disjoint from the classifier that includes this.</cmns-av:explanatoryNote>
 	</owl:ObjectProperty>
@@ -2972,21 +3308,5 @@
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4</dct:source>
 		<cmns-av:synonym>reference source document</cmns-av:synonym>
 	</owl:Class>
-	
-	<owl:AllDifferent>
-		<owl:distinctMembers rdf:parseType="Collection">
-			<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Achiral">
-			</rdf:Description>
-			<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Chiral">
-			</rdf:Description>
-		</owl:distinctMembers>
-	</owl:AllDifferent>
-	<owl:AllDifferent>
-		<owl:distinctMembers rdf:parseType="Collection">
-			<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Cis">
-			</rdf:Description>
-			<rdf:Description rdf:about="&idmp-sub;Stereochemistry-Trans">
-			</rdf:Description>
-		</owl:distinctMembers>
-	</owl:AllDifferent>
+
 </rdf:RDF>
