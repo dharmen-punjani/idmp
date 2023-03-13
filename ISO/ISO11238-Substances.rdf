@@ -94,7 +94,7 @@
 	</owl:Ontology>
 	
 	<owl:Class rdf:about="&idmp-sub;Acid">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalSubstance"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularEntity"/>
@@ -301,7 +301,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Base">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalSubstance"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:label>base</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22695"/>
 		<rdfs:seeAlso rdf:resource="http://semanticscience.org/resource/SIO_010454"/>
@@ -555,7 +555,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Ester">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalSubstance"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:label>ester</rdfs:label>
 		<dct:source>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_35701</dct:source>
 		<dct:source>Medical Subject Headings, see http://purl.bioontology.org/ontology/MESH/D004952</dct:source>
@@ -621,7 +621,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Hydrate">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalSubstance"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:label>hydrate</rdfs:label>
 		<dct:source>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_35505</dct:source>
 		<skos:definition>addition compound that contains water in weak chemical combination with another compound</skos:definition>
@@ -2116,7 +2116,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Salt">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalSubstance"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:label>salt</rdfs:label>
 		<rdfs:seeAlso>Chemical Entities of Biological Interest Ontology, see http://purl.obolibrary.org/obo/CHEBI_24866</rdfs:seeAlso>
 		<rdfs:seeAlso>National Cancer Institute Thesaurus, see http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C822</rdfs:seeAlso>
