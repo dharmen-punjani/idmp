@@ -93,6 +93,9 @@
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
+	<owl:AnnotationProperty rdf:about="&owl;minQualifiedCardinality">
+	</owl:AnnotationProperty>
+	
 	<owl:Class rdf:about="&idmp-sub;Acid">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:subClassOf>
@@ -220,6 +223,17 @@
 		<skos:definition>sequence of alpha amino acide residues forming a part of a nucleic acid molecule</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;AmountType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:label>amount type</rdfs:label>
+		<skos:definition>classifies the quantity in the amount element group</skos:definition>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AmountType-Exact">
+		<rdf:type rdf:resource="&idmp-sub;AmountType"/>
+		<rdfs:label>amount type - exact</rdfs:label>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-sub;Analysis">
 		<rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/Process"/>
 		<rdfs:label>analysis</rdfs:label>
@@ -323,6 +337,46 @@
 		<cmns-av:adaptedFrom>ISO/TS 19444:2018 clause F.3.6.3.2</cmns-av:adaptedFrom>
 		<cmns-av:synonym>centesimal potency</cmns-av:synonym>
 	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;CharacteristicAttribute">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;CharacteristicAttributeType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:someValuesFrom rdf:resource="&cmns-cxtdsg;ContextualName"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>characteristic attribute</rdfs:label>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances,</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;CharacteristicAttributeType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;CharacteristicAttribute"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;CharacteristicAttribute"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>characteristic attribute type</rdfs:label>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;CharacteristicAttributeType-Physical">
+		<rdf:type rdf:resource="&idmp-sub;CharacteristicAttributeType"/>
+		<rdfs:label>characteristic attribute type - physical</rdfs:label>
+	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;ChemicalSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
@@ -519,6 +573,11 @@
 		<skos:definition>role played by an aspect if that aspect is used to define something</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;DegreeOfComminution">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;CharacteristicAttribute"/>
+		<rdfs:label>degree of comminution</rdfs:label>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;DescriptionRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;AspectRole"/>
 		<rdfs:label>description role</rdfs:label>
@@ -552,6 +611,73 @@
 		</rdfs:subClassOf>
 		<rdfs:label>element group</rdfs:label>
 		<skos:definition>a grouping of aspects or subspecfications in a specified substance group information model</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ElementGroup-Amount">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;AmountType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>element group amount</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ElementGroup-AttributeParameter">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:someValuesFrom rdf:resource="&cmns-cxtdsg;ContextualName"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
+				<owl:someValuesFrom rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>element group attribute parameter</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ElementGroupAuthor">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasDescription"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:someValuesFrom rdf:resource="&cmns-cxtdsg;ContextualName"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>element group author</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Ester">
@@ -682,19 +808,6 @@
 	
 	<owl:Class rdf:about="&idmp-sub;Ingredient">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:onClass>
-					<owl:Restriction>
-						<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
-						<owl:onClass rdf:resource="&idmp-sub;ManufacturedItem"/>
-						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-					</owl:Restriction>
-				</owl:onClass>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>ingredient</rdfs:label>
 		<skos:definition>role of a substance that is specifically part of or used in the preparation of some manufactured item, pharmaceutical product, medication, or drug</skos:definition>
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-NamingConformant"/>
@@ -806,6 +919,11 @@
 		<skos:definition>producer that holds the authorization for the manufacturing process</skos:definition>
 		<skos:note>In the context of ISO 11238, the definition refers to a company responsible for the manufacturing of the substance.</skos:note>
 		<cmns-av:synonym>establishment</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;MarkerSubstanceRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceRole"/>
+		<rdfs:label>marker substance role</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MarketContext">
@@ -1015,13 +1133,6 @@
 		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:onClass rdf:resource="&idmp-sub;Moiety"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;RegulatoryContext"/>
 			</owl:Restriction>
@@ -1176,24 +1287,6 @@
 				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularEntity"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;StructuralElement">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-								<owl:onClass rdf:resource="&idmp-sub;MolecularGroup"/>
-								<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>molecular sequence</rdfs:label>
 		<skos:definition>sequential structure of molecular fragments defining a macromolecule</skos:definition>
 	</owl:Class>
@@ -1211,24 +1304,6 @@
 				<owl:onProperty rdf:resource="&idmp-sub;hasSimplifiedMolecularInputLineEntrySpecification"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;string"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;StructuralElement">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-								<owl:onClass rdf:resource="&idmp-sub;Atom"/>
-								<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -1782,6 +1857,51 @@
 		<rdfs:label>organism part</rdfs:label>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;ParentRole">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Role"/>
+		<rdfs:label>parent role</rdfs:label>
+		<skos:definition>role of an entity in a ordering that has a more lower rank in the ordering</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 6.3.1</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>Parent role is used in the specified substance group 1 in the element group constituents.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ParentSubstanceRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ParentRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>parent substance role</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ParentTaxonRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ParentRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCredibility"/>
+				<owl:onClass rdf:resource="&cmns-doc;Document"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasReliability"/>
+				<owl:onClass rdf:resource="&cmns-doc;Document"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isRoleIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Taxonomy"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>parent taxon role</rdfs:label>
+		<skos:definition>role of the more general taxon towards another more specific taxon in a taxonomy</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PeptideMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Macromolecule"/>
 		<rdfs:subClassOf>
@@ -2216,12 +2336,6 @@
 	
 	<owl:Class rdf:about="&idmp-sub;SourceMaterialRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<skos:definition>role of material from which a substance is derived, which is defined based on TaxonomicRankomic and anatomical origins</skos:definition>
 		<skos:prefLabel>source material role</skos:prefLabel>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018 clause G.3.14</cmns-av:adaptedFrom>
@@ -2439,15 +2553,79 @@
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:onClass rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1-CharacteristicAttribute"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 1</rdfs:label>
+		<skos:definition>The specified substance group 1 captures constituents (such as ranges of marker or signature substance(s), other substances that may have biological activity and extraction solvent, physical form and any characteristic attributes essential to the description of the material.</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.2</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section E.2.6</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1-CharacteristicAttribute">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified substance group 1 - characteristic attribute</rdfs:label>
+		<skos:example>Examples of characteristic attributes are e.g. for Herbals: &apos;Degree of Comminution&apos;, &apos;Process State&apos;, &apos;Wild/Cultivated&apos;, &apos;Growth State&apos;, &apos;Feeding composition&apos; (e.g. zoological source material), &apos;Harvesting Time&apos;, &apos;Decontamination Process&apos;, &apos;Country of Origin&apos; (also applicable to Plsama-derived substance), &apos;Geographical Location&apos;, Storage Time&apos; and &apos;Storage Condition&apos;, In addtion, physical properties like boiling point, triple pint, density and solubility are also dscribed by this element group. Detailled information is proved by the annexes of the ISO/TS 19844 Implementation Guide.</skos:example>
+		<cmns-av:explanatoryNote>The element group &apos;Characteristic Attribute&apos; is meant to capture all kinds of properties and additional information of a substance. These properties and additional information are not attributes in there own right but are instances of characteristic attributes.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1-Constituent">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceConstituent"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstance"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified substance group 1 - constituent</rdfs:label>
+		<skos:definition>element group in specified substance groups that specifies a constituency</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 6.3</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The constituent substance includes components for materials containing multiple substances, parent substance, marker substance and extraction solvents for herbals, allergenic extracts.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup"/>
 		<rdfs:label>specified substance group 2</rdfs:label>
-		<skos:definition>groups criteria base on the manufactoring process</skos:definition>
+		<skos:definition>specified substance group 2 shall capture manufacturer information</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.3</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section E.2.6</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The manufacturer is not necessarily the entity that holds the market authorization, but the entity that manufactures, collects, processes and stores the material.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>For the Herbal preparation, the manufacturer of the processed Herbal Drug or Substance (fresh) is captured. Although the details of the manufacturing are not part of the definition, they should be transmitted by the manufacturer because a significant change in the manufacturing process for these complex materials could result in a new Specified Substance Group 1 and/or Group 2 Name and ID for pharmacovigilance purposes, even if there are no apparent qualitative changes in the major constituents of the substance.</cmns-av:usageNote>
+		<cmns-av:usageNote>For the Substance (fresh) this information will tie the manufacturer/farmer which grows and harvests or collects the fresh plant material. For the Herbal Drug this information will tie the manufacturer which processes (comminuted, cutting of the material) and stores the Herbal Drug.</cmns-av:usageNote>
+		<cmns-av:usageNote>The manufacturer information should include the information about the manufacturing site, which can be sourced in accordance with the organizations in ISO 11615 as implemented within the regional requirements, e.g. for Europe this could be the EMA OMS service.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2-ManufacturingMaterialSubstance">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PharmacopoeialGradeType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified substance group 2 - manufacturing material substance</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2-ResultantMaterial">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:label>specified substance group 2 - resultant material</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2-StartingMaterial">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:label>specified substance group 2 - starting material</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup3">
@@ -3599,6 +3777,13 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDirectParent"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Taxon"/>
 			</owl:Restriction>
@@ -3659,6 +3844,11 @@
 		<rdfs:range rdf:resource="&idmp-sub;ConformanceLevel"/>
 		<skos:definition>indicates whether a given class or element is mandatory, conditional, or optional with respect to a given substance type or specified substance group for reporting information per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasCredibility">
+		<rdfs:label>has credibility</rdfs:label>
+		<skos:definition>assertion how credible some relation is</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasDefiningMolecularFormula">
 		<rdfs:label>has defining molecular formula</rdfs:label>
@@ -3926,6 +4116,11 @@
 		<skos:definition>relates a substance to its parent substance</skos:definition>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasReliability">
+		<rdfs:label>has reliability</rdfs:label>
+		<skos:definition>assertion of information known about some relation</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasRendering">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasReferenceURL"/>
 		<rdfs:label>has rendering</rdfs:label>
@@ -4069,6 +4264,11 @@
 		<rdfs:label>is aspect of</rdfs:label>
 		<cmns-av:synonym>is characteristic of</cmns-av:synonym>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;isDefining">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasBooleanValue"/>
+		<rdfs:label>is defining</rdfs:label>
+	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isEquivalentTo">
 		<rdf:type rdf:resource="&owl;SymmetricProperty"/>
@@ -4252,9 +4452,105 @@
 		</rdfs:subClassOf>
 	</rdf:Description>
 	
+	<owl:ObjectProperty rdf:about="&cmns-doc;isSpecifiedBy">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-doc;specifies">
+	</owl:ObjectProperty>
+	
+	<owl:Class rdf:about="&cmns-pts;Constituency">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-pts;FunctionalRole">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-pts;PartyRole">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-pts;Role">
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;hasRole">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;isManifestedIn">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;isPlayedBy">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;isRoleIn">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;manifests">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-pts;playsRole">
+	</owl:ObjectProperty>
+	
 	<owl:Class rdf:about="&cmns-prd;Good">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
 		<cmns-av:explanatoryNote>Note that the concept of &apos;good&apos; as used in IDMP and by definition is a physical concept, and includes raw materials, intermediate materials, physical products, and substances of a defined amount.</cmns-av:explanatoryNote>
 	</owl:Class>
-
+	
+	<owl:Class rdf:about="&cmns-prd;Producer">
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-prd;isProducedBy">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-prd;produces">
+	</owl:ObjectProperty>
+	
+	<owl:Class rdf:about="&cmns-qtu;Expression">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;QuantityValue">
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasExpression">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasQuantityValue">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;specializes">
+	</owl:ObjectProperty>
+	
+	<owl:Class rdf:about="&cmns-ra;RegisteredIdentifier">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-ra;Registrar">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-ra;RegistrationAuthority">
+	</owl:Class>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;isRegisteredBy">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-ra;isRelatedTo">
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&cmns-rga;isApplicableInJurisdiction">
+	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&lcc-lr;hasTextualName">
+	</owl:DatatypeProperty>
+	
+	<rdf:Description>
+		<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+	</rdf:Description>
+	<rdf:Description>
+		<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+	</rdf:Description>
+	<rdf:Description>
+		<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+	</rdf:Description>
+	<rdf:Description>
+		<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+	</rdf:Description>
+	<rdf:Description>
+		<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+	</rdf:Description>
 </rdf:RDF>
