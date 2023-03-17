@@ -220,7 +220,9 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>amino acid sequence</rdfs:label>
-		<skos:definition>sequence of alpha amino acide residues forming a part of a nucleic acid molecule</skos:definition>
+		<skos:definition>order and identity of amino acides within a protein or peptide</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.62</cmns-av:adaptedFrom>
+		<cmns-av:synonym>polymer sequence</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;AmountType">
@@ -584,17 +586,6 @@
 		<skos:definition>role played by an aspect if that aspect is used to describe something</skos:definition>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;DomainTaxon">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasTaxonomicRank"/>
-				<owl:hasValue rdf:resource="&idmp-sub;TaxonomicRank-Domain"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>domain taxon</rdfs:label>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;ElementGroup">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
 		<rdfs:subClassOf>
@@ -705,28 +696,6 @@
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;FamilyTaxon">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasTaxonomicRank"/>
-				<owl:hasValue rdf:resource="&idmp-sub;TaxonomicRank-Family"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>family taxon</rdfs:label>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;GenusTaxon">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasTaxonomicRank"/>
-				<owl:hasValue rdf:resource="&idmp-sub;TaxonomicRank-Genus"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>genus taxon</rdfs:label>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;GraphStructure">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Structure"/>
 		<skos:definition>a structure where the elements form vertices that are connected by edges</skos:definition>
@@ -819,17 +788,6 @@
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;KingdomTaxon">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasTaxonomicRank"/>
-				<owl:hasValue rdf:resource="&idmp-sub;TaxonomicRank-Kingdom"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>kingdom taxon</rdfs:label>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;LMPotency">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceDilutionPotentization"/>
 		<rdfs:label>LM potency</rdfs:label>
@@ -846,14 +804,7 @@
 		<cmns-av:synonym>scope of observation</cmns-av:synonym>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;LifeTaxon">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
-		<rdfs:label>life taxon</rdfs:label>
-		<skos:definition>a taxon at the highest ranking of the taxonomy</skos:definition>
-	</owl:Class>
-	
 	<owl:NamedIndividual rdf:about="&idmp-sub;LifeTaxonPlurality">
-		<rdf:type rdf:resource="&idmp-sub;LifeTaxon"/>
 		<rdfs:label>life taxon (plurality)</rdfs:label>
 		<skos:definition>plurality of all organisms</skos:definition>
 	</owl:NamedIndividual>
@@ -1207,6 +1158,14 @@
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.47</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MolecularFragment">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularGroup"/>
+		<rdfs:label>molecular fragment</rdfs:label>
+		<skos:definition>portion of a molecule that has one or more sites of attachment to other fragments or moieties</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.48</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>Molecular fragments are used in the description of polymers to represent substituents and in structural modifications to a substance.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MolecularGraph">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
 		<rdfs:subClassOf>
@@ -1390,6 +1349,14 @@
 		<cmns-av:directSource>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1143</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MonodisperseSubstance">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:label>monodisperse substance</rdfs:label>
+		<owl:disjointWith rdf:resource="&idmp-sub;PolydisperseSubstance"/>
+		<skos:definition>single substance that is homogeneous in molecular weight, that is, it does not have a distribution of different molecular weight chains within the total mass</skos:definition>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.51</cmns-av:directSource>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MonomerMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
 		<rdfs:label>monomer molecule</rdfs:label>
@@ -1398,7 +1365,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MonomerResidue">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularFragment"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
@@ -1788,61 +1755,8 @@
 		<cmns-av:synonym>optional criterion</cmns-av:synonym>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;OrderTaxon">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasTaxonomicRank"/>
-				<owl:hasValue rdf:resource="&idmp-sub;TaxonomicRank-Order"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>order taxon</rdfs:label>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;Organism">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;FamilyTaxon"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;GenusTaxon"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;KingdomTaxon"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;OrderTaxon"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;PhylumTaxon"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;SpecfiesTaxon"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
@@ -1850,11 +1764,16 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>organism</rdfs:label>
+		<skos:definition>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.56</skos:definition>
+		<skos:definition>individual living entity anatomical origin that can react to stimuli reproduce, grow, and maintain homeostasis</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;OrganismPart">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:label>organism part</rdfs:label>
+		<skos:definition>entity of anatomical origin and location of source material within an organism</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.57</cmns-av:adaptedFrom>
+		<cmns-av:synonym>part</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ParentRole">
@@ -1918,6 +1837,12 @@
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;AminoAcideSequence"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>peptide molecule</rdfs:label>
 		<cmns-av:adaptedFrom>ISO/TS 1944:2018 clause G.3.12</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>molecule with a defined sequence of alpha-amino acids connected through peptide bonds. A peptide consists of a linear chain with a length of 2 to 40 amino acids.</cmns-av:adaptedFrom>
@@ -1939,11 +1864,6 @@
 		</rdfs:subClassOf>
 		<rdfs:label>pharmacopoeial grade type</rdfs:label>
 		<skos:definition>classifier used to indicate the pharmacopoeial grade of some material or substance</skos:definition>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;PhylumTaxon">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
-		<rdfs:label>phylum taxon</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalManufacturedItem">
@@ -2053,10 +1973,72 @@
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.84</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;PolydisperseSubstance">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:label>polydisperse substance</rdfs:label>
+		<skos:definition>single substance containing multiple related entities</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.62</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>Polydisperse substances include polymers, mixture and structurally diverse material isolated from a single source. Chemical substances, proteins and nucleic acids with defined sequences are not described as polydisperse substances.</cmns-av:usageNote>
+	</owl:Class>
+	
 	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerClassifier">
 		<rdfs:label>polymer type</rdfs:label>
 		<skos:definition>substance classifier for substances defined by rules for polymers in ISO 11238.</skos:definition>
 	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerConnectivitiy-Block">
+		<rdf:type rdf:resource="&idmp-sub;PolymerConnectivityCode"/>
+		<rdfs:label>polymer connectivity - block</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;PolymerConnectivity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularStructure"/>
+		<rdfs:label>polymer connectivity</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.62</cmns-av:adaptedFrom>
+		<cmns-av:synonym>copolymer sequence type</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerConnectivity-Alternating">
+		<rdf:type rdf:resource="&idmp-sub;PolymerConnectivityCode"/>
+		<rdfs:label>polymer connectivity - alternating</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerConnectivity-Graft">
+		<rdf:type rdf:resource="&idmp-sub;PolymerConnectivityCode"/>
+		<rdfs:label>polymer connectivity - graft</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerConnectivity-Mixed">
+		<rdf:type rdf:resource="&idmp-sub;PolymerConnectivityCode"/>
+		<rdfs:label>polymer connectivity - mixed</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerConnectivity-Periodic">
+		<rdf:type rdf:resource="&idmp-sub;PolymerConnectivityCode"/>
+		<rdfs:label>polymer connectivity - periodic</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerConnectivity-Random">
+		<rdf:type rdf:resource="&idmp-sub;PolymerConnectivityCode"/>
+		<rdfs:label>polymer connectivity - random</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerConnectivity-Statistical">
+		<rdf:type rdf:resource="&idmp-sub;PolymerConnectivityCode"/>
+		<rdfs:label>polymer connectivity - statistical</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;PolymerConnectivityCode">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerConnectivity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>polymer connectivity code</rdfs:label>
+		<skos:definition>code denoting the type of polymer connectivity (copolymer sequence type)</skos:definition>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
@@ -2090,6 +2072,14 @@
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:label>potency specification</rdfs:label>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.5.3</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Potentization">
+		<rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/ProcessSpecification"/>
+		<rdfs:label>potentization</rdfs:label>
+		<skos:definition>process by which dilutions and triturations are obtained from homeopathic stocks in accordance with a homeopathic manufacturing procedure: this means successive dilutions and successions, or successive appropriate triturations, or a combination of the two processes</skos:definition>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.65</cmns-av:directSource>
+		<cmns-av:explanatoryNote>The number of potentization steps defines the degree of dilution; for example, &quot;D3&quot;, &quot;3DH&quot; or &quot;3X&quot; means three decimal potentization steps (diluted 1:1 000), and &quot;C3&quot; or &quot;3CH&quot; means three centesimal potentization steps (diluted 1:1 000 000).</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PrescriptionRole">
@@ -2130,9 +2120,31 @@
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">41</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;AminoAcideSequence"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>protein molecule</rdfs:label>
 		<skos:definition>molecule with a defined sequence of alpha-amino acids connected through peptide bonds. A protein consists of one or more chains with a lenght of more than 40 amino acids.</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 1944:2018 clause G.3.12</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ProteinSubUnit">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntity"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;AminoAcidResidue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>protein sub-unit</rdfs:label>
+		<skos:definition>linear sequence of amino acid residues connected through peptide bonds</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.69</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Protein sub-units usually adopt specific structural motives (e.g. β-sheets, α-helical structures) and have specific functions/roles within the protein (e.g. catalytic centre, substrate binding). Sub-units are linked to each other to make up the fully functional protein.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.69</cmns-av:usageNote>
+		<cmns-av:usageNote>Repeated sub-units in proteins are captured.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinSubstance">
@@ -2334,6 +2346,43 @@
 		<cmns-av:synonym>classifier for a single molecular entity</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SourceMaterialClass">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;SourceMaterialClassCode"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>source material class</rdfs:label>
+		<skos:definition>General high-level classification of the source material specific to the origin of the material.</skos:definition>
+		<skos:example>biologic</skos:example>
+		<skos:example>botanical</skos:example>
+		<skos:example>mineral</skos:example>
+		<skos:example>organic</skos:example>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.1</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SourceMaterialClassCode">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&idmp-sub;SourceMaterialClass"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>source material class code</rdfs:label>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.1</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SourceMaterialRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
 		<skos:definition>role of material from which a substance is derived, which is defined based on TaxonomicRankomic and anatomical origins</skos:definition>
@@ -2342,15 +2391,47 @@
 		<cmns-av:explanatoryNote>Generalized from IDMP definition of source material</cmns-av:explanatoryNote>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;SpecfiesTaxon">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Taxon"/>
+	<owl:Class rdf:about="&idmp-sub;SourceMaterialType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasTaxonomicRank"/>
-				<owl:hasValue rdf:resource="&idmp-sub;TaxonomicRank-Species"/>
+				<owl:onProperty rdf:resource="&cmns-dsg;isSignifiedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;SourceMaterialTypeCode"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>species taxon</rdfs:label>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>source material type</rdfs:label>
+		<skos:example>animal</skos:example>
+		<skos:example>arachnid</skos:example>
+		<skos:example>bacteria</skos:example>
+		<skos:example>fungus</skos:example>
+		<skos:example>grass pollen</skos:example>
+		<skos:example>human</skos:example>
+		<skos:example>mammal</skos:example>
+		<skos:example>plant</skos:example>
+		<skos:example>porcine</skos:example>
+		<skos:example>virus</skos:example>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.2</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>The type of the source material shall be specified based on a controlled vocabulary. For vaccines, this subclause refers to the class of infectious agent.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SourceMaterialTypeCode">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&idmp-sub;SourceMaterialType"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>source material type code</rdfs:label>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.9.2</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecificationRole">
@@ -2368,6 +2449,7 @@
 	<owl:Class rdf:about="&idmp-sub;SpecifiedAminoAcidSequence">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularSequence"/>
 		<rdfs:label>specified amino acid sequence</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.68</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedAmount">
@@ -3603,22 +3685,16 @@
 	<owl:Class rdf:about="&idmp-sub;Taxon">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
-			<owl:Class>
-				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-sub;LifeTaxon">
-					</rdf:Description>
-					<owl:Restriction>
-						<owl:onProperty rdf:resource="&idmp-sub;hasDirectParent"/>
-						<owl:onClass rdf:resource="&idmp-sub;Taxon"/>
-						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
-					</owl:Restriction>
-				</owl:unionOf>
-			</owl:Class>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasDirectParent"/>
 				<owl:onClass rdf:resource="&idmp-sub;Taxon"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasTaxonomicRank"/>
+				<owl:onClass rdf:resource="&idmp-sub;TaxonomicRank"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -3631,15 +3707,14 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasTaxonomicRank"/>
-				<owl:onClass rdf:resource="&idmp-sub;TaxonomicRank"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganism"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalOrganism"/>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Taxonomy"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>taxon</rdfs:label>
@@ -3674,6 +3749,12 @@
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Taxon"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Taxonomy"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>taxonomic rank</rdfs:label>
 		<skos:definition>a ranking in a taxonomy</skos:definition>
 	</owl:Class>
@@ -3685,11 +3766,11 @@
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Family"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Genus"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Kingdom"/>
-		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Life"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Order"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Phylum"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Species"/>
 		<idmp-sub:hasDirectParent rdf:resource="&idmp-sub;TaxonomicRank-Phylum"/>
+		<cmns-av:usageNote>taxonomic rank used in IDMP organism general element group</cmns-av:usageNote>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;TaxonomicRank-Domain">
@@ -3698,11 +3779,9 @@
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Family"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Genus"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Kingdom"/>
-		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Life"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Order"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Phylum"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Species"/>
-		<idmp-sub:hasDirectParent rdf:resource="&idmp-sub;TaxonomicRank-Life"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;TaxonomicRank-Family">
@@ -3710,40 +3789,32 @@
 		<rdfs:label>taxonomic rank - family</rdfs:label>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Genus"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Kingdom"/>
-		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Life"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Order"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Phylum"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Species"/>
 		<idmp-sub:hasDirectParent rdf:resource="&idmp-sub;TaxonomicRank-Order"/>
+		<cmns-av:usageNote>taxonomic rank used in IDMP organism element group</cmns-av:usageNote>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;TaxonomicRank-Genus">
 		<rdf:type rdf:resource="&idmp-sub;TaxonomicRank"/>
 		<rdfs:label>taxonomic rank - genus</rdfs:label>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Kingdom"/>
-		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Life"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Order"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Phylum"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Species"/>
 		<idmp-sub:hasDirectParent rdf:resource="&idmp-sub;TaxonomicRank-Family"/>
+		<cmns-av:usageNote>taxonomic rank used in IDMP organism element group</cmns-av:usageNote>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;TaxonomicRank-Kingdom">
 		<rdf:type rdf:resource="&idmp-sub;TaxonomicRank"/>
 		<rdfs:label>taxonomic rank - kingdom</rdfs:label>
-		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Life"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Order"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Phylum"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Species"/>
 		<idmp-sub:hasDirectParent rdf:resource="&idmp-sub;TaxonomicRank-Domain"/>
-	</owl:NamedIndividual>
-	
-	<owl:NamedIndividual rdf:about="&idmp-sub;TaxonomicRank-Life">
-		<rdf:type rdf:resource="&idmp-sub;TaxonomicRank"/>
-		<rdfs:label>taxonomic rank - life</rdfs:label>
-		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Order"/>
-		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Phylum"/>
-		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Species"/>
+		<cmns-av:usageNote>taxonomic rank used in IDMP organism general element group</cmns-av:usageNote>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;TaxonomicRank-Order">
@@ -3752,6 +3823,7 @@
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Phylum"/>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Species"/>
 		<idmp-sub:hasDirectParent rdf:resource="&idmp-sub;TaxonomicRank-Class"/>
+		<cmns-av:usageNote>taxonomic rank used in IDMP organism general element group</cmns-av:usageNote>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;TaxonomicRank-Phylum">
@@ -3759,12 +3831,14 @@
 		<rdfs:label>taxonomic rank - phylum</rdfs:label>
 		<owl:differentFrom rdf:resource="&idmp-sub;TaxonomicRank-Species"/>
 		<idmp-sub:hasDirectParent rdf:resource="&idmp-sub;TaxonomicRank-Kingdom"/>
+		<cmns-av:usageNote>taxonomic rank used in IDMP organism general element group</cmns-av:usageNote>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;TaxonomicRank-Species">
 		<rdf:type rdf:resource="&idmp-sub;TaxonomicRank"/>
 		<rdfs:label>taxonomic rank - species</rdfs:label>
 		<idmp-sub:hasDirectParent rdf:resource="&idmp-sub;TaxonomicRank-Species"/>
+		<cmns-av:usageNote>taxonomic rank used in IDMP organism general group</cmns-av:usageNote>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;Taxonomy">
@@ -4268,6 +4342,10 @@
 	<owl:DatatypeProperty rdf:about="&idmp-sub;isDefining">
 		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasBooleanValue"/>
 		<rdfs:label>is defining</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:example>If an enzyme has a strong binding with Substance A, then the relationship of Substance A with the enzyme (Related Substance) is defining information.</skos:example>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3.5</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>There are cases that the substance relationship is a defining element for the substance&apos;s pharmacodynamic action.</cmns-av:usageNote>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isEquivalentTo">
