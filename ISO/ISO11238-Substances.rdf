@@ -2040,6 +2040,25 @@
 		<skos:definition>code denoting the type of polymer connectivity (copolymer sequence type)</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;PolymerMoleculeSubstituent">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Macromolecule"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularFragment"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>polymer molecule substituent</rdfs:label>
+		<skos:definition>role of a molecular fragment attached to a structural repeat unit of a polymer that typically replaces a hydrogen atom</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.85</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:subClassOf>
@@ -3676,6 +3695,20 @@
 		<skos:note>A pharmacological role is related to the composition, properties, or action of a substance or ingredient in another substance or pharmaceutical product. It covers adjuvant and expedient, which are roles played by the substance components in a pharmaceutical product, but it can also be used for treated disease, patient, packaging and routes of administrations, all of which are roles that are studied in the science of pharmacology and have an impact on the drug&apos;s effects.</skos:note>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Succession">
+		<rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/ProcessSpecification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Potentization"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>succession</rdfs:label>
+		<skos:definition>process of agitating a liquid preparation in the manufacturing of homeopathic medicinal products.</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.85</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>As intermediate step in the process of serial dilution, it is part of the potentization process.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;TargetRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;AspectRole"/>
 		<rdfs:label>target role</rdfs:label>
@@ -3720,6 +3753,24 @@
 		<rdfs:label>taxon</rdfs:label>
 		<skos:definition>In biology, a taxon is a group of one more populations of an organism or organisms seen by taxonomists to form a unit</skos:definition>
 		<cmns-av:directSource>https://en.wikipedia.org/wiki/Taxon</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;TaxonAuthor">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;author"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;authors"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-doc;isAbout"/>
+						<owl:someValuesFrom rdf:resource="&idmp-sub;Taxon"/>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>taxon author</rdfs:label>
+		<skos:definition>The author of a taxon.</skos:definition>
+		<cmns-av:usageNote>The taxon author along with taxonomic family, genuse and species is necessary to identify an organism.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;TaxonomicRank">
@@ -3863,15 +3914,35 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>taxonomy</rdfs:label>
-		<skos:definition>hierarchic scientific organism classification system</skos:definition>
+		<skos:definition>scientific organism classification system needed to describe the origin of source material in substances isolated from biological matrices</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6</cmns-av:adaptedFrom>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.88</cmns-av:directSource>
-		<cmns-av:explanatoryNote>needed to describe the origin of source material in substances isolated from biological matrices</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>Taxonomic information is captured to the species level for all polydisperse substances isolated from biological matrices, if such information is available and the source material is consistently derived from the species. Taxonomic family, genus and species along with the taxon author are necessary to identify the source organism. Kingdom, phylum, class and order are also captured when available. Intraspecific information (e.g. subspecies, strain or variety) is captured when the forms exhibit consistent differences in either material content or function.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;author">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;PartyRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&cmns-doc;authors"/>
+								<owl:someValuesFrom rdf:resource="&cmns-doc;Document"/>
+							</owl:Restriction>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&cmns-doc;authors"/>
+								<owl:someValuesFrom rdf:resource="&cmns-doc;Specification"/>
+							</owl:Restriction>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>author</rdfs:label>
+		<skos:definition>role of a person or party that writes some text</skos:definition>
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasActiveMoiety">
