@@ -68,7 +68,7 @@
 	<owl:NamedIndividual rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/CatalogueOfLife/Taxon/39VD">
 		<rdf:type rdf:resource="&idmp-sub;Taxon"/>
 		<rdfs:label>Betacoronavirus</rdfs:label>
-		<idmp-sub:hasDirectParent rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/CatalogueOfLife/Taxon/7NLXS%20"/>
+		<idmp-sub:hasDirectParent rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/CatalogueOfLife/Taxon/7NLXS"/>
 		<idmp-sub:hasTaxonomicRank rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/CatalogueOfLife/TaxonomicRank/Genus"/>
 		<cmns-col:isIncludedIn rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/EXT/Extensions/CatalogueOfLife/Taxonomy/Viruses"/>
 	</owl:NamedIndividual>
