@@ -2179,6 +2179,12 @@
 		<cmns-av:explanatoryNote>The number of potentization steps defines the degree of dilution; for example, &quot;D3&quot;, &quot;3DH&quot; or &quot;3X&quot; means three decimal potentization steps (diluted 1:1 000), and &quot;C3&quot; or &quot;3CH&quot; means three centesimal potentization steps (diluted 1:1 000 000).</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;Premise">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:label>premise</rdfs:label>
+		<skos:definition>an aspect from which another aspect is inferred</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PrescriptionRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;AspectRole"/>
 		<rdfs:label>prescription role</rdfs:label>
@@ -4315,6 +4321,12 @@
 		<rdfs:range rdf:resource="&xsd;anyURI"/>
 		<skos:definition>has a drawing in perspective of a structure</skos:definition>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasRequirement">
+		<rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+		<rdfs:label>has requirement</rdfs:label>
+		<skos:definition>relates a specification or definition to a necessary aspect of the thing being specified or defined</skos:definition>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasRoleName">
 		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;hasName"/>
