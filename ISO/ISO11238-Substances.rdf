@@ -100,8 +100,13 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularEntity"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;AcidMolecule"/>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&idmp-sub;hasMolecularEntity"/>
+						<owl:someValuesFrom rdf:resource="&idmp-sub;AcidMolecule"/>
+					</owl:Restriction>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>acid</rdfs:label>
@@ -419,32 +424,8 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;isDefinedIn"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&cmns-pts;Constituency">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
-								<owl:onClass>
-									<owl:Class>
-										<owl:intersectionOf rdf:parseType="Collection">
-											<rdf:Description rdf:about="&idmp-sub;MolecularConstituent">
-											</rdf:Description>
-											<owl:Restriction>
-												<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
-												<owl:onClass rdf:resource="&idmp-sub;MolecularStructure"/>
-												<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-											</owl:Restriction>
-										</owl:intersectionOf>
-									</owl:Class>
-								</owl:onClass>
-								<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularStructure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>chemical substance</rdfs:label>
@@ -1501,20 +1482,8 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;MolecularConstituent">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
-								<owl:onClass rdf:resource="&idmp-sub;SpecifiedNucleotideSequence"/>
-								<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;NucleotideSequence"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>nucleic acid substance</rdfs:label>
@@ -1582,7 +1551,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>nucleiotide sequence</rdfs:label>
-		<skos:definition>a sequence of nucleotides forming a part of a protein</skos:definition>
+		<skos:definition>a sequence of nucleotides forming a part of a nucleic acid</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;OfficialName">
@@ -2141,20 +2110,8 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;MolecularConstituent">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
-								<owl:onClass rdf:resource="&idmp-sub;SpecifiedMonomerSequence"/>
-								<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MonomerSequence"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>polymer substance</rdfs:label>
@@ -2254,20 +2211,8 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;MolecularConstituent">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
-								<owl:onClass rdf:resource="&idmp-sub;SpecifiedAminoAcidSequence"/>
-								<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;AminoAcideSequence"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>protein substance</rdfs:label>
@@ -2395,33 +2340,16 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningMolecularWeight"/>
+				<owl:onClass rdf:resource="&idmp-sub;SpecifiedMolecularWeight"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningNumberOfMoieties"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;integer"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedMolecularWeight"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;optionallyIncludes"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;MolecularConstituent">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&idmp-sub;necessarilyIncludes"/>
-								<owl:onClass rdf:resource="&idmp-sub;SpecifiedMolecularStructure"/>
-								<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>single substance</rdfs:label>
@@ -4151,8 +4079,6 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasDirectParent">
-		<rdf:type rdf:resource="&owl;AsymmetricProperty"/>
-		<rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasParent"/>
 		<rdfs:label>has direct parent</rdfs:label>
 		<skos:definition>relation to the direct broader or higher element in a hierarchy</skos:definition>
@@ -4291,8 +4217,6 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasParent">
-		<rdf:type rdf:resource="&owl;AsymmetricProperty"/>
-		<rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
 		<rdf:type rdf:resource="&owl;TransitiveProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-ra;isRelatedTo"/>
 		<rdfs:label>has parent</rdfs:label>
