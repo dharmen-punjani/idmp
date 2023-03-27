@@ -278,8 +278,15 @@
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Analysis"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Analysis"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>analytical method</rdfs:label>
 		<skos:definition>specification about how to do an analysis</skos:definition>
+		<skos:definition>specification of the methodology for performing some analysis</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, figure 29</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -653,6 +660,13 @@
 	
 	<owl:Class rdf:about="&idmp-sub;ElementGroup">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;Collection"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
@@ -665,8 +679,15 @@
 				<owl:someValuesFrom rdf:resource="&cmns-dsg;Name"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
+				<owl:someValuesFrom rdf:resource="&cmns-dsg;Name"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>element group</rdfs:label>
 		<skos:definition>a grouping of aspects or subspecfications in a specified substance group information model</skos:definition>
+		<skos:definition>grouping of aspects or subspecfications in a specified substance group information model</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ElementGroup-Amount">
@@ -1027,7 +1048,7 @@
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.41</dct:source>
 		<owl:disjointWith rdf:resource="&idmp-sub;MolecularEntity"/>
 		<skos:definition>entity that has mass, occupies space and consists of one or more substances</skos:definition>
-		<cmns-av:explanatoryNote>Material is not of molecular or astrononomical level and can be described by classical Newtonian physics.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>Material is not defined herein at a molecular or astrononomical level and can be described using classical Newtonian physics.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MaterialClassifier">
@@ -1039,7 +1060,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>material classifier</rdfs:label>
-		<skos:definition>classifier for material</skos:definition>
+		<skos:definition>classifier for substances or specified substances of which certain products, packaging, or devices are made</skos:definition>
 		<skos:example>biological material</skos:example>
 		<skos:example>botanical material</skos:example>
 		<skos:example>synthetic material</skos:example>
@@ -1068,7 +1089,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>material specification</rdfs:label>
-		<skos:definition>a specification about material</skos:definition>
+		<skos:definition>specification for substances or specified substances that are part of or used in the preparation of some manufactured item, or pharmaceutical product, medication, or drug</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Matter">
@@ -1852,7 +1873,27 @@
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty>
+					<rdf:Description>
+						<owl:inverseOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
+					</rdf:Description>
+				</owl:onProperty>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Material">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>optical activity</rdfs:label>
+		<rdfs:label>optical rotation</rdfs:label>
 		<skos:definition>angle of rotation of polarized light when transmitting through material</skos:definition>
 		<cmns-av:adaptedFrom>PAC, 1996, 68, 2193. (Basic terminology of stereochemistry (IUPAC Recommendations 1996)) on page 2212</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>A sample of material able to rotate the plane of polarization of a beam of transmitted plane-polarized light is said to possess optical activity (or to be optically active). This optical rotation is the classical distinguishing characteristic (sufficient but not necessary) of systems containing unequal amounts of corresponding enantiomers. An enantiomer causing rotation in a clockwise direction (when viewed in the direction facing the oncoming light beam) under specified conditions is called dextrorotatory and its chemical name or formula is designated by the prefix (+)-; one causing rotation in the opposite sense is laevorotatory and designated by the prefix (−)-. Materials with optical activity also exhibit other chiroptic phenomena.</cmns-av:explanatoryNote>
@@ -2033,6 +2074,23 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Monograph"/>
 		<rdfs:label>pharmacopoeial monograph</rdfs:label>
 		<skos:definition>a monograph published as part of a pharmacopoiea</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalCharacteristic">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Matter"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical characteristic</rdfs:label>
+		<skos:definition>characterization of matter based on physically observable properties of the matter</skos:definition>
+		<skos:example>a distribution of molecular weight</skos:example>
+		<skos:example>a matching mass spectrum</skos:example>
+		<skos:example>a specified mass range</skos:example>
+		<skos:example>a specified optical activity</skos:example>
+		<cmns-av:explanatoryNote>The properties are characterized by specific or ranges of quantity values, but can be also more complex properties such as statistical distributions or a match with some reference spectrum.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalManufacturedItem">
@@ -2407,8 +2465,12 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>resultant material role</rdfs:label>
+		<skos:definition>role of material that is the result of a manufacturing process</skos:definition>
+		<skos:note>Resultant material may be the starting material of the next process step or the final material or actual specified substance.</skos:note>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.70 and section 8.5.5, Figure 30</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.5.5, figure 30</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018 clause G.3.13</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause G.3.13</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;RoleName">
@@ -2538,9 +2600,19 @@
 	
 	<owl:Class rdf:about="&idmp-sub;SourceMaterialRole">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MaterialRole"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>source material role</rdfs:label>
 		<skos:definition>role of material from which a substance is derived, which is defined based on TaxonomicRankomic and anatomical origins</skos:definition>
+		<skos:definition>role of material from which a substance is derived, which is defined based on taxonomic and anatomical origins</skos:definition>
 		<skos:prefLabel>source material role</skos:prefLabel>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.76 and section 8.5.5, Figure 30</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018 clause G.3.14</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause G.3.14</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>Generalized from IDMP definition of source material</cmns-av:explanatoryNote>
 	</owl:Class>
 	
@@ -2603,6 +2675,50 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularSequence"/>
 		<rdfs:label>specified amino acid sequence</rdfs:label>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.68</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedAmount">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-qtu;QuantityValue">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-qtu;QuantityValueRange">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
+				<owl:someValuesFrom rdf:resource="&cmns-col;Constituent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified amount</rdfs:label>
+		<skos:definition>specifying aspect that quantifies how much of a constituent is part of the constituency</skos:definition>
+		<skos:example>the relative mass of material of a specific substance in a mixture</skos:example>
+		<cmns-av:usageNote>The specified amount can be a range and it can be relative.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedItemCount">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-dtp;hasIntegerValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified item count</rdfs:label>
+		<skos:definition>number of discrete items of the same constituent in a constituency</skos:definition>
+		<skos:example>the number of items in a container or collection</skos:example>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedMolecularSequence">
