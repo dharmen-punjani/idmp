@@ -592,6 +592,11 @@
 		<cmns-av:adaptedFrom>PAC, 1996, 68, 2287. (Glossary of basic terms in polymer science (IUPAC Recommendations 1996)) on page 2291</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ContentType-Chemical-SMILES">
+		<rdfs:label>chemical/x-daylight-smiles</rdfs:label>
+		<lcc-lr:hasTextualName>chemical/x-daylight-smiles</lcc-lr:hasTextualName>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-sub;Count">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;AggregateAspect"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalPropertyAspect"/>
@@ -731,6 +736,39 @@
 		<rdfs:label>element group author</rdfs:label>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;ElementGroupGrade">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;PharmacopoeialGradeName"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;PharmacopoeialGradeType"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PharmacopoeialGrade"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>element group grade</rdfs:label>
+		<skos:definition>An element group that specifies the pharmacopoeial grade of a substance.</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ElementGroupReferenceSource">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:label>element group reference source</rdfs:label>
+		<skos:definition>element group that refers to a pharmacopoeial monograph or an in-house monograph</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section F.3.7.4</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Ester">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:subClassOf>
@@ -831,6 +869,12 @@
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:label>impurity specification</rdfs:label>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.5.3</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;InHouseMonograph">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Monograph"/>
+		<rdfs:label>in-house monograph</rdfs:label>
+		<skos:definition>a monograph published in-house in a pharmaceutical company</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;InactiveIngredient">
@@ -1375,6 +1419,19 @@
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MolecularStructureRepresentation">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;GraphStructure"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Document"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;isAbout"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularStructure"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>molecular structure representation</rdfs:label>
+		<skos:definition>a document that contains structured symbols (text or graphical elements)  that are representations of atoms, bonds and their spatial and topological arrangement</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MolecularWeight">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
 		<rdfs:subClassOf>
@@ -1433,6 +1490,12 @@
 		<owl:disjointWith rdf:resource="&idmp-sub;PolydisperseSubstance"/>
 		<skos:definition>single substance that is homogeneous in molecular weight, that is, it does not have a distribution of different molecular weight chains within the total mass</skos:definition>
 		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.51</cmns-av:directSource>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Monograph">
+		<rdfs:subClassOf rdf:resource="&cmns-doc;ReferenceDocument"/>
+		<rdfs:label>monograph</rdfs:label>
+		<skos:definition>a detailed written study of a single specialized subject or an aspect of it</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MonomerMolecule">
@@ -1936,7 +1999,17 @@
 	<owl:Class rdf:about="&idmp-sub;PharmacopoeialGrade">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:label>pharmacopoeial grade</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.5.3</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>A grade refers to the overall quality or group of specifications of a given specified substance.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>Grade shall be indicated for both Specified Substance Group 3 and Group 4.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PharmacopoeialGradeName">
+		<rdfs:subClassOf rdf:resource="&cmns-cxtdsg;ContextualName"/>
+		<rdfs:label>pharmacopoeial grade name</rdfs:label>
+		<skos:definition>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 32</skos:definition>
+		<skos:definition>a name in accordance with the pharmacopeia</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section F.3.7.4</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PharmacopoeialGradeType">
@@ -1948,7 +2021,18 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>pharmacopoeial grade type</rdfs:label>
-		<skos:definition>classifier used to indicate the pharmacopoeial grade of some material or substance</skos:definition>
+		<skos:definition>classifier indicating the pharmacopoeial specification</skos:definition>
+		<skos:example>In-house</skos:example>
+		<skos:example>JP, ed. XVI</skos:example>
+		<skos:example>Ph.Eur.</skos:example>
+		<skos:example>USP</skos:example>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section F.3.7.4</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PharmacopoeialMonograph">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Monograph"/>
+		<rdfs:label>pharmacopoeial monograph</rdfs:label>
+		<skos:definition>a monograph published as part of a pharmacopoiea</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalManufacturedItem">
@@ -2686,7 +2770,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2703,6 +2787,12 @@
 				<owl:onProperty rdf:resource="&idmp-sub;hasSubstance"/>
 				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 1 - constituent</rdfs:label>
@@ -2731,16 +2821,34 @@
 				<owl:someValuesFrom rdf:resource="&idmp-sub;PharmacopoeialGradeType"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup2"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 2 - manufacturing material substance</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2-ResultantMaterial">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup2"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 2 - resultant material</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2-StartingMaterial">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup2"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 2 - starting material</rdfs:label>
 	</owl:Class>
 	
@@ -2748,7 +2856,7 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
 				<owl:onClass rdf:resource="&idmp-sub;SpecifiedSubstanceGroup3Grade"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
@@ -2759,8 +2867,15 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup3Grade">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroupGrade"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup3"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 3 - grade</rdfs:label>
+		<skos:definition>element group that specifies the pharmacopeian grade of the substance as part of substance group 3</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup4">
@@ -2814,13 +2929,37 @@
 		<cmns-av:usageNote>The specified substance group 4 elements shall contain the most detailed information on a substance.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup4-Grade">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroupGrade"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup4"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified substance group 4 - grade</rdfs:label>
+		<skos:definition>element group that specifies the pharmacopeian grade of the substance as part of substance group 4</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup4-Other">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup4"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 4 - other</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup4-Specification">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup4"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 4 - specification</rdfs:label>
 	</owl:Class>
 	
@@ -4005,6 +4144,16 @@
 		<skos:definition>indicates whether a given class or element is mandatory, conditional, or optional with respect to a given substance type or specified substance group for reporting information per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-sub;hasContentType">
+		<rdf:type rdf:resource="&owl;ObjectProperty"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
+		<rdfs:label>has content type</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;idmp-sub:ContentType"/>
+		<rdfs:seeAlso rdf:resource="&dct;format"/>
+		<skos:definition>relates to a content type according to Internet RFC 1341</skos:definition>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasCredibility">
 		<rdfs:label>has credibility</rdfs:label>
 		<skos:definition>assertion how credible some relation is</skos:definition>
@@ -4214,6 +4363,16 @@
 		<rdfs:range rdf:resource="&idmp-sub;MolecularStructure"/>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularStructureRepresentation">
+		<rdfs:subPropertyOf rdf:resource="&cmns-dsg;isDescribedBy"/>
+		<rdfs:label>has molecular structure representation</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;MolecularStructureRepresentation"/>
+		<skos:definition>relates to a textual or graphical representation of a molecular structure</skos:definition>
+		<skos:example>MDL molfile</skos:example>
+		<skos:example>SMILES string</skos:example>
+		<cmns-av:usageNote>Strictly the domain is the molecular structure, but as shortcut the relation can also link a substance directly to the structure representation of its molecular structure.</cmns-av:usageNote>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularWeight">
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
 		<rdfs:label>has molecular weight</rdfs:label>
@@ -4403,6 +4562,26 @@
 		<skos:definition>describes the nature of valid values for a given class or element in cases where that information is encoded as a string rather than as a value domain per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
+	<owl:Class rdf:about="&idmp-sub;idmp-sub:ContentType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&cmns-doc;Document"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>content type</rdfs:label>
+		<skos:definition>a classifier for the content of documents according to the Internet RFC 1341 specification</skos:definition>
+		<cmns-av:synonym>MIME type</cmns-av:synonym>
+	</owl:Class>
+	
 	<owl:ObjectProperty rdf:about="&idmp-sub;includesCharacteristic">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
 		<rdfs:label>includes aspect</rdfs:label>
@@ -4566,6 +4745,26 @@
 		<skos:definition>a classifier A optionally includes a classifier B if there is presumable a thing that is classified by A and classified by B</skos:definition>
 		<cmns-av:explanatoryNote>This relation is informational only in most cases, but excludes cases where the optional classifier classifies things disjoint from the classifier that includes this.</cmns-av:explanatoryNote>
 	</owl:ObjectProperty>
+	
+	<owl:Class rdf:about="&idmp-sub;simplifiedMolecularInputLineEntrySpecificationRepresentation">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularStructureRepresentation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasContentType"/>
+				<owl:hasValue rdf:resource="&idmp-sub;ContentType-Chemical-SMILES"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;string"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>SMILES representation</rdfs:label>
+		<skos:definition>a textual description of the molecular structure specified by SMILES (simplified molecular input line entry specification)</skos:definition>
+		<cmns-av:synonym>representation according to the simplified molecular input line entry specification</cmns-av:synonym>
+	</owl:Class>
 	
 	<rdf:Description rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-SubstancesProcessingMaterialRole">
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018 clause G.3.11</cmns-av:adaptedFrom>
