@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
+	<!ENTITY ISO21090-HarmonizedDatatypes "https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/">
+	<!ENTITY ISOConformanceAnnotations "https://spec.pistoiaalliance.org/idmp/ontology/META/ISOConformanceAnnotations/">
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
 	<!ENTITY cmns-col "https://www.omg.org/spec/Commons/Collections/">
@@ -24,6 +26,9 @@
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11239-PharmaceuticalDoseForms/"
+	xmlns="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11239-PharmaceuticalDoseForms/"
+	xmlns:ISO21090-HarmonizedDatatypes="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"
+	xmlns:ISOConformanceAnnotations="https://spec.pistoiaalliance.org/idmp/ontology/META/ISOConformanceAnnotations/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-col="https://www.omg.org/spec/Commons/Collections/"
@@ -74,6 +79,20 @@
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
 		<dct:source>ISO 11239:2012 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on pharmaceutical dose forms, units of presentation, routes of administration and packaging, clause 3.1.16</dct:source>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-phdf;QualitativeComposition">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
+		<rdfs:label>qualitative composition</rdfs:label>
+		<skos:definition>a constituency that quantifies the amount of constituents</skos:definition>
+		<skos:example>2 red tablets in a blister</skos:example>
+		<skos:example>90% water</skos:example>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-phdf;QuantitativeComposition">
+		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
+		<rdfs:label>qualitative composition</rdfs:label>
+		<dct:description>a constituency that defines the kinds of constituents only but not the amount</dct:description>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;MedicinalProduct">

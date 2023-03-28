@@ -278,12 +278,6 @@
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Analysis"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Analysis"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>analytical method</rdfs:label>
 		<skos:definition>specification about how to do an analysis</skos:definition>
 		<skos:definition>specification of the methodology for performing some analysis</skos:definition>
@@ -669,18 +663,6 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
-				<owl:someValuesFrom rdf:resource="&cmns-dsg;Name"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;hasName"/>
 				<owl:someValuesFrom rdf:resource="&cmns-dsg;Name"/>
 			</owl:Restriction>
@@ -972,43 +954,22 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
-		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
+		<rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/ContainerConstituent"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Manufacturer"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasIngredient"/>
+				<owl:onClass rdf:resource="&idmp-sub;Ingredient"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>manufactured item</rdfs:label>
-		<skos:definition>specification for a good that embodies the qualitative and quantitative composition of a product as contained in the packaging of the medicinal product</skos:definition>
+		<skos:definition>qualitative and quantitative composition of a product as contained in the packaging of the medicinal product</skos:definition>
 		<skos:note>A medicinal product may contain one or more manufactured items. In many instances the manufactured item is equal to the pharmaceutical product. However, there are instances where the manufactured item(s) undergo a transformation before being administered to the patient (as the pharmaceutical product) and the two are not equal.</skos:note>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.38</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Manufacturer">
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Producer"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;produces"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;PhysicalManufacturedItem">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>manufacturer</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.39</dct:source>
 		<skos:definition>producer that holds the authorization for the manufacturing process</skos:definition>
@@ -1873,25 +1834,6 @@
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty>
-					<rdf:Description>
-						<owl:inverseOf rdf:resource="&cmns-qtu;hasQuantityValue"/>
-					</rdf:Description>
-				</owl:onProperty>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;Material">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>optical activity</rdfs:label>
 		<rdfs:label>optical rotation</rdfs:label>
 		<skos:definition>angle of rotation of polarized light when transmitting through material</skos:definition>
@@ -2091,36 +2033,6 @@
 		<skos:example>a specified mass range</skos:example>
 		<skos:example>a specified optical activity</skos:example>
 		<cmns-av:explanatoryNote>The properties are characterized by specific or ranges of quantity values, but can be also more complex properties such as statistical distributions or a match with some reference spectrum.</cmns-av:explanatoryNote>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;PhysicalManufacturedItem">
-		<rdfs:subClassOf rdf:resource="&cmns-prd;Good"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;Material">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:onClass>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-prd;isProducedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Manufacturer"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>physical manufactured item</rdfs:label>
-		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.38</dct:source>
-		<skos:definition>good that embodies the qualitative and quantitative composition of a product as contained in the packaging of the medicinal product</skos:definition>
-		<skos:note>A medicinal product may contain one or more manufactured items. In many instances the manufactured item is equal to the pharmaceutical product. However, there are instances where the manufactured item(s) undergo a transformation before being administered to the patient (as the pharmaceutical product) and the two are not equal.</skos:note>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalOrganism">
@@ -3575,14 +3487,21 @@
 		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;isCharacteristicOf"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasSubstance"/>
+				<owl:onClass rdf:resource="&idmp-sub;Substance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Matter"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SubstanceComposition"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>substance constituent</rdfs:label>
@@ -4260,15 +4179,13 @@
 		<skos:definition>indicates whether a given class or element is mandatory, conditional, or optional with respect to a given substance type or specified substance group for reporting information per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
 	
-	<owl:DatatypeProperty rdf:about="&idmp-sub;hasContentType">
-		<rdf:type rdf:resource="&owl;ObjectProperty"/>
+	<owl:ObjectProperty rdf:about="&idmp-sub;hasContentType">
 		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isClassifiedBy"/>
-		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>has content type</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;idmp-sub:ContentType"/>
 		<rdfs:seeAlso rdf:resource="&dct;format"/>
 		<skos:definition>relates to a content type according to Internet RFC 1341</skos:definition>
-	</owl:DatatypeProperty>
+	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasCredibility">
 		<rdfs:label>has credibility</rdfs:label>
@@ -4602,7 +4519,6 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasSubstance">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;hasConstituent"/>
 		<rdfs:label>has substance</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>relation to a substance</skos:definition>
@@ -4887,6 +4803,9 @@
 	</rdf:Description>
 	
 	<owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/Container">
+	</owl:Class>
+	
+	<owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/ContainerConstituent">
 	</owl:Class>
 	
 	<owl:Class rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/ManufacturingMethod">
