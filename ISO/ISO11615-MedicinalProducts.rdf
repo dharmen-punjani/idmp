@@ -303,17 +303,6 @@
 		</rdfs:subClassOf>
 	</owl:Class>
 	
-	<rdf:Description rdf:about="&idmp-sub;hasIngredient">
-		<owl:equivalentProperty rdf:resource="&idmp-mprd;hasIngredientRole"/>
-	</rdf:Description>
-	
-	<rdf:Description rdf:about="&idmp-sub;hasMolecularStructure">
-		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasStructure"/>
-		<skos:definition>relation between a molecular entity or a substance and its molecular structure</skos:definition>
-		<cmns-av:explanatoryNote>The molecular structure is the graph of atoms connected by bonds. It may include electric charges and stereocenters and some parts may be indeterminate, e.g. parts representing chains of arbitrary length.</cmns-av:explanatoryNote>
-		<cmns-av:usageNote>If the property is applied to a substance, then it is the molecular structure of its defining molecule. This means the substance is either a chemical substance, a protein or a nucleic acid and the property is used as a shortcut.</cmns-av:usageNote>
-	</rdf:Description>
-	
 	<owl:Class rdf:about="&idmp-uom;UnitOfPresentation">
 		<dct:source>ISO 11615:2017 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated medicinal product information, clause 3.1.84</dct:source>
 	</owl:Class>
@@ -625,6 +614,8 @@
 		</rdfs:subClassOf>
 		<rdfs:label>container constituency</rdfs:label>
 		<skos:definition>relationship that defines containers by the items being contained in the container</skos:definition>
+		<cmns-av:synonym>container composition</cmns-av:synonym>
+		<cmns-av:synonym>packaging composition</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ContainerConstituent">
@@ -636,6 +627,21 @@
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isCharacterizedBy"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-cls;Classifier">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-doc;Specification">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>container constituent</rdfs:label>
 		<owl:equivalentClass>
 			<owl:Restriction>
@@ -643,7 +649,10 @@
 				<owl:someValuesFrom rdf:resource="&idmp-mprd;ContainerConstituency"/>
 			</owl:Restriction>
 		</owl:equivalentClass>
-		<skos:definition>a constituent that defines the count or quantity of things of the same kind being held in a container</skos:definition>
+		<skos:definition>a constituent that defines the count or quantity of things of the same kind being held in a container or package</skos:definition>
+		<cmns-av:explanatoryNote>The container constituent is the object (passive) role in a container constituency, which is a reification of the contains relation.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>If a quantity value is specified, then the constituent is a quantitative constituent, otherwise it is only a qualitative constituent. 
+The quantity is qualified and filtered by a classifier or specification (the constituent type). Only things in the container, that are classified/specified by the type are counted resp. quantified.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ContainerSpecification">
@@ -1454,7 +1463,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;PackageItem">
-		<rdfs:subClassOf rdf:resource="&idmp-mprd;ContainerConstituent"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-mprd;hasPackageItemType"/>
@@ -2120,6 +2129,13 @@
 		<cmns-av:usageNote>the number/quantity of manufactured items in the immediate container of a packaged medicinal product</cmns-av:usageNote>
 	</owl:ObjectProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-mprd;hasManufacturedItemType">
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isCharacterizedBy"/>
+		<rdfs:label>has manufactured item type</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;ManufacturedItem"/>
+		<skos:definition>classifies or specifies the manufactured item contained in an immediate container</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasPackageComponent">
 		<rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
 		<rdfs:label>has package component</rdfs:label>
@@ -2134,20 +2150,10 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasPackageItemType">
-		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-cls;isCharacterizedBy"/>
 		<rdfs:label>has package item (container) type</rdfs:label>
-		<rdfs:domain rdf:resource="&idmp-mprd;PackageItem"/>
-		<rdfs:range>
-			<owl:Class>
-				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&cmns-cls;Classifier">
-					</rdf:Description>
-					<rdf:Description rdf:about="&cmns-doc;Specification">
-					</rdf:Description>
-				</owl:unionOf>
-			</owl:Class>
-		</rdfs:range>
-		<skos:definition>relates the package item to the specification or classifier that defines the type of items referenced by the package item</skos:definition>
+		<rdfs:range rdf:resource="&idmp-mprd;PackageItem"/>
+		<skos:definition>classifies or specifies the package item (container) contained in an outer or intermediate packaging</skos:definition>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-mprd;hasReferenceStrength">

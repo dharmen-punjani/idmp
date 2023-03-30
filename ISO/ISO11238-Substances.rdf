@@ -954,7 +954,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ManufacturedItem">
-		<rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/ContainerConstituent"/>
+		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasIngredient"/>
@@ -4317,6 +4317,7 @@
 		<rdfs:label>has ingredient</rdfs:label>
 		<rdfs:label>has specified ingredient</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;Ingredient"/>
+		<owl:equivalentProperty rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/hasIngredientRole"/>
 		<skos:definition>relates a substance or product composition to an ingredient of that composition</skos:definition>
 		<cmns-av:usageNote>This property should be used primarily in a manufacturing context where differentiation of ingredients in a product from other elements that play roles in the manufacturing context is important.</cmns-av:usageNote>
 	</owl:ObjectProperty>
@@ -4392,8 +4393,12 @@
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularStructure">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasStructure"/>
 		<rdfs:label>has molecular structure</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;MolecularStructure"/>
+		<skos:definition>relation between a molecular entity or a substance and its molecular structure</skos:definition>
+		<cmns-av:explanatoryNote>The molecular structure is the graph of atoms connected by bonds. It may include electric charges and stereocenters and some parts may be indeterminate, e.g. parts representing chains of arbitrary length.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>If the property is applied to a substance, then it is the molecular structure of its defining molecule. This means the substance is either a chemical substance, a protein or a nucleic acid and the property is used as a shortcut.</cmns-av:usageNote>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularStructureRepresentation">
