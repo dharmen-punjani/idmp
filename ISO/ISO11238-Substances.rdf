@@ -3321,16 +3321,6 @@
 	<owl:Class rdf:about="&idmp-sub;Substance">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:subClassOf>
-			<owl:Class>
-				<owl:unionOf rdf:parseType="Collection">
-					<rdf:Description rdf:about="&idmp-sub;MolecularConstituent">
-					</rdf:Description>
-					<rdf:Description rdf:about="&idmp-sub;SubstanceConstituent">
-					</rdf:Description>
-				</owl:unionOf>
-			</owl:Class>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningMolecularWeight"/>
 				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularWeight"/>
@@ -4317,7 +4307,6 @@
 		<rdfs:label>has ingredient</rdfs:label>
 		<rdfs:label>has specified ingredient</rdfs:label>
 		<rdfs:range rdf:resource="&idmp-sub;Ingredient"/>
-		<owl:equivalentProperty rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/hasIngredientRole"/>
 		<skos:definition>relates a substance or product composition to an ingredient of that composition</skos:definition>
 		<cmns-av:usageNote>This property should be used primarily in a manufacturing context where differentiation of ingredients in a product from other elements that play roles in the manufacturing context is important.</cmns-av:usageNote>
 	</owl:ObjectProperty>
