@@ -599,6 +599,12 @@
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cxtdsg;isApplicableIn"/>
+				<owl:someValuesFrom rdf:resource="&idmp-mprd;PackagedMedicinalProduct"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
 				<owl:someValuesFrom>
 					<owl:Class>
@@ -653,6 +659,7 @@
 		<cmns-av:explanatoryNote>The container constituent is the object (passive) role in a container constituency, which is a reification of the contains relation.</cmns-av:explanatoryNote>
 		<cmns-av:usageNote>If a quantity value is specified, then the constituent is a quantitative constituent, otherwise it is only a qualitative constituent. 
 The quantity is qualified and filtered by a classifier or specification (the constituent type). Only things in the container, that are classified/specified by the type are counted resp. quantified.</cmns-av:usageNote>
+		<cmns-av:usageNote>In IDMP packaging, constituents are either package items, if the container is an outer or intermediate packaging of a packaged medicinal product, or manifactured items if the container is the immediate container.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-mprd;ContainerSpecification">
