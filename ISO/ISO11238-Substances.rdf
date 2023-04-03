@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
+	<!ENTITY chebi "http://purl.obolibrary.org/obo/CHEBI_">
 	<!ENTITY cmns-av "https://www.omg.org/spec/Commons/AnnotationVocabulary/">
 	<!ENTITY cmns-cds "https://www.omg.org/spec/Commons/CodesAndCodeSets/">
 	<!ENTITY cmns-cls "https://www.omg.org/spec/Commons/Classifiers/">
@@ -31,6 +32,7 @@
 ]>
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
 	xmlns="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11238-Substances/"
+	xmlns:chebi="http://purl.obolibrary.org/obo/CHEBI_"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
@@ -102,24 +104,29 @@
 				<owl:someValuesFrom>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&idmp-sub;hasMolecularEntity"/>
-						<owl:someValuesFrom rdf:resource="&idmp-sub;AcidMolecule"/>
+						<owl:someValuesFrom>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;AcidRole"/>
+							</owl:Restriction>
+						</owl:someValuesFrom>
 					</owl:Restriction>
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>acid</rdfs:label>
 		<rdfs:seeAlso rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C48057"/>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_37527"/>
+		<rdfs:seeAlso rdf:resource="&chebi;37527"/>
 		<skos:definition>substance that yields hydrogen ions or protons in aqueous solutions; a substance capable of accepting a pair of electrons for the formation of a coordinate covalent bond; a substance whose hydrogen can be replaced by metals or basic radicals, or which react with bases to form salts and water</skos:definition>
 		<skos:example>An example of an acid is hydrochloric acid.</skos:example>
 		<skos:note>An acid is also defined as a chemical that gives off hydrogen ions in water and forms salts by combining with certain metals. Acids have a sour taste and turn certain dyes red. Some acids made by the body, such as gastric acid, can help the body work the way it should.</skos:note>
 		<skos:note>An acid is also defined in CHEBI as a molecular entity capable of donating a hydron (Bronsted acid) or capable of forming a covalent bond with an electron pair (Lewis acid). This is referenced as an acid molecule in IDMP substance.</skos:note>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;AcidMolecule">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
-		<rdfs:label>acid molecule</rdfs:label>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_37527"/>
+	<owl:Class rdf:about="&idmp-sub;AcidRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ChemicalRole"/>
+		<rdfs:label>acid role</rdfs:label>
+		<rdfs:seeAlso rdf:resource="&chebi;37527"/>
 		<skos:definition>molecular entity capable of donating a hydron (Bronsted acid) or capable of forming a covalent bond with an electron pair (Lewis acid)</skos:definition>
 		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
@@ -189,7 +196,7 @@
 	<owl:Class rdf:about="&idmp-sub;AlphaAminoAcidMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
 		<rdfs:label>alpha-amino acid molecule</rdfs:label>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33704"/>
+		<rdfs:seeAlso rdf:resource="&chebi;33704"/>
 		<skos:definition>An amino acid molecule in which the amino group is located on the carbon atom at the position α to the carboxy group.</skos:definition>
 		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
@@ -215,7 +222,7 @@
 		</rdfs:subClassOf>
 		<rdfs:label>amino acid residue</rdfs:label>
 		<rdfs:seeAlso>When two or more amino acids molecules combine to form a peptide molecule, the elements of water are removed, and what remains of each amino acid molecule is called an amino-acid residue.</rdfs:seeAlso>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33708"/>
+		<rdfs:seeAlso rdf:resource="&chebi;33708"/>
 		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -303,6 +310,33 @@
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 29</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;AnalyticalMethodType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;AnalyticalMethod"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>analytical method type</rdfs:label>
+		<skos:definition>classifier for the analytical method used to determine identification, potency and impurities</skos:definition>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AnalyticalMethodType-Biological">
+		<rdf:type rdf:resource="&idmp-sub;AnalyticalMethodType"/>
+		<rdfs:label>biological</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AnalyticalMethodType-Chemical">
+		<rdf:type rdf:resource="&idmp-sub;AnalyticalMethodType"/>
+		<rdfs:label>chemical</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;AnalyticalMethodType-Physical">
+		<rdf:type rdf:resource="&idmp-sub;AnalyticalMethodType"/>
+		<rdfs:label>physical</rdfs:label>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-sub;ArrangementAspect">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
 		<rdfs:subClassOf>
@@ -356,7 +390,7 @@
 	<owl:Class rdf:about="&idmp-sub;Atom">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntity"/>
 		<rdfs:label>atom</rdfs:label>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33250"/>
+		<rdfs:seeAlso rdf:resource="&chebi;33250"/>
 		<skos:definition>smallest particle characterizing a chemical element</skos:definition>
 		<cmns-av:directSource>Nomenclature of Inorganic Chemistry – IUPAC Recommendations 2005, N. G. Connelly, T. Damhus, R. M. Hartshorn, A. T. Hutton (Eds.), Royal Society of Chemistry, Cambridge, U.K., ISBN 0-85404-438-8. 3rd ed., p. 35</cmns-av:directSource>
 		<cmns-av:explanatoryNote>It consists of a nucleus of a positive charge carrying almost all its mass (more than 99.9%) and Z electrons determining its size.</cmns-av:explanatoryNote>
@@ -370,22 +404,27 @@
 				<owl:someValuesFrom>
 					<owl:Restriction>
 						<owl:onProperty rdf:resource="&idmp-sub;hasMolecularEntity"/>
-						<owl:someValuesFrom rdf:resource="&idmp-sub;BaseMolecule"/>
+						<owl:someValuesFrom>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
+								<owl:someValuesFrom rdf:resource="&idmp-sub;BaseRole"/>
+							</owl:Restriction>
+						</owl:someValuesFrom>
 					</owl:Restriction>
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>base</rdfs:label>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22695"/>
+		<rdfs:seeAlso rdf:resource="&chebi;22695"/>
 		<rdfs:seeAlso rdf:resource="http://semanticscience.org/resource/SIO_010454"/>
 		<skos:definition>substance having an available pair of electrons capable of forming a covalent bond with a hydron or with the vacant orbital of some other molecular entity</skos:definition>
 		<skos:note>A base is a molecular entity dissolved in a solvent that is capable of accepting a proton (Bronsted base) or forming a covalent bond with a hydron (Lewis base) (SIO).</skos:note>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;BaseMolecule">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
-		<rdfs:label>base molecule</rdfs:label>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_22695"/>
+	<owl:Class rdf:about="&idmp-sub;BaseRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ChemicalRole"/>
+		<rdfs:label>base role</rdfs:label>
+		<rdfs:seeAlso rdf:resource="&chebi;22695"/>
 		<skos:definition>A molecular entity having an available pair of electrons capable of forming a covalent bond with a hydron (Brønsted base) or with the vacant orbital of some other molecular entity (Lewis base).</skos:definition>
 		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
@@ -445,6 +484,15 @@
 		<rdfs:label>characteristic attribute type - physical</rdfs:label>
 		<cmns-av:synonym>physical</cmns-av:synonym>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;ChemicalRole">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularRole"/>
+		<rdfs:label>chemical role</rdfs:label>
+		<rdfs:seeAlso rdf:resource="&chebi;51086"/>
+		<skos:definition>role played by a molecular entity or part thereof in a chemical context</skos:definition>
+		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
+		<cmns-av:synonym>chemical function</cmns-av:synonym>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ChemicalSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
@@ -835,7 +883,7 @@
 	<owl:Class rdf:about="&idmp-sub;EsterMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
 		<rdfs:label>ester molecule</rdfs:label>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_35701"/>
+		<rdfs:seeAlso rdf:resource="&chebi;35701"/>
 		<skos:definition>A molecular entity formally derived from an oxoacid RkE(=O)l(OH)m (l &gt; 0) and an alcohol, phenol, heteroarenol, or enol by linking with formal loss of water from an acidic hydroxy group of the former and a hydroxy group of the latter.</skos:definition>
 		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
@@ -905,7 +953,10 @@
 	<owl:Class rdf:about="&idmp-sub;IdentitySpecification">
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Specification"/>
 		<rdfs:label>identity specification</rdfs:label>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.5.3</cmns-av:adaptedFrom>
+		<skos:definition>Identification describes a specification to establish the identity of the (new) drug substance. The method should be able to discriminate between compounds of closely related structure which are likely to be present.</skos:definition>
+		<skos:example>Another example of an identification specification is the molar (decadic) absorption coefficient or the molar extinction coefficient. The value for caffeine in water is: ɛmax λ = 272 nm = 1 115 m2 mol-1.</skos:example>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.5.6.2</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>Identity tests should be specific for the (new) drug substance, e.g. infrared spectroscopy, the use of two chromatographic procedures, where the separation is based on different principles, or combination of tests into a single procedure, such as HPLC/UV diode array, HPLC/MS, or GC/MS, is generally acceptable.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ImpuritySpecification">
@@ -985,11 +1036,11 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>macromolecule</rdfs:label>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_33839"/>
-		<skos:altLabel>polymer molecule</skos:altLabel>
+		<rdfs:seeAlso rdf:resource="&chebi;33839"/>
 		<skos:definition>a molecule of high relative molecular mass, the structure of which essentially comprises the multiple repetition of units derived, actually or conceptually, from molecules of low relative molecular mass</skos:definition>
 		<cmns-av:directSource>PAC, 1996, 68, 2287. (Glossary of basic terms in polymer science (IUPAC Recommendations 1996)) on page 2289</cmns-av:directSource>
 		<cmns-av:explanatoryNote>In many cases, especially for synthetic polymers, a molecule can be regarded as having a high relative molecular mass if the addition or removal of one or a few of the units has a negligible effect on the molecular properties. This statement fails in the case of certain macromolecules for which the properties may be critically dependent on fine details of the molecular structure.</cmns-av:explanatoryNote>
+		<cmns-av:synonym>polymer molecule</cmns-av:synonym>
 		<cmns-av:usageNote>If a part or the whole of the molecule has a high relative molecular mass and essentially comprises the multiple repetition of units derived, actually or conceptually, from molecules of low relative molecular mass, it may be described as either macromolecular or polymeric, or by polymer used adjectivally.</cmns-av:usageNote>
 	</owl:Class>
 	
@@ -1355,7 +1406,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>molecular group</rdfs:label>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_24433"/>
+		<rdfs:seeAlso rdf:resource="&chebi;24433"/>
 		<skos:definition>defined linked collection of atoms or a single atom within a molecular entity</skos:definition>
 		<cmns-av:adaptedFrom>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1118</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>This use of the term in physical organic and general chemistry is less restrictive than the definition adopted for the purpose of nomenclature of organic compounds.</cmns-av:explanatoryNote>
@@ -1506,7 +1557,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>molecule</rdfs:label>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_25367"/>
+		<rdfs:seeAlso rdf:resource="&chebi;25367"/>
 		<skos:definition>electrically neutral entity consisting of more than one atom (n&gt;1)</skos:definition>
 		<cmns-av:directSource>PAC, 1994, 66, 1077. (Glossary of terms used in physical organic chemistry (IUPAC Recommendations 1994)) on page 1143</cmns-av:directSource>
 	</owl:Class>
@@ -1602,6 +1653,9 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>nucleic acid molecule</rdfs:label>
+		<rdfs:seeAlso rdf:resource="&chebi;33696"/>
+		<skos:definition>A macromolecule made up of nucleotide units and hydrolysable into certain pyrimidine or purine bases (usually adenine, cytosine, guanine, thymine, uracil), D-ribose or 2-deoxy-D-ribose and phosphoric acid.</skos:definition>
+		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;NucleicAcidSubstance">
@@ -1646,7 +1700,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>nucleotide</rdfs:label>
-		<rdfs:seeAlso rdf:resource="http://purl.obolibrary.org/obo/CHEBI_36976"/>
+		<rdfs:seeAlso rdf:resource="&chebi;36976"/>
 		<skos:definition>a nucleoside phosphate resulting from the condensation of the 3 or 5 hydroxy group of a nucleoside with phosphoric acid</skos:definition>
 		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
@@ -2000,14 +2054,14 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;AlphaAminoAcidMolecule"/>
+				<owl:onClass rdf:resource="&idmp-sub;AminoAcidResidue"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">40</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;AlphaAminoAcidMolecule"/>
+				<owl:onClass rdf:resource="&idmp-sub;AminoAcidResidue"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2018,8 +2072,19 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>peptide molecule</rdfs:label>
+		<rdfs:seeAlso rdf:resource="&chebi;16670"/>
+		<skos:definition>molecule with a defined sequence of alpha-amino acids connected through peptide bonds. A peptide consists of a linear chain with a length of 2 to 40 amino acids.</skos:definition>
+		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 1944:2018 clause G.3.12</cmns-av:adaptedFrom>
-		<cmns-av:adaptedFrom>molecule with a defined sequence of alpha-amino acids connected through peptide bonds. A peptide consists of a linear chain with a length of 2 to 40 amino acids.</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Amide derived from two or more amino carboxylic acid molecules (the same or different) by formation of a covalent bond from the carbonyl carbon of one to the nitrogen atom of another with formal loss of water. The term is usually applied to structures formed from α-amino acids, but it includes those derived from any amino carboxylic acid. X = OH, OR, NH2, NHR, etc.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PeptideResidue">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MonomerResidue"/>
+		<rdfs:label>peptide residue</rdfs:label>
+		<rdfs:seeAlso rdf:resource="&chebi;142504"/>
+		<skos:definition>An organic group resulting from the scission of two peptide bonds to afford a residue containing a peptide fragmen</skos:definition>
+		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PharmacopoeialGrade">
@@ -2336,7 +2401,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:onClass rdf:resource="&idmp-sub;AlphaAminoAcidMolecule"/>
+				<owl:onClass rdf:resource="&idmp-sub;AminoAcidResidue"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">41</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2352,7 +2417,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinSubUnit">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularEntity"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
@@ -3040,6 +3105,17 @@
 		<cmns-av:usageNote>The specified substance group 4 elements shall contain the most detailed information on a substance.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup4-AnalyticalMethod">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup4"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified substance group 4 - analytical method</rdfs:label>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup4-Grade">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroupGrade"/>
 		<rdfs:subClassOf>
@@ -3089,12 +3165,6 @@
 						</owl:unionOf>
 					</owl:Class>
 				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Material"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -3601,22 +3671,22 @@
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceGroup4-SpecificationCategory-Identity">
 		<rdf:type rdf:resource="&idmp-sub;SubstanceGroup4SpecificationCategory"/>
-		<rdfs:label>specification category - identity</rdfs:label>
+		<rdfs:label>identity</rdfs:label>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceGroup4-SpecificationCategory-Impurity">
 		<rdf:type rdf:resource="&idmp-sub;SubstanceGroup4SpecificationCategory"/>
-		<rdfs:label>specification category - impurity</rdfs:label>
+		<rdfs:label>impurity</rdfs:label>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceGroup4-SpecificationCategory-Other">
 		<rdf:type rdf:resource="&idmp-sub;SubstanceGroup4SpecificationCategory"/>
-		<rdfs:label>specification category - other</rdfs:label>
+		<rdfs:label>other</rdfs:label>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;SubstanceGroup4-SpecificationCategory-Potency">
 		<rdf:type rdf:resource="&idmp-sub;SubstanceGroup4SpecificationCategory"/>
-		<rdfs:label>specification category - potency</rdfs:label>
+		<rdfs:label>potency</rdfs:label>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;SubstanceGroup4SpecificationCategory">
@@ -4678,6 +4748,9 @@
 		<rdfs:label>has values allowed</rdfs:label>
 		<skos:definition>describes the nature of valid values for a given class or element in cases where that information is encoded as a string rather than as a value domain per the ISO 19844 guideline</skos:definition>
 	</owl:AnnotationProperty>
+	
+	<owl:Class rdf:about="&idmp-sub;idmp-sub:ContentType">
+	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;includesCharacteristic">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
