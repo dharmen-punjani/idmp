@@ -96,6 +96,10 @@
 		<cmns-av:copyright>Copyright (c) 2022-2023 Pistoia Alliance, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
+	<rdf:Description rdf:about="&skos;altLabel">
+		<cmns-av:usageNote>The constituent refers to a subclass of molecular entity. The constituent instance must not refer to the class directly (because this would introduce punning), so it should use &apos;has molecular entity&apos; with an anonymous node as object.</cmns-av:usageNote>
+	</rdf:Description>
+	
 	<owl:Class rdf:about="&idmp-sub;Acid">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Substance"/>
 		<rdfs:subClassOf>
@@ -203,23 +207,6 @@
 	
 	<owl:Class rdf:about="&idmp-sub;AminoAcidResidue">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonomerResidue"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;ConstitutionalUnit">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
-								<owl:someValuesFrom rdf:resource="&idmp-sub;ProteinMolecule"/>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>amino acid residue</rdfs:label>
 		<rdfs:seeAlso>When two or more amino acids molecules combine to form a peptide molecule, the elements of water are removed, and what remains of each amino acid molecule is called an amino-acid residue.</rdfs:seeAlso>
 		<rdfs:seeAlso rdf:resource="&chebi;33708"/>
@@ -614,51 +601,6 @@
 		<skos:definition>aspect that quantifies the mass, volume or amount of substance of a single constituent or a group of constituents in a constituency or collection</skos:definition>
 		<skos:example>the relative mass of material of a specific substance in a mixture</skos:example>
 		<cmns-av:usageNote>The specified amount can be a range and it can be relative.</cmns-av:usageNote>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;ConstitutionalAminoAcid">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstitutionalUnit"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;AminoAcidResidue"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>constitutional amino acid</rdfs:label>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;ConstitutionalNucleotide">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ConstitutionalUnit"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Nucleotide"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>constitutional nucleotide</rdfs:label>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;ConstitutionalUnit">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularConstituent"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;Atom">
-							</rdf:Description>
-							<rdf:Description rdf:about="&idmp-sub;MolecularGroup">
-							</rdf:Description>
-						</owl:unionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>molecular constitutional unit</rdfs:label>
-		<skos:altLabel>constitutional unit</skos:altLabel>
-		<skos:definition>an atom or group of atoms (with pendant atoms or groups, if any) comprising a part of the essential structure of a macromolecule, an oligomer molecule, a block or a chain</skos:definition>
-		<cmns-av:adaptedFrom>PAC, 1996, 68, 2287. (Glossary of basic terms in polymer science (IUPAC Recommendations 1996)) on page 2291</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ContentType">
@@ -1299,27 +1241,39 @@
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularConstituency">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Substance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>molecular constituency</rdfs:label>
-		<skos:definition>the constituency in terms of molecular entities</skos:definition>
+		<skos:definition>the constituency of a substance in terms of molecular entities</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularConstituent">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;isMolecularEntityIn"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Matter"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularEntity"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularEntity"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularEntity"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularEntity"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isConstituentOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularConstituency"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>molecular constituent</rdfs:label>
-		<skos:definition>molecular entities that are a part of the constituency of a  molecular entity or substance</skos:definition>
-		<skos:example>Water as substance is classified by the water molecule as constituent molecule although it will contain many other molecules, depending on purity or grade.</skos:example>
+		<skos:definition>scattered molecular entities of the same type that make up the constituency of a substance at the molecular level</skos:definition>
+		<skos:example>Water as substance is classified by the scattered water molecules as molecular constituent although it will contain many other molecules, depending on purity or grade.</skos:example>
 		<skos:example>classification based on functional groups such as the ester group</skos:example>
 		<cmns-av:explanatoryNote>Matter that is classified by the same constituent molecular entity are usually called chemical substances (compounds or elements), but this is a different chemical substance concept than the one defined in the IDMP-O ontology.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>contituent molecular entity</cmns-av:synonym>
@@ -1585,23 +1539,6 @@
 	
 	<owl:Class rdf:about="&idmp-sub;MonomerResidue">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularFragment"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;ConstitutionalUnit">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
-								<owl:someValuesFrom rdf:resource="&idmp-sub;Macromolecule"/>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>monomer residue</rdfs:label>
 		<skos:definition>residue derived from a monomer molecule that is a constituent of a macromolecule</skos:definition>
 	</owl:Class>
@@ -1682,23 +1619,6 @@
 	
 	<owl:Class rdf:about="&idmp-sub;Nucleotide">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MonomerResidue"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-pts;playsRole"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;ConstitutionalUnit">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&cmns-pts;isManifestedIn"/>
-								<owl:someValuesFrom rdf:resource="&idmp-sub;NucleicAcidMolecule"/>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>nucleotide</rdfs:label>
 		<rdfs:seeAlso rdf:resource="&chebi;36976"/>
 		<skos:definition>a nucleoside phosphate resulting from the condensation of the 3 or 5 hydroxy group of a nucleoside with phosphoric acid</skos:definition>
