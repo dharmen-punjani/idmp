@@ -1897,6 +1897,24 @@
 		<skos:definition>a sequence of nucleotides forming a part of a nucleic acid</skos:definition>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;NumberAverageMolecularWeight">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularWeight"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>number-average molecular weight</rdfs:label>
+		<skos:definition>M_n = sum_i (n_i M_i) over sum_i ( n_i) = W / N
+where 
+n is the number or fraction of molecules having a given molecular mass;
+M is the molar mass of the molecules;
+W is the total weight of all the molecules;
+N is the total numberof all the molecules.</skos:definition>
+		<cmns-av:explanatoryNote>Number-average molecular weights are typically determined through end-group analysis or the measurement of colligative properties, e.g. vapour pressure osmometry and by gel permeation chromatography, proton NMR.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;OfficialName">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceName"/>
 		<rdfs:subClassOf>
@@ -3220,7 +3238,8 @@
 		</rdfs:subClassOf>
 		<rdfs:label>specified degree of polymerization</rdfs:label>
 		<skos:definition>average number of monomers or repeat units in a polymeric block or chain</skos:definition>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.3.2</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.3.2, H.4.5</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The degree of polymerization is the average number of times the SRU repeats in the polymeric material. The degree of polymerization is tied to the bracket that encloses the SRU for a homopolymer and the bracket that encloses a block copolymer.</cmns-av:explanatoryNote>
 		<cmns-av:usageNote>Applies to both homopolymers and block copolymers where it refers to the degree of polymerization within a block.</cmns-av:usageNote>
 	</owl:Class>
 	
@@ -3264,8 +3283,6 @@
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:unionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;MolecularEntity">
-							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
 							</rdf:Description>
 							<rdf:Description rdf:about="&idmp-sub;Substance">
@@ -3938,9 +3955,12 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>structural repeat unit</rdfs:label>
-		<skos:definition>repeating structure in a polymer</skos:definition>
+		<skos:definition>structure with two or more connection points and a repeating unit in a polymer</skos:definition>
 		<cmns-av:abbreviation>SRU</cmns-av:abbreviation>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.1</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.4.4</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Each SRU is typically derived from the monomer that is used to synthesize the polymer.</cmns-av:explanatoryNote>
+		<cmns-av:explanatoryNote>The SRU is usually not the smallest nor the largest repeating unit within a polymer. Rather it is typically derived from the actual monomers that were used to construct the polymer.</cmns-av:explanatoryNote>
+		<cmns-av:usageNote>The repeating unit is enclosed within brackets in the textual or graphical representation of the structural repeat unit.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;StructuralRepresentation">
@@ -4780,6 +4800,58 @@
 		<skos:definition>scientific organism classification system needed to describe the origin of source material in substances isolated from biological matrices</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clauses 3.88, 7.2.6</cmns-av:adaptedFrom>
 		<cmns-av:usageNote>Taxonomic information is captured to the species level for all polydisperse substances isolated from biological matrices, if such information is available and the source material is consistently derived from the species. Taxonomic family, genus and species along with the taxon author are necessary to identify the source organism. Kingdom, phylum, class and order are also captured when available. Intraspecific information (e.g. subspecies, strain or variety) is captured when the forms exhibit consistent differences in either material content or function.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ViscosityMolecularWeight">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularWeight"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>viscosity molecular weight</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;WeightAverageMolecularWeight">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularWeight"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>weight-average molecular weight</rdfs:label>
+		<skos:definition>M_w = sum_i (n_i M_i^2) / sum_i(n_i M_i) = sum_i (n_i M_i^2) / W
+
+where 
+n is the number or fraction of molecules having a given molecular mass;
+M is the molar mass of the molecules;
+W is the total weight of all the molecules;
+N is the total numberof all the molecules.</skos:definition>
+		<cmns-av:explanatoryNote>Weight-average molecular weights are typically determined from light scattering or sedimentation measurements.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ZAverageMolecularWeight">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularWeight"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>Z-average molecular weight</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ZPlus1AverageMolecularWeight">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularWeight"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>Z+1-average molecular weight</rdfs:label>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;author">
@@ -5650,6 +5722,20 @@
 			<rdf:Description rdf:about="&idmp-sub;PolymerMolecule">
 			</rdf:Description>
 			<rdf:Description rdf:about="&idmp-sub;ProteinMolecule">
+			</rdf:Description>
+		</owl:members>
+	</owl:AllDisjointClasses>
+	<owl:AllDisjointClasses>
+		<owl:members rdf:parseType="Collection">
+			<rdf:Description rdf:about="&idmp-sub;NumberAverageMolecularWeight">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;ViscosityMolecularWeight">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;WeightAverageMolecularWeight">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;ZAverageMolecularWeight">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;ZPlus1AverageMolecularWeight">
 			</rdf:Description>
 		</owl:members>
 	</owl:AllDisjointClasses>
