@@ -22,6 +22,7 @@
 	<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
 ]>
 <rdf:RDF xml:base="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"
+	xmlns="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/"
 	xmlns:cmns-av="https://www.omg.org/spec/Commons/AnnotationVocabulary/"
 	xmlns:cmns-cds="https://www.omg.org/spec/Commons/CodesAndCodeSets/"
 	xmlns:cmns-cls="https://www.omg.org/spec/Commons/Classifiers/"
@@ -1277,6 +1278,12 @@
 		<skos:note>The hierarchy in the enumeration is an important part of the specification. Although the enumerations are defined as linear lists within ISO/IEC 11404 and the UML definitions, any information processing entity that asserts direct or indirect conformance with this International Standard shall conform to the relationships when evaluating meaning (implication) within the enumeration. In addition, this International Standard occasionally refers to the relationships within the narrative when defining the outcome of some operations.</skos:note>
 	</owl:DatatypeProperty>
 	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasLowerIntegerBound">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has lower integer bound</rdfs:label>
+		<skos:definition>indicates the smallest INT in an integer range</skos:definition>
+	</owl:DatatypeProperty>
+	
 	<owl:ObjectProperty rdf:about="&idmp-dtp;hasMediaType">
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-doc;refersTo"/>
@@ -1353,6 +1360,12 @@
 		<rdfs:range rdf:resource="&idmp-dtp;UpdateMode"/>
 		<skos:definition>allows a sending system to to identify the role that the attribute plays in processing the instance that is being represented</skos:definition>
 	</owl:ObjectProperty>
+	
+	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasUpperIntegerBound">
+		<rdfs:subPropertyOf rdf:resource="&idmp-dtp;hasIntegerValue"/>
+		<rdfs:label>has upper integer bound</rdfs:label>
+		<skos:definition>indicates the largest INT value in an integer range</skos:definition>
+	</owl:DatatypeProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-dtp;hasValidTimeHigh">
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>

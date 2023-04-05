@@ -47,6 +47,12 @@
 		<cmns-av:copyright>Copyright (c) 2015-2022 Object Management Group, Inc.</cmns-av:copyright>
 	</owl:Ontology>
 	
+	<owl:DatatypeProperty rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/hasLowerIntegerBound">
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/hasUpperIntegerBound">
+	</owl:DatatypeProperty>
+	
 	<owl:Class rdf:about="&cmns-qtu;ArbitraryUnit">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;MeasurementUnit"/>
 		<rdfs:subClassOf>
@@ -239,6 +245,54 @@
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
 		<rdfs:label>factor</rdfs:label>
 		<skos:definition>number or quantity that when multiplied with another produces a given number or expression</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&cmns-qtu;IntegerRange">
+		<rdfs:subClassOf rdf:resource="&cmns-qtu;Expression"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/hasLowerIntegerBound"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO21090-HarmonizedDatatypes/hasUpperIntegerBound"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;integer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;isMaximumInclusive"/>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;isMaximumUnbounded"/>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;isMinimumInclusive"/>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;isMinimumUnbounded"/>
+				<owl:onDataRange rdf:resource="&xsd;boolean"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>integer range</rdfs:label>
+		<skos:definition>expression of the lowest possible integer value and highest possible integer value for some countable quantity</skos:definition>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&cmns-qtu;InternationalSystemOfQuantities">
@@ -882,6 +936,13 @@
 		<skos:definition>indicates the numeric multiple or submultiple multiplication factor</skos:definition>
 	</owl:DatatypeProperty>
 	
+	<owl:ObjectProperty rdf:about="&cmns-qtu;hasIntegerRange">
+		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasExpression"/>
+		<rdfs:label>has integer range</rdfs:label>
+		<rdfs:range rdf:resource="&cmns-qtu;IntegerRange"/>
+		<skos:definition>relates something (an expression, formula, etc.) to its count expressed as range of integers</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;hasLowerBound">
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:subPropertyOf rdf:resource="&cmns-qtu;hasArgument"/>
@@ -991,11 +1052,27 @@
 		<skos:definition>indicates whether something, such as a measurement scale, includes the absolute maximum permissive value or not</skos:definition>
 	</owl:DatatypeProperty>
 	
+	<owl:DatatypeProperty rdf:about="&cmns-qtu;isMaximumUnbounded">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
+		<rdfs:label>is maximum unbounded</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates that there is no maximum value in a numeric or quantity range</skos:definition>
+		<cmns-av:usageNote>some datatypes such as IEEE floating point values have a specific value for positive infinity that can be used as an upper boundary of the range, but integers and decimals do not</cmns-av:usageNote>
+	</owl:DatatypeProperty>
+	
 	<owl:DatatypeProperty rdf:about="&cmns-qtu;isMinimumInclusive">
 		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
 		<rdfs:label>is minimum inclusive</rdfs:label>
 		<rdfs:range rdf:resource="&xsd;boolean"/>
 		<skos:definition>indicates whether something, such as a measurement scale, includes the absolute minimum permissive value or not</skos:definition>
+	</owl:DatatypeProperty>
+	
+	<owl:DatatypeProperty rdf:about="&cmns-qtu;isMinimumUnbounded">
+		<rdf:type rdf:resource="&owl;FunctionalProperty"/>
+		<rdfs:label>is minimum unbounded</rdfs:label>
+		<rdfs:range rdf:resource="&xsd;boolean"/>
+		<skos:definition>indicates that there is no minimum value in a numeric or quantity range</skos:definition>
+		<cmns-av:usageNote>some datatypes such as IEEE floating point values have a specific value for negative infinity that can be used as a lower boundary of the range, but integers and decimals do not</cmns-av:usageNote>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&cmns-qtu;specializes">

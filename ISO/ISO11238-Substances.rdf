@@ -176,6 +176,10 @@
 		<owl:deprecated rdf:datatype="&xsd;boolean">true</owl:deprecated>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;AgentModificationMethod">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ModificationMethod"/>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;AggregateAspect">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
 		<rdfs:subClassOf>
@@ -203,6 +207,12 @@
 		<rdfs:seeAlso rdf:resource="&chebi;33704"/>
 		<skos:definition>An amino acid molecule in which the amino group is located on the carbon atom at the position α to the carboxy group.</skos:definition>
 		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;AlternatingCopolymerConnectivity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;CopolymerConnectivity"/>
+		<rdfs:label>alternating copolymer connectivity</rdfs:label>
+		<skos:definition>copolymer connectivity with regular alternating A and B units</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;AminoAcidResidue">
@@ -423,6 +433,19 @@
 		<cmns-av:usageNote>Source material in IDMP is used to define structurally diverse, chemical, mixture, polymer and protein substances from biological matrices.</cmns-av:usageNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;BranchedPolymerGeometry">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PolymerGeometry"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;PolymerGeometry-Branched"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>branched polymer geometry</rdfs:label>
+		<skos:definition>polymer geometry where monomer residues have more then two connection points and form branches of a main chain and those have the same connectivity as the main chain</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.4.2, Figure H.4</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;CentesimalDilution">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceDilutionPotentization"/>
 		<rdfs:label>centesemal dilution</rdfs:label>
@@ -581,28 +604,6 @@
 		<cmns-av:adaptedFrom>PAC, 1996, 68, 2193. (Basic terminology of stereochemistry (IUPAC Recommendations 1996)) on page 2204</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;ConstituentAmount">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;AggregateAspect"/>
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalPropertyAspect"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
-				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
-				<owl:someValuesFrom rdf:resource="&cmns-col;Constituent"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>constituent amount</rdfs:label>
-		<skos:definition>aspect that quantifies the mass, volume or amount of substance of a single constituent or a group of constituents in a constituency or collection</skos:definition>
-		<skos:example>the relative mass of material of a specific substance in a mixture</skos:example>
-		<cmns-av:usageNote>The specified amount can be a range and it can be relative.</cmns-av:usageNote>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;ContentType">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
@@ -631,43 +632,85 @@
 	
 	<owl:Class rdf:about="&idmp-sub;CopolymerConnectivity">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Structure"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;CopolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>copolymer connectivity</rdfs:label>
+		<owl:disjointUnionOf rdf:parseType="Collection">
+			<rdf:Description rdf:about="&idmp-sub;AlternatingCopolymerConnectivity">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;idmp-subBlockCopolymerConnectivity">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;idmp-subCrossCopolymerConnectivity">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;idmp-subGraftCopolymerConnectivity">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;idmp-subMixedCopolymerConnectivity">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;idmp-subPeriodicCopolymerConnectivity">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;idmp-subRandomCopolymerConnectivity">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;idmp-subStatisticalCopolymerConnectivity">
+			</rdf:Description>
+		</owl:disjointUnionOf>
+		<skos:definition>structure how subunits in a copolymers are connected</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.1</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Alternating">
 		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
 		<rdfs:label>Alternating</rdfs:label>
+		<skos:definition>Alternating copolymers are with regular alternating A and B units.</skos:definition>
+		<skos:example>(–A-B-A-B-A-)n</skos:example>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Block">
+		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
+		<rdfs:label>Block</rdfs:label>
+		<skos:definition>Block copolymers comprise two or more homopolymer subunits linked by covalent bonds. The union of the homopolymer subunits may require an intermediate non-repeating subunit, known as a junction block. Block copolymers with two or three distinct blocks are called diblock copolymers and triblock copolymers.</skos:definition>
+		<skos:example>(B-B-B-B-A-A-A-A-B-B-B-B-A-A-A-A)n</skos:example>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Cross">
 		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
 		<rdfs:label>Cross</rdfs:label>
+		<skos:definition>Cross polymers are also network polymers similar to cross-linked polymers with the main difference being that the cross-linking is done by another polymer or oligomer.</skos:definition>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Graft">
 		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
 		<rdfs:label>Graft</rdfs:label>
+		<skos:definition>Graft polymers are similar to branched polymers with the main difference being that the branches of the graft are made from a different monomer.</skos:definition>
+		<skos:example>There are a number of dimethicone-peg polymers that would be considered to be graft polymers, e.g. A-B diblock copolymer with A-B alternating copolymer side chains is properly called a graft copolymer.</skos:example>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Mixed">
 		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
 		<rdfs:label>Mixed</rdfs:label>
+		<skos:definition>Mixed copolymers are polymers that contain a region of block copolymers and a region that contains random copolymers.</skos:definition>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Periodic">
 		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
 		<rdfs:label>Periodic</rdfs:label>
+		<skos:definition>Periodic copolymers are polymers with A and B units arranged in a repeating sequence</skos:definition>
+		<skos:example>(A-B-A-B-B-A-A-A-A-B-B-B)n.</skos:example>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Random">
 		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
 		<rdfs:label>Random</rdfs:label>
+		<skos:definition>Statistical copolymers are copolymers in which the sequence of monomer residues follows a statistical rule. If the probability of finding a given monomer residue at a particular point in the chain is equal to the mole fraction of that monomer residue in the chain, then the polymer may be referred to as a truly random copolymer.</skos:definition>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Statistical">
 		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
 		<rdfs:label>Statistical</rdfs:label>
+		<skos:definition>Statistical copolymers are copolymers in which the sequence of monomer residues follows a statistical rule.</skos:definition>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;CopolymerConnectivityClassifier">
@@ -679,44 +722,56 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>copolymer connectivity classifier</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;CopolymerConnectivity-Alternating">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;CopolymerConnectivity-Block">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;CopolymerConnectivity-Cross">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;CopolymerConnectivity-Graft">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;CopolymerConnectivity-Mixed">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;CopolymerConnectivity-Periodic">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;CopolymerConnectivity-Random">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;CopolymerConnectivity-Statistical">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
 		<skos:definition>classifier for the copolymer connectivity in a copolymer</skos:definition>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.1</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.4.3</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;CopolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PolymerSubstance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;PolymerClassifier-Copolymer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>copolymer substance</rdfs:label>
-		<skos:note>polymer that consists of two or more kinds of repeating units</skos:note>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.1</cmns-av:adaptedFrom>
+		<skos:note>polymer with more than one type of structural repeat unit linked through covalent bonds</skos:note>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.3.1</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;Count">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;AggregateAspect"/>
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalPropertyAspect"/>
+	<owl:Class rdf:about="&idmp-sub;CrossLinkedPolymerGeometry">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PolymerGeometry"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;isQualifiedBy"/>
-				<owl:onClass rdf:resource="&cmns-cls;Aspect"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;PolymerGeometry-CrossLinked"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-dtp;hasIntegerValue"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
-				<owl:onDataRange rdf:resource="&xsd;integer"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
-				<owl:someValuesFrom rdf:resource="&cmns-col;Collection"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>count</rdfs:label>
-		<skos:definition>the number of discrete constituents, optionally qualified and filtered by a specification in a constituency or collection</skos:definition>
-		<skos:example>the number of package items in a packaging</skos:example>
-		<skos:example>the number of red tablets in a blister, vs the number of green tablets in the blister. The qualifier (or filter) is here the color of the tablet constituent</skos:example>
+		<rdfs:label>cross-linked polymer geometry</rdfs:label>
+		<skos:definition>polymer geometry where one monomer residue forms a long linear chain and a second monomer residue or cross-linking agent connects the linear chains</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.4.2, Figure H.6</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;DecimalDilution">
@@ -736,6 +791,18 @@
 	<owl:Class rdf:about="&idmp-sub;DegreeOfComminution">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;CharacteristicAttribute"/>
 		<rdfs:label>degree of comminution</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;DendriticPolymerGeometry">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PolymerGeometry"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;PolymerGeometry-Dendritic"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>dendritic polymer geometry</rdfs:label>
+		<skos:definition>polymer geometry where the chains of the monomer residue form a dendritic structure</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;DescriptionRole">
@@ -928,9 +995,15 @@
 	
 	<owl:Class rdf:about="&idmp-sub;HomopolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PolymerSubstance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;PolymerClassifier-Homopolymer"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>homopolymer substance</rdfs:label>
-		<skos:note>polymer that consists of a single kind of repeating unit</skos:note>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.1</cmns-av:adaptedFrom>
+		<skos:note>polymer containing a single structural repeat unit</skos:note>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.3.3</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;Hydrate">
@@ -1043,6 +1116,20 @@
 		<skos:definition>plurality of all organisms</skos:definition>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;LinearPolymerGeometry">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PolymerGeometry"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SequentialStructure"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;PolymerGeometry-Linear"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>linear polymer geometry</rdfs:label>
+		<skos:definition>polymer geometry where monomer residues form an unbranched chain</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.4.2, Figure H.3</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Macromolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Molecule"/>
 		<rdfs:label>macromolecule</rdfs:label>
@@ -1050,7 +1137,6 @@
 		<skos:definition>a molecule of high relative molecular mass, the structure of which essentially comprises the multiple repetition of units derived, actually or conceptually, from molecules of low relative molecular mass</skos:definition>
 		<cmns-av:directSource>PAC, 1996, 68, 2287. (Glossary of basic terms in polymer science (IUPAC Recommendations 1996)) on page 2289</cmns-av:directSource>
 		<cmns-av:explanatoryNote>In many cases, especially for synthetic polymers, a molecule can be regarded as having a high relative molecular mass if the addition or removal of one or a few of the units has a negligible effect on the molecular properties. This statement fails in the case of certain macromolecules for which the properties may be critically dependent on fine details of the molecular structure.</cmns-av:explanatoryNote>
-		<cmns-av:synonym>polymer molecule</cmns-av:synonym>
 		<cmns-av:usageNote>If a part or the whole of the molecule has a high relative molecular mass and essentially comprises the multiple repetition of units derived, actually or conceptually, from molecules of low relative molecular mass, it may be described as either macromolecular or polymeric, or by polymer used adjectivally.</cmns-av:usageNote>
 	</owl:Class>
 	
@@ -1210,6 +1296,22 @@
 		<skos:definition>substance classifier for substances defined by rules mixtures in ISO 11238.</skos:definition>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;Modification">
+		<rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/Process"/>
+		<rdfs:label>modification</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ModificationMethod">
+		<rdfs:subClassOf rdf:resource="https://spec.pistoiaalliance.org/idmp/ontology/ISO/ISO11615-MedicinalProducts/ProcessSpecification"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;Modification"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>modification method</rdfs:label>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;Moiety">
 		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 		<rdfs:subClassOf>
@@ -1233,7 +1335,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningMolecularWeight"/>
-				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularWeight"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularWeightValue"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -1530,7 +1632,7 @@
 		<idmp-cmpl:hasConformanceToISOLevel rdf:resource="&idmp-cmpl;ConformanceToISOLevel-Extension"/>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;MolecularWeight">
+	<owl:Class rdf:about="&idmp-sub;MolecularWeightValue">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -1551,7 +1653,7 @@
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>molecular weight</rdfs:label>
+		<rdfs:label>molecular weight value</rdfs:label>
 		<skos:definition>mass of one molecule of a homogenous substance or the average mass of molecules that comprise a heterogeneous substance, which is derived from the molecular structure or the molecular formula</skos:definition>
 		<skos:note>For a substance not described in a Pharmacopoeia a mass spectrum may be provided to substantiate the calculated molecular weight.</skos:note>
 		<skos:note>For polymers, there are several different types of molecular weight (weight average, number average, etc.).</skos:note>
@@ -1639,6 +1741,12 @@
 		<cmns-av:directSource>IUPAC. Compendium of Chemical Terminology, 2nd ed. (the &quot;Gold Book&quot;). Compiled by A. D. McNaught and A. Wilkinson. Blackwell Scientific Publications, Oxford (1997).</cmns-av:directSource>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;MonomerResidue">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularGroup"/>
+		<rdfs:label>monomer residue</rdfs:label>
+		<skos:definition>residue of a monomer that builds a polymer molecule</skos:definition>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;MonomerSequence">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularSequence"/>
 		<rdfs:subClassOf>
@@ -1681,6 +1789,19 @@
 		<skos:definition>an aspect plays the role of a necessary part, if a truthful characterization by the aspect is a prerequiste in the definition, identification or specification</skos:definition>
 		<cmns-av:synonym>necessary aspect</cmns-av:synonym>
 		<cmns-av:synonym>necessary criterion</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;NetworkPolymerGeometry">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PolymerGeometry"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:hasValue rdf:resource="&idmp-sub;PolymerGeometry-Network"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>network polymer geometry</rdfs:label>
+		<skos:definition>polymer geometry where the monomer residues have more then two connection points and form multidimensional structures</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.4.2, Figure H.5</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;NucleicAcidMolecule">
@@ -1892,11 +2013,26 @@
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;OpticalActivity">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalPropertyAspect"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;OpticalRotation"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;OpticalRotationValue"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>specified optical activity</rdfs:label>
@@ -1952,7 +2088,7 @@
 		<cmns-txt:hasTextValue>(+)</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
 	
-	<owl:Class rdf:about="&idmp-sub;OpticalRotation">
+	<owl:Class rdf:about="&idmp-sub;OpticalRotationValue">
 		<rdfs:subClassOf rdf:resource="&cmns-qtu;QuantityValue"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -1973,12 +2109,12 @@
 				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>optical activity</rdfs:label>
-		<rdfs:label>optical rotation</rdfs:label>
+		<rdfs:label>optical activity value</rdfs:label>
 		<skos:definition>angle of rotation of polarized light when transmitting through material</skos:definition>
 		<cmns-av:adaptedFrom>PAC, 1996, 68, 2193. (Basic terminology of stereochemistry (IUPAC Recommendations 1996)) on page 2212</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>A sample of material able to rotate the plane of polarization of a beam of transmitted plane-polarized light is said to possess optical activity (or to be optically active). This optical rotation is the classical distinguishing characteristic (sufficient but not necessary) of systems containing unequal amounts of corresponding enantiomers. An enantiomer causing rotation in a clockwise direction (when viewed in the direction facing the oncoming light beam) under specified conditions is called dextrorotatory and its chemical name or formula is designated by the prefix (+)-; one causing rotation in the opposite sense is laevorotatory and designated by the prefix (−)-. Materials with optical activity also exhibit other chiroptic phenomena.</cmns-av:explanatoryNote>
 		<cmns-av:synonym>optical rotation</cmns-av:synonym>
+		<cmns-av:synonym>optical rotation value</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;OptionalAspectRole">
@@ -2028,7 +2164,7 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PackageItemCount">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Count"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedCount"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;isQualifiedBy"/>
@@ -2210,27 +2346,14 @@
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Product"/>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;PhysicalModificationMethod">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ModificationMethod"/>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PhysicalOrganism">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
 		<rdfs:label>physical organism</rdfs:label>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6</cmns-av:adaptedFrom>
-	</owl:Class>
-	
-	<owl:Class rdf:about="&idmp-sub;PhysicalPropertyAspect">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;Matter"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>physical property aspect</rdfs:label>
-		<skos:definition>a characterization of matter based on physically observable properties of the matter</skos:definition>
-		<skos:example>a distribution of molecular weight</skos:example>
-		<skos:example>a matching mass spectrum</skos:example>
-		<skos:example>a specified mass range</skos:example>
-		<skos:example>a specified optical activity</skos:example>
-		<cmns-av:explanatoryNote>The properties are characterized by specific or ranges of quantity values, but can be also more complex properties such as statistical distributions or a match with some reference spectrum.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalSubstance">
@@ -2238,7 +2361,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasOpticalActivity"/>
-				<owl:onClass rdf:resource="&idmp-sub;OpticalRotation"/>
+				<owl:onClass rdf:resource="&idmp-sub;OpticalRotationValue"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2252,7 +2375,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasMolecularWeight"/>
-				<owl:onClass rdf:resource="&idmp-sub;MolecularWeight"/>
+				<owl:onClass rdf:resource="&idmp-sub;MolecularWeightValue"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
@@ -2296,8 +2419,38 @@
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerClassifier">
-		<rdfs:label>polymer type</rdfs:label>
-		<skos:definition>substance classifier for substances defined by rules for polymers in ISO 11238.</skos:definition>
+		<rdf:type rdf:resource="&owl;Class"/>
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>polymer classifier</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;PolymerClassifier-Copolymer">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;PolymerClassifier-Homopolymer">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
+		<skos:definition>polymers are classified as either a homopolymer or a copolymer</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause H.4.1</cmns-av:adaptedFrom>
+		<cmns-av:synonym>polymer class</cmns-av:synonym>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerClassifier-Copolymer">
+		<rdf:type rdf:resource="&idmp-sub;PolymerClassifier"/>
+		<rdfs:label>Copolymer</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerClassifier-Homopolymer">
+		<rdf:type rdf:resource="&idmp-sub;PolymerClassifier"/>
+		<rdfs:label>Homopolymer</rdfs:label>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerConnectivitiy-Block">
@@ -2355,19 +2508,41 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PolymerGeometry">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;Structure"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;GraphStructure"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;Macromolecule">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PolymerSubstance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>polymer geometry</rdfs:label>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.1</cmns-av:adaptedFrom>
+		<skos:definition>structure formed by the chains of monomer residues in a polymer</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.4.2</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerGeometry-Branched">
 		<rdf:type rdf:resource="&idmp-sub;PolymerGeometryClassifier"/>
 		<rdfs:label>Branched</rdfs:label>
+		<skos:example>An example of a branched polymer would be amylopectin.</skos:example>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, Figure H.4</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Branched polymers are typically made of the same monomers and these monomers typically have more than two connection points. Usually there is a predominant chain and predominant type of connectivity.</cmns-av:explanatoryNote>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerGeometry-CrossLinked">
 		<rdf:type rdf:resource="&idmp-sub;PolymerGeometryClassifier"/>
 		<rdfs:label>Cross-linked</rdfs:label>
+		<skos:example>Commercial grade polystyrene typically consists of 95 % to 99 % styrene and 1 % to 5 % divinyl benzene.</skos:example>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, Figure H.6</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Cross-linked polymers also form networks of linear chains but the distinguishing factor from network polymers is that a cross-linked polymer typically contains one monomer that forms a long linear chain and a second monomer or cross-linking agent that will connect the linear chains.</cmns-av:explanatoryNote>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerGeometry-Dendritic">
@@ -2378,11 +2553,16 @@
 	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerGeometry-Linear">
 		<rdf:type rdf:resource="&idmp-sub;PolymerGeometryClassifier"/>
 		<rdfs:label>Linear</rdfs:label>
+		<skos:example>Examples of linear polymers include polyethylene, polyethylene glycol, and cellulose.</skos:example>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, Figure H.3</cmns-av:adaptedFrom>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;PolymerGeometry-Network">
 		<rdf:type rdf:resource="&idmp-sub;PolymerGeometryClassifier"/>
 		<rdfs:label>Network</rdfs:label>
+		<skos:example>Phenol formaldehyde resins, particularly when the molar ratio of formaldehyde to phenol is greater than one, are examples of network polymers.</skos:example>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, Figure H.5</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>Network polymers typically have more than two connection points on one of the monomers and form multidimensional structural representations.</cmns-av:explanatoryNote>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;PolymerGeometryClassifier">
@@ -2394,8 +2574,45 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>polymer geometry classifier</rdfs:label>
+		<owl:equivalentClass>
+			<owl:Class>
+				<owl:oneOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&idmp-sub;PolymerGeometry-Branched">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;PolymerGeometry-CrossLinked">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;PolymerGeometry-Dendritic">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;PolymerGeometry-Linear">
+					</rdf:Description>
+					<rdf:Description rdf:about="&idmp-sub;PolymerGeometry-Network">
+					</rdf:Description>
+				</owl:oneOf>
+			</owl:Class>
+		</owl:equivalentClass>
 		<skos:definition>classifier for the structure of a polymer</skos:definition>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.1</cmns-av:adaptedFrom>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.4.2</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PolymerMolecule">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Macromolecule"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;MonomerResidue"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerGeometry"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>polymer molecule</rdfs:label>
+		<skos:definition>macromolecule that is not built from peptides or amino acid residues</skos:definition>
+		<skos:note>IUPAC defines polymer molecule as a synonym to macromolecule, but the IDMP definition is more restricted.</skos:note>
+		<cmns-av:explanatoryNote>Polymer molecules are those macromolecules who are the constituent molecular entities of IDMP polymer substances.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PolymerMoleculeSubstituent">
@@ -2843,45 +3060,168 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedAmount">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;AggregateAspect"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+						<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+					</owl:Restriction>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
+						<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+					</owl:Restriction>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
 				<owl:onClass rdf:resource="&cmns-qtu;QuantityValue"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValueRange"/>
 				<owl:onClass rdf:resource="&cmns-qtu;QuantityValueRange"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isQualifiedBy"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-cls;Aspect">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-col;Constituent">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-cls;characterizes"/>
-				<owl:someValuesFrom rdf:resource="&cmns-col;Constituent"/>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-col;Collection">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-pts;Constituency">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>specified amount</rdfs:label>
-		<skos:definition>specifying aspect that quantifies how much of a constituent is part of the constituency</skos:definition>
+		<skos:definition>aspect that quantifies the mass, volume or amount of substance of a single constituent or a group of constituents in a constituency or collection</skos:definition>
 		<skos:example>the relative mass of material of a specific substance in a mixture</skos:example>
+		<cmns-av:usageNote>The amount can be filtered by some classifier or constituent. The amount is then grouped by the classifier or constituent.</cmns-av:usageNote>
 		<cmns-av:usageNote>The specified amount can be a range and it can be relative.</cmns-av:usageNote>
+		<cmns-av:usageNote>Unbounded ranges must be marked explicitly using &apos;is minimum/maximum unbounded&apos; in the range. Unspecified boundaries in the range are not indicating that no boundary exists as it is done in some datamodels.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedCount">
-		<rdfs:subClassOf rdf:resource="&cmns-cls;Aspect"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;AggregateAspect"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-qtu;hasIntegerRange"/>
+						<owl:onClass rdf:resource="&cmns-qtu;IntegerRange"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+					</owl:Restriction>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&idmp-dtp;hasIntegerValue"/>
+						<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+						<owl:onDataRange rdf:resource="&xsd;integer"/>
+					</owl:Restriction>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasIntegerRange"/>
+				<owl:onClass rdf:resource="&cmns-qtu;IntegerRange"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-dtp;hasIntegerValue"/>
-				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
 				<owl:onDataRange rdf:resource="&xsd;integer"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;isQualifiedBy"/>
+				<owl:onClass>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-cls;Aspect">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-col;Constituent">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:onClass>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&cmns-col;Collection">
+							</rdf:Description>
+							<rdf:Description rdf:about="&cmns-pts;Constituency">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>specified count</rdfs:label>
-		<skos:definition>number of discrete items of the same constituent in a constituency</skos:definition>
+		<skos:definition>number of discrete items in a collection or the number of constituents in a constituency</skos:definition>
 		<skos:example>the number of items in a container or collection</skos:example>
+		<skos:example>the number of red tablets in a blister, vs the number of green tablets in the blister. The qualifier (or filter) is here the color of the tablet constituent</skos:example>
+		<cmns-av:usageNote>If using a range, whether the maximum and minimum are included in or excluded from the range (open or closed interval) must be explicitly stated.</cmns-av:usageNote>
+		<cmns-av:usageNote>The count can be filtered by some classifier or constituent. The count is then grouped by the classifier or constituent.</cmns-av:usageNote>
+		<cmns-av:usageNote>Unbounded ranges must be marked explicitly using &apos;is minimum/maximum unbounded&apos; in the range. Unspecified boundaries in the range are not indicating that no boundary exists as it is done in some datamodels.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedDegreeOfPolymerization">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified degree of polymerization</rdfs:label>
+		<skos:definition>average number of monomers or repeat units in a polymeric block or chain</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.3.2</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>Applies to both homopolymers and block copolymers where it refers to the degree of polymerization within a block.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedMolecularSequence">
@@ -2917,11 +3257,28 @@
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedMolecularWeight">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalPropertyAspect"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularWeight"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:unionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;MolecularEntity">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;PhysicalSubstance">
+							</rdf:Description>
+							<rdf:Description rdf:about="&idmp-sub;Substance">
+							</rdf:Description>
+						</owl:unionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MolecularWeightValue"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>specified molecular weight</rdfs:label>
@@ -2936,6 +3293,26 @@
 	<owl:Class rdf:about="&idmp-sub;SpecifiedNucleotideSequence">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularSequence"/>
 		<rdfs:label>specified nucleotide sequence</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedPolydispersity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified polydispersity</rdfs:label>
+		<skos:definition>measure of the range of molecular masses in polymer substance</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.3.5</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The dispersity of polymers is typically calculated by the ratio of weight average molecular weight to number average molecular weight.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedStereochemistry">
@@ -3543,6 +3920,29 @@
 		<cmns-av:synonym>structural part</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;StructuralModificationMethod">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ModificationMethod"/>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;StructuralRepeatUnit">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;Structure"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom>
+					<owl:Restriction>
+						<owl:onProperty rdf:resource="&cmns-col;isPartOf"/>
+						<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+					</owl:Restriction>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>structural repeat unit</rdfs:label>
+		<skos:definition>repeating structure in a polymer</skos:definition>
+		<cmns-av:abbreviation>SRU</cmns-av:abbreviation>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.1</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;StructuralRepresentation">
 		<rdfs:subClassOf rdf:resource="&cmns-dsg;Designation"/>
 		<rdfs:subClassOf>
@@ -3586,12 +3986,6 @@
 				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralElement"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>structure</rdfs:label>
 		<skos:definition>arrangement and organization of interrelated elements in a material object or system</skos:definition>
 		<skos:note>Material structures include man-made objects such as buildings and machines and natural objects such as biological organisms, minerals and chemicals.</skos:note>
@@ -3606,7 +4000,7 @@
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningMolecularWeight"/>
-				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularWeight"/>
+				<owl:allValuesFrom rdf:resource="&idmp-sub;MolecularWeightValue"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
@@ -4693,7 +5087,7 @@
 		<rdfs:label>has molecular weight</rdfs:label>
 		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.3</dct:source>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.7.5, Figure 10</dct:source>
-		<rdfs:range rdf:resource="&idmp-sub;MolecularWeight"/>
+		<rdfs:range rdf:resource="&idmp-sub;MolecularWeightValue"/>
 		<skos:definition>relates a substance to its molecular weight</skos:definition>
 	</owl:ObjectProperty>
 	
@@ -4877,6 +5271,48 @@
 	</owl:AnnotationProperty>
 	
 	<owl:Class rdf:about="&idmp-sub;idmp-sub:ContentType">
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;idmp-subBlockCopolymerConnectivity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;CopolymerConnectivity"/>
+		<rdfs:label>block copolymer connectivity</rdfs:label>
+		<skos:definition>copolymer connectivity with two or more homopolymer subunits linked by covalent bonds</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;idmp-subCrossCopolymerConnectivity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;CopolymerConnectivity"/>
+		<rdfs:label>cross copolymer connectivity</rdfs:label>
+		<skos:definition>copolymer connectivity with similar structure to that of cross-linked polymers with the main difference that cross-linking is done by another polymer or oligomer</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;idmp-subGraftCopolymerConnectivity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;CopolymerConnectivity"/>
+		<rdfs:label>graft copolymer connectivity</rdfs:label>
+		<skos:definition>copolymer connectivity with similar structure to that of branched polymers with the main difference being that the branches of the graft are made from a different monomer</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;idmp-subMixedCopolymerConnectivity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;CopolymerConnectivity"/>
+		<rdfs:label>mixed copolymer connectivity</rdfs:label>
+		<skos:definition>copolymer connectivity with a region of block copolymers connectivity and a region of randnom copolymers connectivity</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;idmp-subPeriodicCopolymerConnectivity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;CopolymerConnectivity"/>
+		<rdfs:label>periodic copolymer connectivity</rdfs:label>
+		<skos:definition>copolymer connectivity with A and B units arranged in a repeating sequence</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;idmp-subRandomCopolymerConnectivity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;CopolymerConnectivity"/>
+		<rdfs:label>random copolymer connectivity</rdfs:label>
+		<skos:definition>copolymer connectivity where the propability of finding a given monomer residue at a particular point in the chain is equal to the mole fraction of that monomer residue in the chain</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;idmp-subStatisticalCopolymerConnectivity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;CopolymerConnectivity"/>
+		<rdfs:label>statistical copolymer connectivity</rdfs:label>
+		<skos:definition>copolymer connectivity where the sequence of monomer residue follows a statistical rule</skos:definition>
 	</owl:Class>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;includesCharacteristic">
@@ -5190,5 +5626,31 @@
 	
 	<owl:DatatypeProperty rdf:about="&lcc-lr;hasTextualName">
 	</owl:DatatypeProperty>
-
+	
+	<owl:AllDisjointClasses>
+		<owl:members rdf:parseType="Collection">
+			<rdf:Description rdf:about="&idmp-sub;BranchedPolymerGeometry">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;CrossLinkedPolymerGeometry">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;DendriticPolymerGeometry">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;LinearPolymerGeometry">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;NetworkPolymerGeometry">
+			</rdf:Description>
+		</owl:members>
+	</owl:AllDisjointClasses>
+	<owl:AllDisjointClasses>
+		<owl:members rdf:parseType="Collection">
+			<rdf:Description rdf:about="&idmp-sub;NucleicAcidMolecule">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;PeptideMolecule">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;PolymerMolecule">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;ProteinMolecule">
+			</rdf:Description>
+		</owl:members>
+	</owl:AllDisjointClasses>
 </rdf:RDF>
