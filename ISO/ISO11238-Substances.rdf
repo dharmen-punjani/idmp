@@ -694,6 +694,7 @@
 		<rdfs:label>copolymer connectivity - alternating</rdfs:label>
 		<skos:definition>Alternating copolymers are with regular alternating A and B units.</skos:definition>
 		<skos:example>(–A-B-A-B-A-)n</skos:example>
+		<cmns-dsg:isSignifiedBy rdf:resource="&idmp-sub;CopolymerConnectivityCode-Alternating"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Block">
@@ -701,12 +702,14 @@
 		<rdfs:label>copolymer connectivity - block</rdfs:label>
 		<skos:definition>Block copolymers comprise two or more homopolymer subunits linked by covalent bonds. The union of the homopolymer subunits may require an intermediate non-repeating subunit, known as a junction block. Block copolymers with two or three distinct blocks are called diblock copolymers and triblock copolymers.</skos:definition>
 		<skos:example>(B-B-B-B-A-A-A-A-B-B-B-B-A-A-A-A)n</skos:example>
+		<cmns-dsg:isSignifiedBy rdf:resource="&idmp-sub;CopolymerConnectivityCode-Block"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Cross">
 		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
 		<rdfs:label>copolymer connectivity - cross</rdfs:label>
 		<skos:definition>Cross polymers are also network polymers similar to cross-linked polymers with the main difference being that the cross-linking is done by another polymer or oligomer.</skos:definition>
+		<cmns-dsg:isSignifiedBy rdf:resource="&idmp-sub;CopolymerConnectivityCode-Cross"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Graft">
@@ -714,12 +717,14 @@
 		<rdfs:label>copolymer connectivity - graft</rdfs:label>
 		<skos:definition>Graft polymers are similar to branched polymers with the main difference being that the branches of the graft are made from a different monomer.</skos:definition>
 		<skos:example>There are a number of dimethicone-peg polymers that would be considered to be graft polymers, e.g. A-B diblock copolymer with A-B alternating copolymer side chains is properly called a graft copolymer.</skos:example>
+		<cmns-dsg:isSignifiedBy rdf:resource="&idmp-sub;CopolymerConnectivityCode-Graft"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Mixed">
 		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
 		<rdfs:label>copolymer connectivity - mixed</rdfs:label>
 		<skos:definition>Mixed copolymers are polymers that contain a region of block copolymers and a region that contains random copolymers.</skos:definition>
+		<cmns-dsg:isSignifiedBy rdf:resource="&idmp-sub;CopolymerConnectivityCode-Mixed"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Periodic">
@@ -727,18 +732,21 @@
 		<rdfs:label>copolymer connectivity - periodic</rdfs:label>
 		<skos:definition>Periodic copolymers are polymers with A and B units arranged in a repeating sequence</skos:definition>
 		<skos:example>(A-B-A-B-B-A-A-A-A-B-B-B)n.</skos:example>
+		<cmns-dsg:isSignifiedBy rdf:resource="&idmp-sub;CopolymerConnectivityCode-Periodic"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Random">
 		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
 		<rdfs:label>copolymer connectivity - random</rdfs:label>
 		<skos:definition>Statistical copolymers are copolymers in which the sequence of monomer residues follows a statistical rule. If the probability of finding a given monomer residue at a particular point in the chain is equal to the mole fraction of that monomer residue in the chain, then the polymer may be referred to as a truly random copolymer.</skos:definition>
+		<cmns-dsg:isSignifiedBy rdf:resource="&idmp-sub;CopolymerConnectivityCode-Random"/>
 	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivity-Statistical">
 		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
 		<rdfs:label>copolymer connectivity - statistical</rdfs:label>
 		<skos:definition>Statistical copolymers are copolymers in which the sequence of monomer residues follows a statistical rule.</skos:definition>
+		<cmns-dsg:isSignifiedBy rdf:resource="&idmp-sub;CopolymerConnectivityCode-Statistical"/>
 	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;CopolymerConnectivityClassifier">
@@ -797,6 +805,62 @@
 		<skos:definition>code denoting the type of copolymer connectivity (copolymer sequence type)</skos:definition>
 	</owl:Class>
 	
+	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivityCode-Alternating">
+		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityCode"/>
+		<rdfs:label>copolymer connectivity code - alternating</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;CopolymerConnectivity-Alternating"/>
+		<cmns-txt:hasTextValue>Alternating</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivityCode-Block">
+		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityCode"/>
+		<rdfs:label>copolymer connectivity code - block</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;CopolymerConnectivity-Block"/>
+		<cmns-txt:hasTextValue>Block</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivityCode-Cross">
+		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityCode"/>
+		<rdfs:label>copolymer connectivity code - cross</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;CopolymerConnectivity-Cross"/>
+		<cmns-txt:hasTextValue>Cross</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivityCode-Graft">
+		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityCode"/>
+		<rdfs:label>copolymer connectivity code - graft</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;CopolymerConnectivity-Graft"/>
+		<cmns-txt:hasTextValue>Graft</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivityCode-Mixed">
+		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityCode"/>
+		<rdfs:label>copolymer connectivity code - mixed</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;CopolymerConnectivity-Mixed"/>
+		<cmns-txt:hasTextValue>Mixed</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivityCode-Periodic">
+		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityCode"/>
+		<rdfs:label>copolymer connectivity code - periodic</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;CopolymerConnectivity-Periodic"/>
+		<cmns-txt:hasTextValue>Periodic</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivityCode-Random">
+		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityCode"/>
+		<rdfs:label>copolymer connectivity code - random</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;CopolymerConnectivity-Random"/>
+		<cmns-txt:hasTextValue>Random</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;CopolymerConnectivityCode-Statistical">
+		<rdf:type rdf:resource="&idmp-sub;CopolymerConnectivityCode"/>
+		<rdfs:label>copolymer connectivity code - statistical</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;CopolymerConnectivity-Statistical"/>
+		<cmns-txt:hasTextValue>Statistical</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-sub;CopolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PolymerSubstance"/>
 		<rdfs:subClassOf>
@@ -806,6 +870,7 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>copolymer substance</rdfs:label>
+		<owl:disjointWith rdf:resource="&idmp-sub;HomopolymerSubstance"/>
 		<skos:note>polymer with more than one type of structural repeat unit linked through covalent bonds</skos:note>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.3.1</cmns-av:adaptedFrom>
 	</owl:Class>
@@ -2822,6 +2887,20 @@ N is the total numberof all the molecules.</skos:definition>
 	
 	<owl:Class rdf:about="&idmp-sub;PolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;idmp-sub:hasDefiningCopolymerConnectivity"/>
+				<owl:onClass rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;idmp-sub:hasDefiningPolymerGeometry"/>
+				<owl:onClass rdf:resource="&idmp-sub;PolymerGeometryClassifier"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>polymer substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;ProteinSubstance"/>
 		<owl:disjointWith rdf:resource="&idmp-sub;StructurallyDiverseSubstance"/>
@@ -5534,11 +5613,53 @@ N is the total numberof all the molecules.</skos:definition>
 		<skos:definition>text describing an amount</skos:definition>
 	</owl:DatatypeProperty>
 	
+	<owl:ObjectProperty rdf:about="&idmp-sub;idmp-sub:hasCopolymerConnectivity">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasStructure"/>
+		<rdfs:label>has copolymer connectivity</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;CopolymerConnectivity"/>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;idmp-sub:hasDefiningCopolymerConnectivity">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasDefiningStructure"/>
+		<rdfs:label>has defining copolymer connectivity</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;CopolymerConnectivityClassifier"/>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-doc;specifies">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;idmp-sub:hasCopolymerConnectivity">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-cls;isClassifiedBy">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates a polymer substance to its defining copolymer connectivity type</skos:definition>
+	</owl:ObjectProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;idmp-sub:hasDefiningPolymerGeometry">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasDefiningStructure"/>
+		<rdfs:label>has defining polymer geometry</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;PolymerGeometryClassifier"/>
+		<owl:propertyChainAxiom rdf:parseType="Collection">
+			<rdf:Description rdf:about="&cmns-doc;specifies">
+			</rdf:Description>
+			<rdf:Description rdf:about="&idmp-sub;idmp-sub:hasPolymerGeometry">
+			</rdf:Description>
+			<rdf:Description rdf:about="&cmns-cls;isClassifiedBy">
+			</rdf:Description>
+		</owl:propertyChainAxiom>
+		<skos:definition>relates a polymer substance to its defining polymer geometry type</skos:definition>
+	</owl:ObjectProperty>
+	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;idmp-sub:hasNonNumericValue">
 		<rdfs:subPropertyOf rdf:resource="&cmns-txt;hasTextValue"/>
 		<rdfs:label>has non-numeric value</rdfs:label>
 		<skos:definition>amount expressed as non-numeric value</skos:definition>
 	</owl:DatatypeProperty>
+	
+	<owl:ObjectProperty rdf:about="&idmp-sub;idmp-sub:hasPolymerGeometry">
+		<rdfs:subPropertyOf rdf:resource="&idmp-sub;hasStructure"/>
+		<rdfs:label>has polymer geometry</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;PolymerGeometry"/>
+	</owl:ObjectProperty>
 	
 	<owl:Class rdf:about="&idmp-sub;idmp-subBlockCopolymerConnectivity">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;CopolymerConnectivity"/>
