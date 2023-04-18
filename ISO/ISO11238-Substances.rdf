@@ -660,6 +660,13 @@
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularStructure"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;StructuralRepresentation"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;CopolymerSubstance"/>
 			</owl:Restriction>
@@ -860,6 +867,18 @@
 		<cmns-dsg:denotes rdf:resource="&idmp-sub;CopolymerConnectivity-Statistical"/>
 		<cmns-txt:hasTextValue>Statistical</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;CopolymerConnectivityRepresentation">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;describes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;CopolymerConnectivity"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>copolymer connectivity representation</rdfs:label>
+		<skos:definition>structural representation of the connectivity in a copolymer</skos:definition>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;CopolymerSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;PolymerSubstance"/>
@@ -2689,6 +2708,13 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;GraphStructure"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;StructuralRepresentation"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
 				<owl:someValuesFrom>
 					<owl:Class>
@@ -2843,6 +2869,14 @@ N is the total numberof all the molecules.</skos:definition>
 		<cmns-dsg:denotes rdf:resource="&idmp-sub;PolymerGeometry-Network"/>
 		<cmns-txt:hasTextValue>Network</cmns-txt:hasTextValue>
 	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;PolymerGeometryRepresentation">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
+		<rdfs:label>polymer geometry representation</rdfs:label>
+		<skos:definition>structural repesentation of a polymer geometry</skos:definition>
+		<skos:example>-A-A-A- for a linear sequence of monomer residues A</skos:example>
+		<cmns-av:usageNote>The polymer geometry is represented by graphs of the monomer residues and its connecting molecular groups.</cmns-av:usageNote>
+	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PolymerMolecule">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Macromolecule"/>
