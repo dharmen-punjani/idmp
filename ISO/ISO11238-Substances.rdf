@@ -243,37 +243,6 @@
 		<cmns-av:adaptedFrom>Hastings J, Owen G, Dekker A, Ennis M, Kale N, Muthukrishnan V, Turner S, Swainston N, Mendes P, Steinbeck C. (2016). ChEBI in 2016: Improved services and an expanding collection of metabolites. Nucleic Acids Res.</cmns-av:adaptedFrom>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;AminoAcideSequence">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularSequence"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom>
-					<owl:Class>
-						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;StructuralElement">
-							</rdf:Description>
-							<owl:Restriction>
-								<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
-								<owl:allValuesFrom rdf:resource="&idmp-sub;AminoAcidResidue"/>
-							</owl:Restriction>
-						</owl:intersectionOf>
-					</owl:Class>
-				</owl:someValuesFrom>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;NucleicAcidMolecule"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>amino acid sequence</rdfs:label>
-		<skos:definition>order and identity of amino acides within a protein or peptide</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.62</cmns-av:adaptedFrom>
-		<cmns-av:synonym>polymer sequence</cmns-av:synonym>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;AmountType">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:label>amount type</rdfs:label>
@@ -1989,6 +1958,7 @@ References or links are expressed either by an object property or a unique ident
 		</rdfs:subClassOf>
 		<rdfs:label>monomer sequence</rdfs:label>
 		<skos:definition>a possibly repeating sequence of monomer residues forming the main chain of a polymer</skos:definition>
+		<cmns-av:synonym>polymer sequence</cmns-av:synonym>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MonomerSet">
@@ -2009,7 +1979,7 @@ References or links are expressed either by an object property or a unique ident
 							<rdf:Description rdf:about="&cmns-cls;Aspect">
 							</rdf:Description>
 							<owl:Restriction>
-								<owl:onProperty rdf:resource="&idmp-sub;isNecessaryCharacteristicFor"/>
+								<owl:onProperty rdf:resource="&idmp-sub;isNecessarilyIncludedIn"/>
 								<owl:someValuesFrom rdf:resource="&idmp-sub;AspectConstituency"/>
 							</owl:Restriction>
 						</owl:intersectionOf>
@@ -2120,7 +2090,7 @@ References or links are expressed either by an object property or a unique ident
 				<owl:someValuesFrom rdf:resource="&idmp-sub;ProteinMolecule"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>nucleiotide sequence</rdfs:label>
+		<rdfs:label>nucleotide sequence</rdfs:label>
 		<skos:definition>a sequence of nucleotides forming a part of a nucleic acid</skos:definition>
 	</owl:Class>
 	
@@ -2373,7 +2343,7 @@ N is the total numberof all the molecules.</skos:definition>
 							<rdf:Description rdf:about="&cmns-cls;Aspect">
 							</rdf:Description>
 							<owl:Restriction>
-								<owl:onProperty rdf:resource="&idmp-sub;isOptionalAspectOf"/>
+								<owl:onProperty rdf:resource="&idmp-sub;isOptionallyIncludedIn"/>
 								<owl:someValuesFrom rdf:resource="&idmp-sub;AspectConstituency"/>
 							</owl:Restriction>
 						</owl:intersectionOf>
@@ -2491,7 +2461,7 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;AminoAcideSequence"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ProteinSequence"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>peptide molecule</rdfs:label>
@@ -3004,12 +2974,69 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasStructure"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;AminoAcideSequence"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ProteinSequence"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>protein molecule</rdfs:label>
 		<skos:definition>molecule with a defined sequence of alpha-amino acids connected through peptide bonds. A protein consists of one or more chains with a lenght of more than 40 amino acids.</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances,  clause G.3.12</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ProteinSequence">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularSequence"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;isDescribedBy"/>
+				<owl:onClass rdf:resource="&idmp-sub;OneLetterDayhoffCodeRepresentation"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:someValuesFrom>
+					<owl:Class>
+						<owl:intersectionOf rdf:parseType="Collection">
+							<rdf:Description rdf:about="&idmp-sub;StructuralElement">
+							</rdf:Description>
+							<owl:Restriction>
+								<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
+								<owl:allValuesFrom rdf:resource="&idmp-sub;AminoAcidResidue"/>
+							</owl:Restriction>
+						</owl:intersectionOf>
+					</owl:Class>
+				</owl:someValuesFrom>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;defines"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;NucleicAcidMolecule"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>protein sequence</rdfs:label>
+		<skos:definition>order and identity of amino acides within a protein or peptide</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.67</cmns-av:adaptedFrom>
+		<cmns-av:synonym>amino acid sequence</cmns-av:synonym>
+		<cmns-av:usageNote>Protein sequences will be represented by single letter Dayhoff codes and listed from the N-terminal to the C-terminal.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ProteinSequenceEncodingSystem">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeSet"/>
+		<rdfs:label>protein sequence encoding system</rdfs:label>
+		<skos:definition>encoding system for amino acids using 1-letter codes by Dayhoff</skos:definition>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;ProteinSequenceRepresentation">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralRepresentation"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;describes"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ProteinSequence"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>protein sequence representation</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.67</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinSubUnit">
@@ -3038,7 +3065,7 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;AminoAcideSequence"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;ProteinSequence"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>protein substance</rdfs:label>
@@ -5421,9 +5448,11 @@ N is the total numberof all the molecules.</skos:definition>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularFragment">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
-		<rdfs:label>has molecular group</rdfs:label>
+		<rdfs:label>has molecular fragment</rdfs:label>
 		<rdfs:domain rdf:resource="&idmp-sub;MolecularEntity"/>
 		<rdfs:range rdf:resource="&idmp-sub;MolecularGroup"/>
+		<skos:definition>relation between a molecular entity and a connected part of it, the molecular fragement (group)</skos:definition>
+		<cmns-av:synonym>has molecular group</cmns-av:synonym>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMolecularStructure">
@@ -5456,6 +5485,7 @@ N is the total numberof all the molecules.</skos:definition>
 	<owl:ObjectProperty rdf:about="&idmp-sub;hasMonomer">
 		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
 		<rdfs:label>has monomer</rdfs:label>
+		<rdfs:range rdf:resource="&idmp-sub;MonomerMolecule"/>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;hasNumberOfMoieties">
@@ -5779,15 +5809,6 @@ N is the total numberof all the molecules.</skos:definition>
 		<skos:definition>copolymer connectivity where the sequence of monomer residue follows a statistical rule</skos:definition>
 	</owl:Class>
 	
-	<owl:ObjectProperty rdf:about="&idmp-sub;includesCharacteristic">
-		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
-		<rdfs:label>includes aspect</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-cls;Classifier"/>
-		<owl:inverseOf rdf:resource="&idmp-sub;isCharacteristicOf"/>
-		<skos:definition>relation between two classifiers A and B where B is classifying an aspect of things classified by A</skos:definition>
-		<cmns-av:synonym>includes characteristic</cmns-av:synonym>
-	</owl:ObjectProperty>
-	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isActiveMoietyOf">
 		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isMoietyOf"/>
 		<rdfs:label>is active moiety of</rdfs:label>
@@ -5795,12 +5816,6 @@ N is the total numberof all the molecules.</skos:definition>
 		<dct:source>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.6.3</dct:source>
 		<rdfs:range rdf:resource="&idmp-sub;Substance"/>
 		<skos:definition>relates a moiety to a substance for which it is the essential aspect, responsible for its pharmacological activity</skos:definition>
-	</owl:ObjectProperty>
-	
-	<owl:ObjectProperty rdf:about="&idmp-sub;isCharacteristicOf">
-		<rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
-		<rdfs:label>is aspect of</rdfs:label>
-		<cmns-av:synonym>is characteristic of</cmns-av:synonym>
 	</owl:ObjectProperty>
 	
 	<owl:DatatypeProperty rdf:about="&idmp-sub;isDefining">
@@ -5853,18 +5868,16 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:label>is molecular entity in</rdfs:label>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-sub;isNecessaryCharacteristicFor">
-		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isCharacteristicOf"/>
+	<owl:ObjectProperty rdf:about="&idmp-sub;isNecessarilyIncludedIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;isIncludedIn"/>
 		<owl:inverseOf rdf:resource="&idmp-sub;necessarilyIncludes"/>
-		<skos:prefLabel>is necessary aspect of</skos:prefLabel>
-		<cmns-av:synonym>is necessary characteristic for</cmns-av:synonym>
+		<skos:prefLabel>is necessary for</skos:prefLabel>
 	</owl:ObjectProperty>
 	
-	<owl:ObjectProperty rdf:about="&idmp-sub;isOptionalAspectOf">
-		<rdfs:subPropertyOf rdf:resource="&idmp-sub;isCharacteristicOf"/>
+	<owl:ObjectProperty rdf:about="&idmp-sub;isOptionallyIncludedIn">
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;isIncludedIn"/>
 		<owl:inverseOf rdf:resource="&idmp-sub;optionallyIncludes"/>
-		<skos:prefLabel>is optional aspect of</skos:prefLabel>
-		<cmns-av:synonym>is optional characteristic of</cmns-av:synonym>
+		<skos:prefLabel>is optional of</skos:prefLabel>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;isParentSubstanceOf">
@@ -5926,20 +5939,56 @@ N is the total numberof all the molecules.</skos:definition>
 	</owl:DatatypeProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;necessarilyIncludes">
-		<rdfs:subPropertyOf rdf:resource="&idmp-sub;includesCharacteristic"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
 		<rdfs:label>necessarily includes</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-cls;Aspect"/>
-		<rdfs:range rdf:resource="&cmns-cls;Aspect"/>
-		<skos:definition>a classifier A necessarily includes a classifier B if things classified by A are also classified by B</skos:definition>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-cls;Aspect">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-doc;Specification">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-cls;Aspect">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-doc;Specification">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>a classifier or specification A necessarily includes a classifier/specifier B if things classified/specified by A are also classified/specified by B</skos:definition>
 		<cmns-av:explanatoryNote>If A necessarily includes B then A is a specialization of B. This is similar to the rdfs:subClassOf relation between OWL classes.</cmns-av:explanatoryNote>
 	</owl:ObjectProperty>
 	
 	<owl:ObjectProperty rdf:about="&idmp-sub;optionallyIncludes">
-		<rdfs:subPropertyOf rdf:resource="&idmp-sub;includesCharacteristic"/>
+		<rdfs:subPropertyOf rdf:resource="&cmns-col;comprises"/>
 		<rdfs:label>optionally includes</rdfs:label>
-		<rdfs:domain rdf:resource="&cmns-cls;Aspect"/>
-		<rdfs:range rdf:resource="&cmns-cls;Aspect"/>
-		<skos:definition>a classifier A optionally includes a classifier B if there is presumable a thing that is classified by A and classified by B</skos:definition>
+		<rdfs:domain>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-cls;Aspect">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-doc;Specification">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:domain>
+		<rdfs:range>
+			<owl:Class>
+				<owl:unionOf rdf:parseType="Collection">
+					<rdf:Description rdf:about="&cmns-cls;Aspect">
+					</rdf:Description>
+					<rdf:Description rdf:about="&cmns-doc;Specification">
+					</rdf:Description>
+				</owl:unionOf>
+			</owl:Class>
+		</rdfs:range>
+		<skos:definition>a classifier or specification A optionally includes a classifier/specification B if there is presumable a thing that is classified/specified by A and classified/specified by B</skos:definition>
 		<cmns-av:explanatoryNote>This relation is informational only in most cases, but excludes cases where the optional classifier classifies things disjoint from the classifier that includes this.</cmns-av:explanatoryNote>
 	</owl:ObjectProperty>
 	
