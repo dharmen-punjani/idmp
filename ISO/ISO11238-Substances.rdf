@@ -2449,6 +2449,19 @@ References or links are expressed either by an object property or a unique ident
 	
 	<owl:Class rdf:about="&idmp-sub;MonomerSet">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;Constituency"/>
+		<rdfs:subClassOf rdf:resource="&cmns-strcol;Set"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MonomerConstituent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MonomerConstituent"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>monomer set</rdfs:label>
 		<skos:definition>set of monomer substances used to synthesize a polymer</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, Figure 22</cmns-av:adaptedFrom>
@@ -2574,11 +2587,11 @@ References or links are expressed either by an object property or a unique ident
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularSequence"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;StructuralElement">
+							<rdf:Description rdf:about="&idmp-sub;StructuralConstituent">
 							</rdf:Description>
 							<owl:Restriction>
 								<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
@@ -3597,11 +3610,11 @@ N is the total numberof all the molecules.</skos:definition>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
 				<owl:someValuesFrom>
 					<owl:Class>
 						<owl:intersectionOf rdf:parseType="Collection">
-							<rdf:Description rdf:about="&idmp-sub;StructuralElement">
+							<rdf:Description rdf:about="&idmp-sub;StructuralConstituent">
 							</rdf:Description>
 							<owl:Restriction>
 								<owl:onProperty rdf:resource="&cmns-pts;isPlayedBy"/>
@@ -3684,6 +3697,7 @@ N is the total numberof all the molecules.</skos:definition>
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinSubUnitConstituent">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;MolecularConstituent"/>
+		<rdfs:subClassOf rdf:resource="&cmns-col;OrderedConstituent"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&idmp-sub;hasGranularMolecularPart"/>
@@ -3703,7 +3717,7 @@ N is the total numberof all the molecules.</skos:definition>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>protein sub-unit constituent</rdfs:label>
-		<skos:definition>amino acid residues of a specific class that is form a constituent part of the protein molecules</skos:definition>
+		<skos:definition>amino acid residues of a specific class that form a constituent part of the protein molecules</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;ProteinSubUnitSpecification">
@@ -4988,16 +5002,17 @@ N is the total numberof all the molecules.</skos:definition>
 		<skos:definition>aspect that characterizes the structure or something</skos:definition>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;StructuralElement">
-		<rdfs:subClassOf rdf:resource="&cmns-pts;Role"/>
+	<owl:Class rdf:about="&idmp-sub;StructuralConstituent">
+		<rdfs:subClassOf rdf:resource="&cmns-col;Constituent"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isIncludedIn"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;Structure"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>structural element</rdfs:label>
+		<rdfs:label>structural constituent</rdfs:label>
 		<skos:definition>something that is an distinguishable element in a structure whose spatial or topological position makes up the structure.</skos:definition>
+		<cmns-av:synonym>structural element</cmns-av:synonym>
 		<cmns-av:synonym>structural part</cmns-av:synonym>
 	</owl:Class>
 	
@@ -5020,6 +5035,7 @@ N is the total numberof all the molecules.</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;StructuralRepeatUnit">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralConstituent"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Structure"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -5076,7 +5092,7 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralElement"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;StructuralConstituent"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>structure</rdfs:label>
