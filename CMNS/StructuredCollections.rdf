@@ -137,7 +137,7 @@
 		<rdfs:subClassOf rdf:resource="&cmns-col;StructuredCollection"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;hasConstituent"/>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
 				<owl:allValuesFrom rdf:resource="&cmns-strcol;IndexedConstituent"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
