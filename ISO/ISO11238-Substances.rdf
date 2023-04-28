@@ -4039,13 +4039,6 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:subClassOf rdf:resource="&cmns-doc;Reference"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasCorrespondingDocument"/>
-				<owl:onClass rdf:resource="&xsd;anyURI"/>
-				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-id;isIdentifiedBy"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceDocumentIdentifier"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
@@ -4056,6 +4049,13 @@ N is the total numberof all the molecules.</skos:definition>
 				<owl:onProperty rdf:resource="&idmp-sub;hasReferenceSourceDocumentType"/>
 				<owl:onClass rdf:resource="&idmp-sub;ReferenceSourceDocumentType"/>
 				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasCorrespondingDocument"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+				<owl:onDataRange rdf:resource="&xsd;anyURI"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:subClassOf>
