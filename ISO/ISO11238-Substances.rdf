@@ -2382,13 +2382,6 @@ References or links are expressed either by an object property or a unique ident
 	
 	<owl:Class rdf:about="&idmp-sub;MonodisperseSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SingleSubstance"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningMolecularWeight"/>
-				<owl:onClass rdf:resource="&idmp-sub;SpecifiedMolecularWeight"/>
-				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
-			</owl:Restriction>
-		</rdfs:subClassOf>
 		<rdfs:label>monodisperse substance</rdfs:label>
 		<owl:disjointWith rdf:resource="&idmp-sub;PolydisperseSubstance"/>
 		<skos:definition>single substance that is homogeneous in molecular weight, that is, it does not have a distribution of different molecular weight chains within the total mass</skos:definition>
@@ -3991,6 +3984,7 @@ N is the total numberof all the molecules.</skos:definition>
 	<owl:NamedIndividual rdf:about="&idmp-sub;ReferenceSourceClass-OfficialNameSource">
 		<rdf:type rdf:resource="&idmp-sub;ReferenceSourceClass"/>
 		<rdfs:label>reference source class - official name source</rdfs:label>
+		<owl:differentFrom rdf:resource="&idmp-sub;ReferenceSourceClass-OtherNameSource"/>
 		<skos:definition>classifier for a reference source indicating that the source is an official, jurisdiction-specific source for an official name</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.3</cmns-av:adaptedFrom>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
@@ -4000,7 +3994,6 @@ N is the total numberof all the molecules.</skos:definition>
 	<owl:NamedIndividual rdf:about="&idmp-sub;ReferenceSourceClass-OtherNameSource">
 		<rdf:type rdf:resource="&idmp-sub;ReferenceSourceClass"/>
 		<rdfs:label>reference source class - other name source</rdfs:label>
-		<owl:differentFrom rdf:resource="&idmp-sub;ReferenceSourceClass-OfficialNameSource"/>
 		<skos:definition>classifier for a reference source indicating that the source of information about a name is not an official, jurisdiction-specific source for that name</skos:definition>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.4.3</cmns-av:adaptedFrom>
 		<cmns-col:isMemberOf rdf:resource="&idmp-sub;ISO19844-CodeSet"/>
