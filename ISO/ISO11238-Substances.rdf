@@ -581,6 +581,8 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>characteristic attribute</rdfs:label>
+		<skos:definition>aspects that are essential for the description or specification of a thing</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances,</cmns-av:adaptedFrom>
 	</owl:Class>
 	
@@ -599,11 +601,22 @@
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>characteristic attribute type</rdfs:label>
+		<skos:definition>classifier for a characteristic attribute</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</cmns-av:adaptedFrom>
+		<cmns-av:usageNote>Used as part of the characteristic attribute element group within the specified substance group 1.</cmns-av:usageNote>
 	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;CharacteristicAttributeType-CryopoorPlasmaProcessFlow">
+		<rdf:type rdf:resource="&idmp-sub;CharacteristicAttributeType"/>
+		<rdfs:label>characteristic attribute type - cryopoor plasma process flow</rdfs:label>
+		<skos:definition>type of attribute that is characteristic for Cryopoor plasma process flows</skos:definition>
+		<cmns-av:synonym>cryopoor plasma process flow</cmns-av:synonym>
+	</owl:NamedIndividual>
 	
 	<owl:NamedIndividual rdf:about="&idmp-sub;CharacteristicAttributeType-Physical">
 		<rdf:type rdf:resource="&idmp-sub;CharacteristicAttributeType"/>
 		<rdfs:label>characteristic attribute type - physical</rdfs:label>
+		<skos:definition>type of characteristic physical attribute</skos:definition>
 		<cmns-av:synonym>physical</cmns-av:synonym>
 	</owl:NamedIndividual>
 	
@@ -1133,6 +1146,13 @@ References or links are expressed either by an object property or a unique ident
 	
 	<owl:Class rdf:about="&idmp-sub;ElementGroupAttributeParameter">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;ElementGroupAmount"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-txt;hasTextValue"/>
@@ -1763,6 +1783,39 @@ References or links are expressed either by an object property or a unique ident
 		<cmns-av:synonym>structural</cmns-av:synonym>
 	</owl:NamedIndividual>
 	
+	<owl:Class rdf:about="&idmp-sub;ModificationMethodTypeCode">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&idmp-sub;ModificationMethodType"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>modification method type code</rdfs:label>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodTypeCode-Agent">
+		<rdf:type rdf:resource="&idmp-sub;ModificationMethodTypeCode"/>
+		<rdfs:label>modification method type code - agent</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;ModificationMethodType-Agent"/>
+		<cmns-txt:hasTextValue>agent</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodTypeCode-Physical">
+		<rdf:type rdf:resource="&idmp-sub;ModificationMethodTypeCode"/>
+		<rdfs:label>modification method type code - physical</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;ModificationMethodType-Physical"/>
+		<cmns-txt:hasTextValue>physical</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;ModificationMethodTypeCode-Structural">
+		<rdf:type rdf:resource="&idmp-sub;ModificationMethodTypeCode"/>
+		<rdfs:label>modification method type code - structural</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;ModificationMethodTypeCode-Structural"/>
+		<cmns-txt:hasTextValue>structural</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-sub;ModificationRole">
 		<rdfs:subClassOf rdf:resource="&cmns-pts;FunctionalRole"/>
 		<rdfs:subClassOf>
@@ -2112,6 +2165,7 @@ References or links are expressed either by an object property or a unique ident
 		</rdfs:subClassOf>
 		<rdfs:label>molecular sequence</rdfs:label>
 		<skos:definition>sequential structure of molecular fragments defining a macromolecule</skos:definition>
+		<cmns-av:usageNote>For branched macromolecules, this is the sequence of the main chain.</cmns-av:usageNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;MolecularStructure">
@@ -3148,6 +3202,57 @@ N is the total numberof all the molecules.</skos:definition>
 		<cmns-av:explanatoryNote>The properties are characterized by specific or ranges of quantity values, but can be also more complex properties such as statistical distributions or a match with some reference spectrum.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;PhysicalForm">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;PhysicalState"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;SolidMatterOrganization"/>
+				<owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalFormType"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical form</rdfs:label>
+		<dct:source>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.59</dct:source>
+		<skos:definition>physical state, either gas, liquid or solid, and the type of organization for solid matter</skos:definition>
+		<skos:note>Solids can be either crystalline or amorphous and can show polymorphism. Amorphous material is characterized by the absence of distinct reflections in the X-ray powder diffraction (XRPD) pattern. Polymorphism which is ability of crystalline materials to exist in more than one form, can also be captured.</skos:note>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalFormType">
+		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-cls;classifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PhysicalForm"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>classifier for the physical form</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalFormTypeCode">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&idmp-sub;PhysicalFormType"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;PhysicalManufacturedItem">
 		<rdfs:subClassOf rdf:resource="&cmns-prd;Product"/>
 	</owl:Class>
@@ -3174,6 +3279,89 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:label>physical organism</rdfs:label>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 7.2.6</cmns-av:adaptedFrom>
 	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalState">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:label>physical state</rdfs:label>
+		<skos:definition>In physics, a state of matter is one of the distinct forms in which matter can exist. Four states of matter are observable in everyday life: solid, liquid, gas, and plasma.</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://en.wikipedia.org/wiki/State_of_matter"/>
+		<cmns-av:synonym>state of matter</cmns-av:synonym>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PhysicalState-Gas">
+		<rdf:type rdf:resource="&idmp-sub;PhysicalState"/>
+		<rdfs:label>physical state - gas</rdfs:label>
+		<owl:differentFrom rdf:resource="&idmp-sub;PhysicalState-Liquid"/>
+		<owl:differentFrom rdf:resource="&idmp-sub;PhysicalState-Plasma"/>
+		<owl:differentFrom rdf:resource="&idmp-sub;PhysicalState-Solid"/>
+		<skos:definition>A gas is a compressible fluid. Not only will a gas conform to the shape of its container but it will also expand to fill the container. In a gas, the molecules have enough kinetic energy so that the effect of intermolecular forces is small (or zero for an ideal gas), and the typical distance between neighboring molecules is much greater than the molecular size. A gas has no definite shape or volume, but occupies the entire container in which it is confined.</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://en.wikipedia.org/wiki/State_of_matter"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PhysicalState-Liquid">
+		<rdf:type rdf:resource="&idmp-sub;PhysicalState"/>
+		<rdfs:label>physical state - liquid</rdfs:label>
+		<owl:differentFrom rdf:resource="&idmp-sub;PhysicalState-Plasma"/>
+		<owl:differentFrom rdf:resource="&idmp-sub;PhysicalState-Solid"/>
+		<skos:definition>A liquid is a nearly incompressible fluid that conforms to the shape of its container but retains a (nearly) constant volume independent of pressure. The volume is definite if the temperature and pressure are constant. Intermolecular (or interatomic or interionic) forces are still important, but the molecules have enough energy to move relative to each other and the structure is mobile. This means that the shape of a liquid is not definite but is determined by its container.</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://en.wikipedia.org/wiki/State_of_matter"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PhysicalState-Plasma">
+		<rdf:type rdf:resource="&idmp-sub;PhysicalState"/>
+		<rdfs:label>physical state - plasma</rdfs:label>
+		<owl:differentFrom rdf:resource="&idmp-sub;PhysicalState-Solid"/>
+		<skos:definition>Like a gas, plasma does not have definite shape or volume. Unlike gases, plasmas are electrically conductive, produce magnetic fields and electric currents, and respond strongly to electromagnetic forces. Positively charged nuclei swim in a &quot;sea&quot; of freely-moving disassociated electrons, similar to the way such charges exist in conductive metal, where this electron &quot;sea&quot; allows matter in the plasma state to conduct electricity.</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://en.wikipedia.org/wiki/State_of_matter"/>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PhysicalState-Solid">
+		<rdf:type rdf:resource="&idmp-sub;PhysicalState"/>
+		<rdfs:label>physical state - solid</rdfs:label>
+		<skos:definition>In a solid, constituent particles (ions, atoms, or molecules) are closely packed together. The forces between particles are so strong that the particles cannot move freely but can only vibarate. As a result a solid has a stable , definite shape, and a definite volume.</skos:definition>
+		<cmns-av:adaptedFrom rdf:resource="https://en.wikipedia.org/wiki/State_of_matter"/>
+	</owl:NamedIndividual>
+	
+	<owl:Class rdf:about="&idmp-sub;PhysicalStateCode">
+		<rdfs:subClassOf rdf:resource="&cmns-cds;CodeElement"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-dsg;denotes"/>
+				<owl:onClass rdf:resource="&idmp-sub;PhysicalState"/>
+				<owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>physical state code</rdfs:label>
+		<skos:definition>code designating a physical state (state of matter)</skos:definition>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PhysicalStateCode-Gas">
+		<rdf:type rdf:resource="&idmp-sub;PhysicalStateCode"/>
+		<rdfs:label>physical state code - gas</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;PhysicalState-Gas"/>
+		<cmns-txt:hasTextValue>gas</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PhysicalStateCode-Liquid">
+		<rdf:type rdf:resource="&idmp-sub;PhysicalStateCode"/>
+		<rdfs:label>physical state code - liquid</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;PhysicalState-Liquid"/>
+		<cmns-txt:hasTextValue>liquid</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PhysicalStateCode-Plasma">
+		<rdf:type rdf:resource="&idmp-sub;PhysicalStateCode"/>
+		<rdfs:label>physical state code - plasma</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;PhysicalState-Plasma"/>
+		<cmns-txt:hasTextValue>plasma</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;PhysicalStateCode-Solid">
+		<rdf:type rdf:resource="&idmp-sub;PhysicalStateCode"/>
+		<rdfs:label>physical state code - solid</rdfs:label>
+		<cmns-dsg:denotes rdf:resource="&idmp-sub;PhysicalStateCode-Solid"/>
+		<cmns-txt:hasTextValue>solid</cmns-txt:hasTextValue>
+	</owl:NamedIndividual>
 	
 	<owl:Class rdf:about="&idmp-sub;PhysicalSubstance">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;Matter"/>
@@ -3236,6 +3424,27 @@ N is the total numberof all the molecules.</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.62</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, clause 6.2.1 and Figure 5</cmns-av:adaptedFrom>
 		<cmns-av:usageNote>Polydisperse substances include polymers, mixture and structurally diverse material isolated from a single source. Chemical substances, proteins and nucleic acids with defined sequences are not described as polydisperse substances.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;Polydispersity">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
+				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityValue"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>polydispersity</rdfs:label>
+		<skos:definition>measure of the range of molecular masses in a polymer substance</skos:definition>
+		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.3.5</cmns-av:adaptedFrom>
+		<cmns-av:directSource>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.61</cmns-av:directSource>
+		<cmns-av:explanatoryNote>The dispersity of polymers is typically calculated by the ratio of weight average molecular weight to number average molecular weight.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;PolymerClassifier">
@@ -3508,6 +3717,12 @@ N is the total numberof all the molecules.</skos:definition>
 				<owl:onProperty rdf:resource="&idmp-sub;idmp-sub:hasDefiningPolymerGeometry"/>
 				<owl:onClass rdf:resource="&idmp-sub;PolymerGeometryClassifier"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&idmp-sub;hasDefiningStructure"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;MonomerSequence"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>polymer substance</rdfs:label>
@@ -4350,6 +4565,24 @@ N is the total numberof all the molecules.</skos:definition>
 		<cmns-av:synonym>classifier for a single molecular entity</cmns-av:synonym>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SolidMatterOrganization">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;StructuralAspect"/>
+		<rdfs:label>solid matter origanization</rdfs:label>
+		<skos:definition>structural arrangement of the particles in solid matter</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 3.59</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SolidMatterOrganization-Amorphous">
+		<rdf:type rdf:resource="&idmp-sub;SolidMatterOrganization"/>
+		<rdfs:label>solid matter organization - amorphous</rdfs:label>
+	</owl:NamedIndividual>
+	
+	<owl:NamedIndividual rdf:about="&idmp-sub;SolidMatterOrganization-Crystalline">
+		<rdf:type rdf:resource="&idmp-sub;SolidMatterOrganization"/>
+		<rdfs:label>solid matter organization - crystalline</rdfs:label>
+	</owl:NamedIndividual>
+	
 	<owl:Class rdf:about="&idmp-sub;SourceMaterialClassifier">
 		<rdfs:subClassOf rdf:resource="&cmns-cls;Classifier"/>
 		<rdfs:subClassOf>
@@ -4716,26 +4949,6 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:label>specified nucleotide sequence</rdfs:label>
 	</owl:Class>
 	
-	<owl:Class rdf:about="&idmp-sub;SpecifiedPolydispersity">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;PhysicalCharacteristic"/>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;PolymerSubstance"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:subClassOf>
-			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-qtu;hasQuantityValue"/>
-				<owl:someValuesFrom rdf:resource="&cmns-qtu;QuantityValue"/>
-			</owl:Restriction>
-		</rdfs:subClassOf>
-		<rdfs:label>specified polydispersity</rdfs:label>
-		<skos:definition>measure of the range of molecular masses in polymer substance</skos:definition>
-		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section H.3.5</cmns-av:adaptedFrom>
-		<cmns-av:explanatoryNote>The dispersity of polymers is typically calculated by the ratio of weight average molecular weight to number average molecular weight.</cmns-av:explanatoryNote>
-	</owl:Class>
-	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedStereochemistry">
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedMolecularStructure"/>
 		<rdfs:label>specified stereochemistry</rdfs:label>
@@ -4792,6 +5005,13 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:subClassOf rdf:resource="&cmns-col;Arrangement"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-doc;specifies"/>
+				<owl:onClass rdf:resource="&idmp-sub;PhysicalSubstance"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
 				<owl:someValuesFrom>
 					<owl:Class>
@@ -4834,31 +5054,91 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:onClass rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1-Amount"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
 				<owl:onClass rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1-CharacteristicAttribute"/>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:onClass rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1-FractionDescription"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:onClass rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1-Modification"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:onClass rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1-PhysicalForm"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:onClass rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1-PhysicalModification"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;hasMember"/>
+				<owl:onClass rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1-Constituent"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
+			</owl:Restriction>
+		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 1</rdfs:label>
 		<skos:definition>The specified substance group 1 captures constituents (such as ranges of marker or signature substance(s), other substances that may have biological activity and extraction solvent, physical form and any characteristic attributes essential to the description of the material.</skos:definition>
+		<skos:note>Single component substances that differ in physical form are defined as different Specified Substances Group 1.</skos:note>
+		<skos:note>Specified Substances Group 1 always have at least one constituent; all constituents are either Substance or Specified Substance Group 1.</skos:note>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.2</cmns-av:adaptedFrom>
 		<cmns-av:adaptedFrom>ISO/TS 19844:2018(E) Health informatics - Identification of medicinal products (IDMP) - Implementation guidelines for ISO 11238 for data elements and structures for the unique identification and exchange of regulated information on substances, section E.2.6</cmns-av:adaptedFrom>
 	</owl:Class>
 	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1-Amount">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroupAmount"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1ElementGroup"/>
+		<rdfs:label>specified substance group 1 - amount</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1-AttributeParameter">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroupAttributeParameter"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1ElementGroup"/>
+		<rdfs:label>specified substance group 1 - attribute parameter</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</cmns-av:adaptedFrom>
+	</owl:Class>
+	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1-CharacteristicAttribute">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1ElementGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
-				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
-				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1"/>
+				<owl:onProperty rdf:resource="&cmns-col;comprises"/>
+				<owl:onClass rdf:resource="&idmp-sub;ElementGroupAttributeParameter"/>
+				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">0</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 1 - characteristic attribute</rdfs:label>
 		<skos:example>Examples of characteristic attributes are e.g. for Herbals: &apos;Degree of Comminution&apos;, &apos;Process State&apos;, &apos;Wild/Cultivated&apos;, &apos;Growth State&apos;, &apos;Feeding composition&apos; (e.g. zoological source material), &apos;Harvesting Time&apos;, &apos;Decontamination Process&apos;, &apos;Country of Origin&apos; (also applicable to Plsama-derived substance), &apos;Geographical Location&apos;, Storage Time&apos; and &apos;Storage Condition&apos;, In addtion, physical properties like boiling point, triple pint, density and solubility are also dscribed by this element group. Detailled information is proved by the annexes of the ISO/TS 19844 Implementation Guide.</skos:example>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</cmns-av:adaptedFrom>
 		<cmns-av:explanatoryNote>The element group &apos;Characteristic Attribute&apos; is meant to capture all kinds of properties and additional information of a substance. These properties and additional information are not attributes in there own right but are instances of characteristic attributes.</cmns-av:explanatoryNote>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1-Constituent">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1ElementGroup"/>
 		<rdfs:subClassOf rdf:resource="&idmp-sub;SubstanceConstituent"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
@@ -4867,16 +5147,48 @@ N is the total numberof all the molecules.</skos:definition>
 				<owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:minQualifiedCardinality>
 			</owl:Restriction>
 		</rdfs:subClassOf>
+		<rdfs:label>specified substance group 1 - constituent</rdfs:label>
+		<skos:definition>element group in specified substance groups that specifies a constituency</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 6.3</cmns-av:adaptedFrom>
+		<cmns-av:explanatoryNote>The constituent substance includes components for materials containing multiple substances, parent substance, marker substance and extraction solvents for herbals, allergenic extracts.</cmns-av:explanatoryNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1-FractionDescription">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1ElementGroup"/>
+		<rdfs:label>specified substance group 1 - fraction description</rdfs:label>
+		<cmns-av:usageNote>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</cmns-av:usageNote>
+		<cmns-av:usageNote>The element group Fraction Description is used to describe plasma-derived substances.</cmns-av:usageNote>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1-Modification">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1ElementGroup"/>
+		<rdfs:label>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</rdfs:label>
+		<rdfs:label>specified substance group 1 - modification</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1-PhysicalForm">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1ElementGroup"/>
+		<rdfs:label>specified substance group 1 - physical form</rdfs:label>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1-PhysicalModification">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1ElementGroup"/>
+		<rdfs:label>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</rdfs:label>
+		<rdfs:label>specified substance group 1 - physical modification</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup1ElementGroup">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
 				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup1"/>
 			</owl:Restriction>
 		</rdfs:subClassOf>
-		<rdfs:label>specified substance group 1 - constituent</rdfs:label>
-		<skos:definition>element group in specified substance groups that specifies a constituency</skos:definition>
-		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 6.3</cmns-av:adaptedFrom>
-		<cmns-av:explanatoryNote>The constituent substance includes components for materials containing multiple substances, parent substance, marker substance and extraction solvents for herbals, allergenic extracts.</cmns-av:explanatoryNote>
+		<rdfs:label>specified substance group 1 element group</rdfs:label>
+		<skos:definition>element group that is part of the specified substance group 1</skos:definition>
+		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, section 8.2</cmns-av:adaptedFrom>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2">
@@ -4892,7 +5204,7 @@ N is the total numberof all the molecules.</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2-ManufacturingMaterialSubstance">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup2ElementGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-cls;isClassifiedBy"/>
@@ -4909,7 +5221,7 @@ N is the total numberof all the molecules.</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2-ResultantMaterial">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup2ElementGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
@@ -4920,7 +5232,7 @@ N is the total numberof all the molecules.</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2-StartingMaterial">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup2ElementGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
@@ -4928,6 +5240,12 @@ N is the total numberof all the molecules.</skos:definition>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 2 - starting material</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup2ElementGroup">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:label>specified substance group 2 element group</rdfs:label>
+		<skos:definition>element group that is part of the specified substance group 2</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup3">
@@ -4942,6 +5260,18 @@ N is the total numberof all the molecules.</skos:definition>
 		<rdfs:label>specified substance group 3</rdfs:label>
 		<skos:definition>groups criteria based on the pharmacopoeial and technical grades</skos:definition>
 		<cmns-av:adaptedFrom>ISO 11238:2018 Health informatics - Identification of medicinal products (IDMP) - Data elements and structures for the unique identification and exchange of regulated information on substances, clause 8.4</cmns-av:adaptedFrom>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup3ElementGroup">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup3"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified substance group 3 element group</rdfs:label>
+		<skos:definition>element group that is part of the specified substance group 3</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup3Grade">
@@ -5008,7 +5338,7 @@ N is the total numberof all the molecules.</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup4-AnalyticalMethod">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup4ElementGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
@@ -5031,7 +5361,7 @@ N is the total numberof all the molecules.</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup4-Other">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup4ElementGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
@@ -5042,7 +5372,7 @@ N is the total numberof all the molecules.</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup4-Specification">
-		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf rdf:resource="&idmp-sub;SpecifiedSubstanceGroup4ElementGroup"/>
 		<rdfs:subClassOf>
 			<owl:Restriction>
 				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
@@ -5050,6 +5380,18 @@ N is the total numberof all the molecules.</skos:definition>
 			</owl:Restriction>
 		</rdfs:subClassOf>
 		<rdfs:label>specified substance group 4 - specification</rdfs:label>
+	</owl:Class>
+	
+	<owl:Class rdf:about="&idmp-sub;SpecifiedSubstanceGroup4ElementGroup">
+		<rdfs:subClassOf rdf:resource="&idmp-sub;ElementGroup"/>
+		<rdfs:subClassOf>
+			<owl:Restriction>
+				<owl:onProperty rdf:resource="&cmns-col;isMemberOf"/>
+				<owl:someValuesFrom rdf:resource="&idmp-sub;SpecifiedSubstanceGroup4"/>
+			</owl:Restriction>
+		</rdfs:subClassOf>
+		<rdfs:label>specified substance group 4 element group</rdfs:label>
+		<skos:definition>element group that is part of the specified substance group 4</skos:definition>
 	</owl:Class>
 	
 	<owl:Class rdf:about="&idmp-sub;StartingMaterialRole">
