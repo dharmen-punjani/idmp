@@ -13,12 +13,14 @@ WHERE {
     # Bind Variable substance <$Substance>
 	# Example for AMPLODIPINE: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/AmlodipineExample/AmlodipineBesylate>
   	# Example for Terlipressin: <https://spec.pistoiaalliance.org/idmp/ontology/EXT/Examples/TerlipressinExample/TerlipressinAcetate>
+    # Example for Qlaira: <https://spor.ema.europa.eu/smswi/#/substances/100000090493>
     BIND(  uc1_cq7_parameter_1 AS $SUBSTANCE )
 
   	# Find Manufactured Items
 	?ManufacturedItem a/rdfs:subClassOf* idmp-sub:ManufacturedItem ;
 		cmns-dsg:isDefinedIn [
-			idmp-mprd:hasActiveIngredient [
+			idmp-sub:hasIngredient [ 
+			    a idmp-sub:ActiveIngredient;
 				cmns-pts:isPlayedBy $SUBSTANCE
 			]
 		] .
